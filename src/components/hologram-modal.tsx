@@ -55,7 +55,7 @@ export default function HologramModal({ project, isOpen, onClose }: HologramModa
                 perspective: "800px",
               }}
               data-modal-open="true"
-              className="pointer-events-auto relative w-full max-w-sm sm:max-w-md"
+              className="pointer-events-auto relative w-[90%] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg"
             >
               {/* Glow behind */}
               <div
@@ -246,6 +246,13 @@ export default function HologramModal({ project, isOpen, onClose }: HologramModa
                 </div>
 
                 {/* Hologram base / projector glow */}
+                <div
+                  className="absolute left-1/2 top-full -z-10 h-32 w-1/2 -translate-x-1/2 opacity-60 blur-xl"
+                  style={{
+                    background: `linear-gradient(to bottom, ${project.accent}80, transparent)`,
+                    clipPath: "polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%)",
+                  }}
+                />
                 <div
                   className="mx-auto mt-2 h-[3px] w-2/3 rounded-full opacity-60 blur-[2px]"
                   style={{ background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)` }}

@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import Image from "next/image";
-import HologramModal, { ProjectData } from "../hologram-modal";
+import { type ProjectData } from "../hologram-modal";
 
 interface SlideProps {
   isActive: boolean;
   onNavigate: (slide: number) => void;
+  onOpenHologram: (project: ProjectData) => void;
 }
 
 const projects: ProjectData[] = [
@@ -80,20 +80,7 @@ const projects: ProjectData[] = [
   },
 ];
 
-export default function SlideWorkIndex({ isActive }: SlideProps) {
-  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null);
-  const [isHologramOpen, setIsHologramOpen] = useState(false);
-
-  function openHologram(project: ProjectData) {
-    setSelectedProject(project);
-    setIsHologramOpen(true);
-  }
-
-  function closeHologram() {
-    setIsHologramOpen(false);
-    setTimeout(() => setSelectedProject(null), 300);
-  }
-
+export default function SlideWorkIndex({ isActive, onOpenHologram }: SlideProps) {
   return (
     <div className="relative flex h-full w-full items-center justify-center overflow-hidden overflow-y-auto bg-white p-2 sm:p-4 md:p-6 dark:bg-zinc-950">
       <motion.div
@@ -113,8 +100,8 @@ export default function SlideWorkIndex({ isActive }: SlideProps) {
           {projects.map((p, i) => (
             <motion.button
               key={p.title}
-              onClick={() => openHologram(p)}
-              className="group flex w-full items-center gap-2 rounded-md border border-border/50 bg-card/30 p-1.5 text-left transition-all hover:border-accent/30 hover:bg-card/60 sm:gap-2.5 sm:rounded-lg sm:p-2 md:gap-4 md:p-3"
+              onClick={() => onOpenHologram(p)}
+              className="group relative flex w-full items-center gap-2 rounded-md border border-border/50 bg-card/30 p-1.5 text-left transition-all hover:border-accent/30 hover:bg-card/60 sm:gap-2.5 sm:rounded-lg sm:p-2 md:gap-4 md:p-3"
               initial={{ opacity: 0, x: -6 }}
               animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
               transition={{
@@ -159,13 +146,6 @@ export default function SlideWorkIndex({ isActive }: SlideProps) {
           ))}
         </div>
       </motion.div>
-
-      {/* Hologram modal */}
-      <HologramModal
-        project={selectedProject}
-        isOpen={isHologramOpen}
-        onClose={closeHologram}
-      />
     </div>
   );
 }

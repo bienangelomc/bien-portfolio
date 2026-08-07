@@ -12,6 +12,7 @@ import SlideProjectAQ from "./slides/slide-project-aq";
 import SlideProjectVoiceCare from "./slides/slide-project-voicecare";
 import SlideProjectAngelo from "./slides/slide-project-angelo";
 import SlideProcess from "./slides/slide-process";
+import HologramModal, { type ProjectData } from "./hologram-modal";
 
 const TOTAL_SLIDES = 8;
 
@@ -28,6 +29,18 @@ const PRESENT_RANGE = PRESENT_END - PRESENT_START;
 export default function Portfolio() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [hologramProject, setHologramProject] = useState<ProjectData | null>(null);
+  const [isHologramOpen, setIsHologramOpen] = useState(false);
+
+  const openHologram = useCallback((project: ProjectData) => {
+    setHologramProject(project);
+    setIsHologramOpen(true);
+  }, []);
+
+  const closeHologram = useCallback(() => {
+    setIsHologramOpen(false);
+    setTimeout(() => setHologramProject(null), 300);
+  }, []);
   const scrollProgress = useMotionValue(0);
 
   // Manual scroll tracking
@@ -124,7 +137,7 @@ export default function Portfolio() {
     { key: "intro", component: SlideIntro, props: { onNavigate: navigateToSlide } },
     { key: "about", component: SlideAbout, props: {} },
     { key: "services", component: SlideServices, props: {} },
-    { key: "work", component: SlideWorkIndex, props: { onNavigate: navigateToSlide } },
+    { key: "work", component: SlideWorkIndex, props: { onNavigate: navigateToSlide, onOpenHologram: openHologram } },
     { key: "aq", component: SlideProjectAQ, props: {} },
     { key: "voicecare", component: SlideProjectVoiceCare, props: {} },
     { key: "angelo", component: SlideProjectAngelo, props: {} },
@@ -175,6 +188,15 @@ export default function Portfolio() {
               </motion.div>
             </AnimatePresence>
           </LaptopStage>
+
+          {/* Hologram modal — renders outside the laptop screen, floating above */}
+          <div className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center">
+            <HologramModal
+              project={hologramProject}
+              isOpen={isHologramOpen}
+              onClose={closeHologram}
+            />
+          </div>
 
           {/* Bottom scroll cue */}
           <BottomCue scrollProgress={scrollProgress} />
