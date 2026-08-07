@@ -56,7 +56,7 @@ export async function POST(request: Request) {
 
     const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
     const fromName = process.env.RESEND_FROM_NAME || "Portfolio Contact";
-    const toEmail = process.env.CONTACT_TO_EMAIL || "Bienangelomc@gmail.com";
+    const toEmail = process.env.CONTACT_TO_EMAIL || "bienangelomc@gmail.com";
 
     const body = {
       from: `${fromName} <${fromEmail}>`,
