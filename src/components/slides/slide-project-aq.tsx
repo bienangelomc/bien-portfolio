@@ -12,7 +12,7 @@ const tags = ["Marketing site", "Local SEO", "Lead capture", "Brand-led design"]
 
 export default function SlideProjectAQ({ isActive }: SlideProps) {
   return (
-    <div className="h-full w-full overflow-y-auto bg-white dark:bg-zinc-950">
+    <div className="h-full w-full overflow-y-auto bg-zinc-950">
       <motion.div
         className="p-1.5 sm:p-2.5 md:p-5"
         initial={{ opacity: 0, y: 12 }}

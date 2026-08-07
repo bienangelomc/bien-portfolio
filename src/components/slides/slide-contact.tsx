@@ -48,7 +48,7 @@ export default function SlideContact({ isActive }: SlideProps) {
   }
 
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-hidden bg-white p-5 md:p-6 dark:bg-zinc-950">
+    <div className="flex h-full w-full items-center justify-center overflow-hidden bg-zinc-950 p-5 md:p-6">
       <motion.div
         className="w-full max-w-md"
         initial={{ opacity: 0, y: 16 }}

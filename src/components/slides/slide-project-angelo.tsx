@@ -12,7 +12,7 @@ const tags = ["Gamification", "Character design", "Speech therapy", "Mobile-firs
 
 export default function SlideProjectAngelo({ isActive }: SlideProps) {
   return (
-    <div className="h-full w-full overflow-y-auto bg-white dark:bg-zinc-950">
+    <div className="h-full w-full overflow-y-auto bg-zinc-950">
       <motion.div
         className="p-1.5 sm:p-2.5 md:p-5"
         initial={{ opacity: 0, y: 12 }}
