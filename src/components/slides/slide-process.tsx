@@ -36,7 +36,7 @@ const steps = [
 
 export default function SlideProcess({ isActive }: SlideProps) {
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-y-auto bg-white p-1.5 sm:p-3 md:p-6 dark:bg-zinc-950">
+    <div className="flex h-full w-full items-start justify-start overflow-y-auto bg-white p-3 sm:p-4 md:p-6 dark:bg-zinc-950 sm:items-center sm:justify-center">
       <motion.div
         className="w-full max-w-lg"
         initial={{ opacity: 0, y: 6 }}

@@ -10,7 +10,7 @@ interface SlideProps {
 
 export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-gradient-to-br from-zinc-50 to-zinc-100 p-1.5 sm:p-3 md:p-6 dark:from-zinc-900 dark:to-zinc-950">
+    <div className="relative flex h-full w-full items-start justify-center pt-3 sm:items-center sm:pt-0 overflow-y-auto bg-gradient-to-br from-zinc-50 to-zinc-100 p-1.5 sm:p-3 md:p-6 dark:from-zinc-900 dark:to-zinc-950">
       {/* Background accent */}
       <div
         className="absolute right-[-10%] top-[-10%] h-16 w-16 rounded-full bg-accent/10 blur-lg sm:h-24 sm:w-24 sm:blur-xl md:h-48 md:w-48 md:blur-3xl"

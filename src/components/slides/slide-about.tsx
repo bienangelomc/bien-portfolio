@@ -8,7 +8,7 @@ interface SlideProps {
 
 export default function SlideAbout({ isActive }: SlideProps) {
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-y-auto bg-white p-1.5 sm:p-3 md:p-8 dark:bg-zinc-950">
+    <div className="flex h-full w-full items-start justify-start overflow-y-auto bg-white p-3 sm:p-4 md:p-8 dark:bg-zinc-950 sm:items-center sm:justify-center">
       <motion.div
         className="max-w-md"
         initial={{ opacity: 0, y: 6 }}
