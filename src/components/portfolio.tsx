@@ -241,8 +241,9 @@ function BottomCue({
 }
 
 function ReleaseSection() {
-  const [state, setState] = useState<"idle" | "loading" | "success">("idle");
+  const [state, setState] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -250,11 +251,12 @@ function ReleaseSection() {
     const newErrors: Record<string, string> = {};
     if (!formData.get("name")) newErrors.name = "Required";
     if (!formData.get("email")) newErrors.email = "Required";
-    if (formData.get("email") && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(formData.get("email"))))
+    if (formData.get("email") && !/[^\s@]+@[^\s@]+\.[^\s@]+/.test(String(formData.get("email"))))
       newErrors.email = "Invalid email";
     if (!formData.get("message")) newErrors.message = "Required";
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
+    setErrorMessage("");
     setState("loading");
     try {
       const res = await fetch("/api/contact", {
@@ -264,11 +266,19 @@ function ReleaseSection() {
       if (res.ok) {
         setState("success");
         e.currentTarget.reset();
+        // Scroll so the success message is visible
+        setTimeout(() => {
+          const section = document.getElementById("get-in-touch");
+          section?.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 100);
       } else {
-        setState("idle");
+        const data = await res.json().catch(() => ({}));
+        setErrorMessage(data?.error || "Something went wrong. Please try again.");
+        setState("error");
       }
     } catch {
-      setState("idle");
+      setErrorMessage("Network error. Please check your connection and try again.");
+      setState("error");
     }
   }
 
@@ -372,6 +382,21 @@ function ReleaseSection() {
               />
               {errors.message && <p className="mt-1 text-xs text-red-500">{errors.message}</p>}
             </div>
+
+            {state === "error" && (
+              <motion.div
+                initial={{ opacity: 0, y: -8 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-2 rounded-lg border border-red-500/30 bg-red-500/10 p-3 text-sm text-red-400"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <span>{errorMessage}</span>
+              </motion.div>
+            )}
 
             <div className="flex justify-center">
               <button
