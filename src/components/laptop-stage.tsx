@@ -150,7 +150,7 @@ export default function LaptopStage({
         >
           {/* ---- SCREEN FACE (front). NO transform → 100% readable when open ---- */}
           <div
-            className="relative aspect-[16/10] w-full overflow-hidden rounded-t-xl bg-[#0a0a0c] p-2.5 shadow-2xl md:p-3"
+            className="relative aspect-[16/10] w-full overflow-hidden rounded-t-xl bg-[#0a0a0c] p-1.5 shadow-2xl sm:p-2 md:p-2.5 lg:p-3"
             style={{ backfaceVisibility: "hidden" }}
           >
             {/* Camera dot */}
@@ -158,7 +158,7 @@ export default function LaptopStage({
 
             {/* Screen panel — scrollable, hidden scrollbar */}
             <motion.div
-              className="laptop-screen relative mt-2 h-[calc(100%-1.75rem)] overflow-y-auto overflow-x-hidden rounded-md bg-zinc-950"
+              className="laptop-screen relative mt-1 h-[calc(100%-1rem)] overflow-y-auto overflow-x-hidden rounded-md bg-zinc-950 sm:mt-1.5 sm:h-[calc(100%-1.25rem)] md:mt-2 md:h-[calc(100%-1.75rem)]"
               style={{
                 opacity: screenOpacity,
                 filter: useTransform(screenBrightness, (v) => `brightness(${v})`),
@@ -208,11 +208,11 @@ export default function LaptopStage({
             </motion.div>
 
             {/* Bottom bezel — progress dots */}
-            <div className="absolute bottom-0 left-0 right-0 flex h-6 items-center justify-center gap-1.5">
+            <div className="absolute bottom-0 left-0 right-0 flex h-4 items-center justify-center gap-1 sm:h-5 sm:gap-1 sm:md:h-6 md:gap-1.5">
               {Array.from({ length: slideCount }).map((_, i) => (
                 <motion.div
                   key={i}
-                  className="h-1 rounded-full"
+                  className="h-[3px] rounded-full sm:h-1"
                   animate={{
                     width: activeSlide === i ? 18 : 6,
                     backgroundColor:

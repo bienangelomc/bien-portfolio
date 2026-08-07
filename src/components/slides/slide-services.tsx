@@ -11,65 +11,65 @@ const services = [
   {
     icon: Globe,
     title: "Business websites",
-    desc: "Marketing sites for local and service businesses, built to be found and to book jobs.",
+    desc: "Marketing sites for local and service businesses.",
   },
   {
     icon: LayoutDashboard,
     title: "Web applications",
-    desc: "Full-stack products with auth, databases, and dashboards that people actually use.",
+    desc: "Full-stack products with auth and databases.",
   },
   {
     icon: Smartphone,
     title: "Mobile apps",
-    desc: "Cross-platform apps with native feel, packaged for iOS and Android.",
+    desc: "Cross-platform apps packaged for iOS & Android.",
   },
   {
     icon: Palette,
     title: "UI design",
-    desc: "Interface and brand direction — not just implementation, but the thinking behind it.",
+    desc: "Interface and brand direction with purpose.",
   },
 ];
 
 export default function SlideServices({ isActive }: SlideProps) {
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-y-auto bg-white p-3 sm:p-5 md:p-6 dark:bg-zinc-950">
+    <div className="flex h-full w-full items-center justify-center overflow-y-auto bg-white p-2 sm:p-4 md:p-6 dark:bg-zinc-950">
       <motion.div
         className="w-full max-w-lg"
-        initial={{ opacity: 0, y: 12 }}
-        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ opacity: 0, y: 8 }}
+        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-accent sm:text-[10px] md:text-xs">
+        <p className="text-[8px] font-medium uppercase tracking-[0.18em] text-accent sm:text-[10px] md:text-xs">
           What I do
         </p>
-        <h2 className="mt-1 font-display text-lg font-medium leading-tight tracking-tight sm:text-xl md:text-2xl lg:text-3xl">
+        <h2 className="mt-0.5 font-display text-base font-medium leading-tight tracking-tight sm:text-lg md:text-2xl lg:text-3xl">
           Four things, done well.
         </h2>
 
-        <div className="mt-3 grid gap-2 sm:gap-2.5 sm:grid-cols-2">
+        <div className="mt-2 grid gap-1.5 sm:mt-3 sm:gap-2 sm:grid-cols-2 md:mt-4 md:gap-2.5">
           {services.map((s, i) => {
             const Icon = s.icon;
             return (
               <motion.div
                 key={s.title}
-                className="rounded-lg border border-border/50 bg-card/30 p-2.5 sm:p-3 md:p-4"
-                initial={{ opacity: 0, y: 6 }}
+                className="rounded-md border border-border/50 bg-card/30 p-2 sm:rounded-lg sm:p-2.5 md:p-3"
+                initial={{ opacity: 0, y: 4 }}
                 animate={
                   isActive
                     ? { opacity: 1, y: 0 }
-                    : { opacity: 0, y: 6 }
+                    : { opacity: 0, y: 4 }
                 }
                 transition={{
-                  duration: 0.35,
-                  delay: 0.06 + i * 0.06,
+                  duration: 0.3,
+                  delay: 0.05 + i * 0.04,
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                <div className="mb-1.5 inline-flex h-6 w-6 items-center justify-center rounded-md bg-accent/10 text-accent sm:h-7 sm:w-7 md:h-8 md:w-8">
-                  <Icon size={11} className="sm:size-[13px] md:size-4" />
+                <div className="mb-1 inline-flex h-5 w-5 items-center justify-center rounded bg-accent/10 text-accent sm:h-6 sm:w-6 sm:rounded-md md:h-8 md:w-8 md:rounded-lg">
+                  <Icon size={9} className="sm:size-[11px] md:size-4" />
                 </div>
-                <h3 className="text-[11px] font-medium sm:text-sm md:text-base">{s.title}</h3>
-                <p className="mt-0.5 text-[9px] leading-relaxed text-muted-foreground sm:text-[10px] md:text-xs">
+                <h3 className="text-[9px] font-medium sm:text-[11px] md:text-sm">{s.title}</h3>
+                <p className="mt-0.5 text-[7px] leading-relaxed text-muted-foreground sm:text-[9px] md:text-xs">
                   {s.desc}
                 </p>
               </motion.div>
