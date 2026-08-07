@@ -55,6 +55,8 @@ export default function Portfolio() {
     const handleWheel = (e: WheelEvent) => {
       const target = e.target as HTMLElement;
       if (!target?.closest?.(".laptop-screen")) return;
+      // Don't hijack wheel inside modals/holograms — let them scroll naturally
+      if (target?.closest?.("[data-modal-open]")) return;
       e.preventDefault();
       const screenEl = target.closest(".laptop-screen") as HTMLElement;
       if (screenEl) {
