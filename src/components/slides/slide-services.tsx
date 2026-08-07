@@ -32,44 +32,44 @@ const services = [
 
 export default function SlideServices({ isActive }: SlideProps) {
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-y-auto bg-white p-5 md:p-6 dark:bg-zinc-950">
+    <div className="flex h-full w-full items-center justify-center overflow-y-auto bg-white p-3 sm:p-5 md:p-6 dark:bg-zinc-950">
       <motion.div
         className="w-full max-w-lg"
-        initial={{ opacity: 0, y: 16 }}
-        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ opacity: 0, y: 12 }}
+        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-accent md:text-xs">
+        <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-accent sm:text-[10px] md:text-xs">
           What I do
         </p>
-        <h2 className="mt-2 font-display text-2xl font-medium leading-tight tracking-tight md:text-3xl">
+        <h2 className="mt-1 font-display text-lg font-medium leading-tight tracking-tight sm:text-xl md:text-2xl lg:text-3xl">
           Four things, done well.
         </h2>
 
-        <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
+        <div className="mt-3 grid gap-2 sm:gap-2.5 sm:grid-cols-2">
           {services.map((s, i) => {
             const Icon = s.icon;
             return (
               <motion.div
                 key={s.title}
-                className="rounded-lg border border-border/50 bg-card/30 p-3"
-                initial={{ opacity: 0, y: 8 }}
+                className="rounded-lg border border-border/50 bg-card/30 p-2.5 sm:p-3 md:p-4"
+                initial={{ opacity: 0, y: 6 }}
                 animate={
                   isActive
                     ? { opacity: 1, y: 0 }
-                    : { opacity: 0, y: 8 }
+                    : { opacity: 0, y: 6 }
                 }
                 transition={{
-                  duration: 0.4,
-                  delay: 0.08 + i * 0.06,
+                  duration: 0.35,
+                  delay: 0.06 + i * 0.06,
                   ease: [0.22, 1, 0.36, 1],
                 }}
               >
-                <div className="mb-2 inline-flex h-7 w-7 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                  <Icon size={13} />
+                <div className="mb-1.5 inline-flex h-6 w-6 items-center justify-center rounded-md bg-accent/10 text-accent sm:h-7 sm:w-7 md:h-8 md:w-8">
+                  <Icon size={11} className="sm:size-[13px] md:size-4" />
                 </div>
-                <h3 className="text-sm font-medium">{s.title}</h3>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
+                <h3 className="text-[11px] font-medium sm:text-sm md:text-base">{s.title}</h3>
+                <p className="mt-0.5 text-[9px] leading-relaxed text-muted-foreground sm:text-[10px] md:text-xs">
                   {s.desc}
                 </p>
               </motion.div>

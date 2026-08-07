@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { CheckCircle2 } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
 interface SlideProps {
   isActive: boolean;
@@ -14,83 +14,92 @@ export default function SlideProjectAngelo({ isActive }: SlideProps) {
   return (
     <div className="h-full w-full overflow-y-auto bg-white dark:bg-zinc-950">
       <motion.div
-        className="p-6 md:p-8"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className="p-3 sm:p-4 md:p-6"
+        initial={{ opacity: 0, y: 12 }}
+        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="flex items-center gap-2">
-          <span className="text-xs font-medium uppercase tracking-[0.15em] text-accent">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <span className="text-[9px] font-medium uppercase tracking-[0.15em] text-accent sm:text-[10px] md:text-xs">
             Case Study
           </span>
-          <span className="text-xs text-muted-foreground">·</span>
-          <span className="text-xs text-muted-foreground">Gamified App</span>
+          <span className="text-[9px] text-muted-foreground sm:text-[10px] md:text-xs">·</span>
+          <span className="text-[9px] text-muted-foreground sm:text-[10px] md:text-xs">Game</span>
         </div>
 
-        <h2 className="mt-2 font-display text-2xl font-medium leading-tight tracking-tight md:text-3xl">
+        <h2 className="mt-1 font-display text-base font-medium leading-tight tracking-tight sm:text-lg md:text-xl">
           Angelo
         </h2>
 
-        <p className="mt-1 text-sm text-muted-foreground">
-          A gamified speech-training companion app with an animated AI guide.
+        <p className="mt-0.5 text-[10px] text-muted-foreground sm:text-xs md:text-sm">
+          A voice-learning game with an AI companion for language practice.
         </p>
 
-        <div className="mt-5 overflow-hidden rounded-xl border border-border/50">
+        {/* Mockup */}
+        <div className="mt-3 overflow-hidden rounded-lg border border-border/50">
           <div className="relative aspect-video">
             <Image
               src="/mockup-angelo.png"
-              alt="Angelo speech training app"
+              alt="Angelo game"
               fill
               className="object-cover object-top"
             />
           </div>
         </div>
 
-        <div className="mt-5 space-y-3">
+        <div className="mt-3 space-y-2.5 sm:mt-4 sm:space-y-3">
           <div>
-            <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Why a game
+            <h3 className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground sm:text-[10px] md:text-xs">
+              What it does
             </h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-foreground/80">
-              Levels, XP, a world map, daily quests, streaks, mini-games and a
-              friendship system — so daily speech practice feels like an
-              adventure rather than a clinical exercise. Think Duolingo meets
-              Finch meets Pokémon.
+            <p className="mt-0.5 text-[10px] leading-relaxed text-foreground/80 sm:text-xs md:text-sm">
+              An AI-powered speech and language game where users practice
+              conversational English with Angelo, a friendly companion.
+              Real-time feedback, scoring, and progress tracking.
             </p>
           </div>
 
           <div>
-            <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              The companion
+            <h3 className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground sm:text-[10px] md:text-xs">
+              Key features
             </h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-foreground/80">
-              Angelo is an animated character with idle motion, blinking and
-              lip sync who walks the user through their practice. Multi-language
-              from the first screen.
+            <p className="mt-0.5 text-[10px] leading-relaxed text-foreground/80 sm:text-xs md:text-sm">
+              AI voice conversations with GPT-4o-mini, text-to-speech voices,
+              speech recognition, progress dashboard, streaks, and mobile-first
+              design.
             </p>
           </div>
 
           <div>
-            <h3 className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              Safety
+            <h3 className="text-[9px] font-medium uppercase tracking-wider text-muted-foreground sm:text-[10px] md:text-xs">
+              Stack
             </h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-foreground/80">
-              Same constraint as VoiceCare — never diagnostic, compares only
-              against the user's own past recordings.
+            <p className="mt-0.5 text-[10px] leading-relaxed text-foreground/80 sm:text-xs md:text-sm">
+              React, TanStack Start, TypeScript, Tailwind CSS, OpenAI API
+              (conversation + TTS), Cloudflare Workers, D1 database.
             </p>
           </div>
         </div>
 
-        <div className="mt-5 flex flex-wrap gap-1.5">
+        <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-4">
           {tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-border/50 px-2.5 py-0.5 text-[11px] text-muted-foreground"
+              className="rounded-full border border-border/50 px-2 py-0.5 text-[9px] text-muted-foreground sm:text-[10px]"
             >
               {tag}
             </span>
           ))}
         </div>
+
+        <a
+          href="https://voice-quest.higgsfield.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-1.5 text-[10px] font-medium text-accent hover:underline sm:mt-4 sm:text-xs"
+        >
+          Visit the site <ExternalLink size={10} className="sm:size-3" />
+        </a>
       </motion.div>
     </div>
   );

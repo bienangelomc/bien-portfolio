@@ -118,7 +118,7 @@ export default function LaptopStage({
   return (
     <div
       className={cn("relative w-full", className)}
-      style={{ perspective: "1600px" }}
+      style={{ perspective: "1400px" }}
     >
         <motion.div
         className="relative mx-auto"
@@ -127,7 +127,7 @@ export default function LaptopStage({
           rotateX: 14,
           y: useTransform(p, [0, 1], ["0%", "10%"]),
           transformStyle: "preserve-3d",
-          width: "min(760px, 90vw)",
+          width: "min(760px, 92vw)",
           willChange: "transform",
         }}
       >

@@ -8,22 +8,22 @@ interface SlideProps {
 
 export default function SlideAbout({ isActive }: SlideProps) {
   return (
-    <div className="flex h-full w-full items-center justify-center bg-white p-8 dark:bg-zinc-950">
+    <div className="flex h-full w-full items-center justify-center overflow-y-auto bg-white p-3 sm:p-5 md:p-8 dark:bg-zinc-950">
       <motion.div
         className="max-w-md"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        initial={{ opacity: 0, y: 12 }}
+        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className="text-xs font-medium uppercase tracking-[0.2em] text-accent">
+        <p className="text-[9px] font-medium uppercase tracking-[0.2em] text-accent sm:text-[10px] md:text-xs">
           About
         </p>
-        <h2 className="mt-3 font-display text-3xl font-medium leading-tight tracking-tight md:text-4xl">
+        <h2 className="mt-1 font-display text-lg font-medium leading-tight tracking-tight sm:text-xl md:text-2xl lg:text-3xl">
           Design and build,
           <br />
           in one pair of hands.
         </h2>
-        <div className="mt-5 space-y-4 text-sm leading-relaxed text-muted-foreground md:text-[15px]">
+        <div className="mt-3 space-y-2.5 text-[11px] leading-relaxed text-muted-foreground sm:mt-4 sm:space-y-3 sm:text-xs md:mt-5 md:text-sm">
           <p>
             I'm a developer who works end-to-end — from the first sketch to the
             live site. I started out building landing pages for local
