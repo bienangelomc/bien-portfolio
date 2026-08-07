@@ -223,7 +223,7 @@ function TopLabel({
       className="pointer-events-none absolute top-16 z-10 w-full text-center"
     >
       <p className="text-xs font-medium uppercase tracking-[0.3em] text-zinc-400">
-        Bien Casimiro
+        My Portfolio
       </p>
     </motion.div>
   );
