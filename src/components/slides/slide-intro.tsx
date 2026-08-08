@@ -55,9 +55,9 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
       />
 
       {/* Main content */}
-      <div className="relative z-10 flex w-full flex-col items-center justify-center gap-1 text-center sm:gap-1.5 md:gap-3">
-        {/* Portrait — big, centered at top */}
-        <div className="relative flex h-24 w-24 flex-col items-center justify-center sm:h-auto sm:w-auto sm:flex-[0_0_40%] md:flex-[0_0_44%]">
+      <div className="relative z-10 flex w-full flex-col items-center justify-start gap-1 pt-1 text-center sm:gap-1.5 md:justify-center md:gap-3">
+        {/* Portrait — big but not clipped */}
+        <div className="relative flex h-16 w-16 flex-col items-center justify-center sm:h-auto sm:w-auto sm:flex-[0_0_38%] md:flex-[0_0_44%]">
           {/* Glow pulse */}
           <motion.div
             className="absolute h-[85%] w-[85%] rounded-full bg-accent/20 blur-md sm:blur-lg md:blur-xl"
@@ -81,10 +81,10 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
             <div className="absolute bottom-1 left-0 h-0.5 w-0.5 rounded-full bg-sky-400/60" />
           </motion.div>
 
-          {/* Portrait image — big */}
+          {/* Portrait image */}
           <motion.div
-            className="relative z-10 h-20 w-20 overflow-hidden rounded-full ring-1.5 ring-accent/30 ring-offset-1.5 ring-offset-zinc-950 sm:h-auto sm:w-[72%] md:w-[72%]"
-            animate={{ y: [0, -2, 0] }}
+            className="relative z-10 h-14 w-14 overflow-hidden rounded-full ring-1.5 ring-accent/30 ring-offset-1 ring-offset-zinc-950 sm:h-auto sm:w-[68%] md:w-[72%]"
+            animate={{ y: [0, -1.5, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           >
             <img
@@ -98,9 +98,9 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
         {/* Name below picture */}
         <motion.h2
-          className="font-display text-xl font-bold tracking-tight text-foreground sm:text-lg md:text-3xl"
-          initial={{ opacity: 0, y: 6 }}
-          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
+          className="font-display text-base font-bold tracking-tight text-foreground sm:text-base md:text-3xl"
+          initial={{ opacity: 0, y: 4 }}
+          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
           transition={{ duration: 0.5, delay: 0.15 }}
         >
           BIEN CASIMIRO
@@ -119,9 +119,9 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
         {/* Headline */}
         <motion.h1
-          className="font-display text-sm font-medium leading-tight tracking-tight sm:text-sm md:text-2xl lg:text-3xl"
-          initial={{ opacity: 0, x: -8 }}
-          animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -8 }}
+          className="font-display text-[13px] font-medium leading-tight tracking-tight sm:text-sm md:text-2xl lg:text-3xl"
+          initial={{ opacity: 0, x: -6 }}
+          animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
           transition={{ duration: 0.5, delay: 0.25 }}
         >
           I build funnels that convert.
@@ -129,7 +129,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
         {/* Description */}
         <motion.p
-          className="max-w-none text-[10px] leading-relaxed text-muted-foreground/80 sm:max-w-xs sm:text-[9px] md:mt-1 md:text-xs lg:text-sm"
+          className="max-w-none text-[9px] leading-relaxed text-muted-foreground/80 sm:max-w-xs sm:text-[9px] md:mt-1 md:text-xs lg:text-sm"
           initial={{ opacity: 0, x: -4 }}
           animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -4 }}
           transition={{ duration: 0.4, delay: 0.3 }}
@@ -139,32 +139,32 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
         {/* Stats row */}
         <motion.div
-          className="grid grid-cols-3 gap-2 sm:gap-2 md:mt-1 md:gap-3"
-          initial={{ opacity: 0, y: 4 }}
-          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
+          className="grid grid-cols-3 gap-1.5 sm:gap-2 md:mt-1 md:gap-3"
+          initial={{ opacity: 0, y: 3 }}
+          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 3 }}
           transition={{ duration: 0.4, delay: 0.4 }}
         >
           <div className="text-center">
-            <p className="font-display text-[15px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
+            <p className="font-display text-[13px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
               2+
             </p>
-            <p className="text-[9px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
+            <p className="text-[8px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
               Years exp.
             </p>
           </div>
           <div className="text-center">
-            <p className="font-display text-[15px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
+            <p className="font-display text-[13px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
               20+
             </p>
-            <p className="text-[9px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
+            <p className="text-[8px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
               Funnels
             </p>
           </div>
           <div className="text-center">
-            <p className="font-display text-[15px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
+            <p className="font-display text-[13px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
               100%
             </p>
-            <p className="text-[9px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
+            <p className="text-[8px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
               Satisfied
             </p>
           </div>
@@ -172,44 +172,44 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
         {/* CTAs */}
         <motion.div
-          className="flex flex-wrap justify-center gap-1.5 sm:gap-2 md:mt-1 md:gap-2"
-          initial={{ opacity: 0, y: 4 }}
-          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
+          className="flex flex-wrap justify-center gap-1 sm:gap-2 md:mt-1 md:gap-2"
+          initial={{ opacity: 0, y: 3 }}
+          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 3 }}
           transition={{ duration: 0.4, delay: 0.5 }}
         >
           <button
             onClick={() => onNavigate(3)}
-            className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-2 py-1 text-[10px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(74,222,128,0.4)] sm:px-2.5 sm:py-0.5 sm:text-[9px] md:px-4 md:py-1.5 md:text-sm"
+            className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-2 py-0.5 text-[9px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(74,222,128,0.4)] sm:px-2.5 sm:py-0.5 sm:text-[9px] md:px-4 md:py-1.5 md:text-sm"
           >
             See work
-            <ArrowRight size={9} className="transition-transform group-hover:translate-x-0.5 sm:size-[7px] md:size-3" />
+            <ArrowRight size={8} className="transition-transform group-hover:translate-x-0.5 sm:size-[7px] md:size-3" />
           </button>
           <button
             onClick={() => onNavigate(9)}
-            className="inline-flex items-center gap-0.5 rounded-full border border-border/60 px-2 py-1 text-[10px] font-medium transition-colors hover:border-accent/50 hover:bg-accent/10 hover:text-accent sm:px-2.5 sm:py-0.5 sm:text-[9px] md:px-4 md:py-1.5 md:text-sm"
+            className="inline-flex items-center gap-0.5 rounded-full border border-border/60 px-2 py-0.5 text-[9px] font-medium transition-colors hover:border-accent/50 hover:bg-accent/10 hover:text-accent sm:px-2.5 sm:py-0.5 sm:text-[9px] md:px-4 md:py-1.5 md:text-sm"
           >
             Quote
-            <Mail size={9} className="sm:size-[7px] md:size-3" />
+            <Mail size={8} className="sm:size-[7px] md:size-3" />
           </button>
         </motion.div>
 
         {/* Skills row — smaller */}
         <motion.div
-          className="w-full border-t border-white/5 pt-1 mt-1 sm:mt-0.5 sm:pt-0.5 md:mt-2 md:pt-2"
-          initial={{ opacity: 0, y: 6 }}
-          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
+          className="w-full border-t border-white/5 pt-0.5 mt-0.5 sm:mt-0.5 sm:pt-0.5 md:mt-2 md:pt-2"
+          initial={{ opacity: 0, y: 4 }}
+          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
           transition={{ duration: 0.4, delay: 0.6 }}
         >
-          <p className="mb-0.5 text-center text-[8px] font-medium uppercase tracking-[0.15em] text-muted-foreground/60 sm:mb-0.5 sm:text-[7px] md:mb-1 md:text-[10px]">
+          <p className="mb-0.5 text-center text-[7px] font-medium uppercase tracking-[0.15em] text-muted-foreground/60 sm:mb-0.5 sm:text-[7px] md:mb-1 md:text-[10px]">
             Tools I work with
           </p>
           <div className="flex flex-wrap justify-center gap-0.5 sm:gap-0.5 md:gap-1">
             {skills.map((skill, i) => (
               <motion.span
                 key={skill.name}
-                className={`rounded-full bg-white/[0.03] px-1 py-0.5 text-[7px] font-medium ring-1 ring-white/5 ${skill.color} sm:px-1 sm:py-0.5 sm:text-[7px] md:px-1.5 md:py-0.5 md:text-[11px]`}
-                initial={{ opacity: 0, y: 4 }}
-                animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
+                className={`rounded-full bg-white/[0.03] px-1 py-[2px] text-[6.5px] font-medium ring-1 ring-white/5 ${skill.color} sm:px-1 sm:py-[2px] sm:text-[7px] md:px-1.5 md:py-0.5 md:text-[11px]`}
+                initial={{ opacity: 0, y: 3 }}
+                animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 3 }}
                 transition={{ duration: 0.3, delay: 0.6 + i * 0.03 }}
               >
                 {skill.name}
