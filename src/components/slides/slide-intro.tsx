@@ -25,7 +25,7 @@ const skills = [
 
 export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
   return (
-    <div className="relative flex h-full w-full flex-col justify-center overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-950 to-black p-2 sm:p-2 md:p-4 lg:p-5">
+    <div className="relative flex h-full w-full flex-col justify-center overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-950 to-black p-1.5 sm:p-2 md:p-4 lg:p-5">
       {/* Tech grid background */}
       <div
         className="absolute inset-0 opacity-[0.06]"
@@ -55,20 +55,20 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
       />
 
       {/* Main content — flex column, centered */}
-      <div className="relative z-10 flex w-full flex-col items-center justify-center gap-1.5 text-center sm:text-left sm:items-start sm:gap-1.5 md:gap-3">
+      <div className="relative z-10 flex w-full flex-col items-center justify-center gap-1 text-center sm:text-left sm:items-start sm:gap-1.5 md:gap-3">
         {/* Top: badge + portrait */}
-        <div className="flex w-full flex-col items-center gap-2 sm:flex-row sm:gap-2 md:gap-4">
+        <div className="flex w-full flex-col items-center gap-1.5 sm:flex-row sm:gap-2 md:gap-4">
           {/* Portrait — top on mobile, right on desktop */}
-          <div className="relative shrink-0 flex h-16 w-16 items-center justify-center sm:h-auto sm:w-auto sm:flex-[0_0_28%] md:flex-[0_0_42%] lg:flex-[0_0_44%]">
+          <div className="relative shrink-0 flex h-12 w-12 items-center justify-center sm:h-auto sm:w-auto sm:flex-[0_0_28%] md:flex-[0_0_42%] lg:flex-[0_0_44%]">
             {/* Glow pulse */}
             <motion.div
-              className="absolute h-[80%] w-[80%] rounded-full bg-accent/20 blur-md sm:blur-lg md:blur-xl"
+              className="absolute h-[75%] w-[75%] rounded-full bg-accent/20 blur-md sm:blur-lg md:blur-xl"
               animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.5, 0.3] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             />
             {/* Rotating ring 1 */}
             <motion.div
-              className="absolute h-[75%] w-[75%] rounded-full border border-accent/25"
+              className="absolute h-[72%] w-[72%] rounded-full border border-accent/25"
               animate={{ rotate: 360 }}
               transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
             >
@@ -76,7 +76,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
             </motion.div>
             {/* Rotating ring 2 */}
             <motion.div
-              className="absolute h-[62%] w-[62%] rounded-full border border-accent/15"
+              className="absolute h-[58%] w-[58%] rounded-full border border-accent/15"
               animate={{ rotate: -360 }}
               transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
             >
@@ -85,8 +85,8 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
             {/* Portrait image */}
             <motion.div
-              className="relative z-10 h-12 w-12 overflow-hidden rounded-full ring-1.5 ring-accent/30 ring-offset-1.5 ring-offset-zinc-950 sm:h-auto sm:w-[72%] md:w-[72%]"
-              animate={{ y: [0, -2, 0] }}
+              className="relative z-10 h-9 w-9 overflow-hidden rounded-full ring-1 ring-accent/30 ring-offset-1 ring-offset-zinc-950 sm:h-auto sm:w-[72%] md:w-[72%]"
+              animate={{ y: [0, -1.5, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             >
               <img
