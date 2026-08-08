@@ -116,7 +116,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
             transition={{ duration: 0.4, delay: 0.2 }}
           >
             <Zap size={9} className="md:size-3.5" />
-            Funnel Builder
+            Funnel Builder &amp; Data Specialist
           </motion.div>
         </div>
 

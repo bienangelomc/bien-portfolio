@@ -43,11 +43,11 @@ export default function SlideAbout({ isActive }: SlideProps) {
           <p className="text-[6px] font-medium uppercase tracking-[0.2em] text-accent sm:text-[9px] md:text-xs">
             About
           </p>
-          <h2 className="mt-0.5 font-display text-[10px] font-medium leading-tight tracking-tight sm:text-base md:text-2xl">
-            Bien Casimiro
-            <br />
-            <span className="text-muted-foreground text-[8px] sm:text-sm md:text-lg">Funnel Builder &amp; Web Developer</span>
-          </h2>
+        <h2 className="mt-0.5 font-display text-[10px] font-medium leading-tight tracking-tight sm:text-base md:text-2xl">
+          Bien Casimiro
+          <br />
+          <span className="text-muted-foreground text-[8px] sm:text-sm md:text-lg">Funnel Builder &amp; Data Specialist</span>
+        </h2>
           <div className="mt-1 space-y-1 text-[6px] leading-relaxed text-muted-foreground sm:mt-2 sm:space-y-1.5 sm:text-[9px] md:mt-4 md:space-y-3 md:text-sm">
             <p>
               I'm <strong className="text-foreground">Bien Casimiro</strong>, a
