@@ -25,7 +25,7 @@ const skills = [
 
 export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
   return (
-    <div className="relative flex h-full w-full flex-col justify-center overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-950 to-black p-1.5 sm:p-2 md:p-4 lg:p-5">
+    <div className="relative flex h-full w-full flex-col justify-center overflow-hidden bg-gradient-to-br from-zinc-900 via-zinc-950 to-black p-1.5">
       {/* Tech grid background */}
       <div
         className="absolute inset-0 opacity-[0.06]"
@@ -42,25 +42,25 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
       {/* Glowing orbs */}
       <motion.div
-        className="absolute -left-4 top-1/4 h-12 w-12 rounded-full bg-accent/15 blur-xl sm:h-10 sm:w-10 md:h-40 md:w-40"
+        className="absolute -left-4 top-1/4 h-12 w-12 rounded-full bg-accent/15 blur-xl"
         animate={{ x: [0, 8, 0], y: [0, -6, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         aria-hidden="true"
       />
       <motion.div
-        className="absolute -right-2 bottom-1/5 h-10 w-10 rounded-full bg-sky-500/10 blur-xl sm:h-8 sm:w-8 md:h-32 md:w-32"
+        className="absolute -right-2 bottom-1/5 h-10 w-10 rounded-full bg-sky-500/10 blur-xl"
         animate={{ x: [0, -10, 0], y: [0, 8, 0] }}
         transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
         aria-hidden="true"
       />
 
-      {/* Main content */}
-      <div className="relative z-10 flex w-full flex-col items-center justify-start gap-1 pt-1 text-center sm:gap-1.5 md:justify-center md:gap-3">
-        {/* Portrait — big but not clipped */}
-        <div className="relative flex h-16 w-16 flex-col items-center justify-center sm:h-auto sm:w-auto sm:flex-[0_0_38%] md:flex-[0_0_44%]">
+      {/* Main content — all base sizes work for both desktop (laptop screen) and mobile (hologram scale) */}
+      <div className="relative z-10 flex w-full flex-col items-center justify-start gap-1 pt-1 text-center">
+        {/* Portrait */}
+        <div className="relative flex h-16 w-16 flex-col items-center justify-center">
           {/* Glow pulse */}
           <motion.div
-            className="absolute h-[85%] w-[85%] rounded-full bg-accent/20 blur-md sm:blur-lg md:blur-xl"
+            className="absolute h-[85%] w-[85%] rounded-full bg-accent/20 blur-md"
             animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -83,7 +83,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
           {/* Portrait image */}
           <motion.div
-            className="relative z-10 h-14 w-14 overflow-hidden rounded-full ring-1.5 ring-accent/30 ring-offset-1 ring-offset-zinc-950 sm:h-auto sm:w-[68%] md:w-[72%]"
+            className="relative z-10 h-14 w-14 overflow-hidden rounded-full ring-1.5 ring-accent/30 ring-offset-1 ring-offset-zinc-950"
             animate={{ y: [0, -1.5, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           >
@@ -98,7 +98,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
         {/* Name below picture */}
         <motion.h2
-          className="font-display text-base font-bold tracking-tight text-foreground sm:text-base md:text-3xl"
+          className="font-display text-base font-bold tracking-tight text-foreground"
           initial={{ opacity: 0, y: 4 }}
           animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
           transition={{ duration: 0.5, delay: 0.15 }}
@@ -108,18 +108,18 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
         {/* Badge */}
         <motion.div
-          className="inline-flex w-fit items-center gap-1 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent ring-1 ring-inset ring-accent/20 sm:text-[9px] md:px-2.5 md:py-1 md:text-xs"
+          className="inline-flex w-fit items-center gap-1 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent ring-1 ring-inset ring-accent/20"
           initial={{ opacity: 0, y: -4 }}
           animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 }}
           transition={{ duration: 0.4, delay: 0.2 }}
         >
-          <Zap size={9} className="sm:w-[8px] sm:h-[8px] md:w-3 md:h-3" />
+          <Zap size={9} />
           Funnel Builder
         </motion.div>
 
         {/* Headline */}
         <motion.h1
-          className="font-display text-[13px] font-medium leading-tight tracking-tight sm:text-sm md:text-2xl lg:text-3xl"
+          className="font-display text-[13px] font-medium leading-tight tracking-tight"
           initial={{ opacity: 0, x: -6 }}
           animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
           transition={{ duration: 0.5, delay: 0.25 }}
@@ -129,7 +129,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
         {/* Description */}
         <motion.p
-          className="max-w-none text-[9px] leading-relaxed text-muted-foreground/80 sm:max-w-xs sm:text-[9px] md:mt-1 md:text-xs lg:text-sm"
+          className="max-w-none text-[9px] leading-relaxed text-muted-foreground/80"
           initial={{ opacity: 0, x: -4 }}
           animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -4 }}
           transition={{ duration: 0.4, delay: 0.3 }}
@@ -139,32 +139,32 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
         {/* Stats row */}
         <motion.div
-          className="grid grid-cols-3 gap-1.5 sm:gap-2 md:mt-1 md:gap-3"
+          className="grid grid-cols-3 gap-1.5"
           initial={{ opacity: 0, y: 3 }}
           animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 3 }}
           transition={{ duration: 0.4, delay: 0.4 }}
         >
           <div className="text-center">
-            <p className="font-display text-[13px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
+            <p className="font-display text-[13px] font-bold text-foreground">
               2+
             </p>
-            <p className="text-[8px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
+            <p className="text-[8px] text-muted-foreground">
               Years exp.
             </p>
           </div>
           <div className="text-center">
-            <p className="font-display text-[13px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
+            <p className="font-display text-[13px] font-bold text-foreground">
               20+
             </p>
-            <p className="text-[8px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
+            <p className="text-[8px] text-muted-foreground">
               Funnels
             </p>
           </div>
           <div className="text-center">
-            <p className="font-display text-[13px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
+            <p className="font-display text-[13px] font-bold text-foreground">
               100%
             </p>
-            <p className="text-[8px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
+            <p className="text-[8px] text-muted-foreground">
               Satisfied
             </p>
           </div>
@@ -172,42 +172,42 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
         {/* CTAs */}
         <motion.div
-          className="flex flex-wrap justify-center gap-1 sm:gap-2 md:mt-1 md:gap-2"
+          className="flex flex-wrap justify-center gap-1"
           initial={{ opacity: 0, y: 3 }}
           animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 3 }}
           transition={{ duration: 0.4, delay: 0.5 }}
         >
           <button
             onClick={() => onNavigate(3)}
-            className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-2 py-0.5 text-[9px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(74,222,128,0.4)] sm:px-2.5 sm:py-0.5 sm:text-[9px] md:px-4 md:py-1.5 md:text-sm"
+            className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-2 py-0.5 text-[9px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(74,222,128,0.4)]"
           >
             See work
-            <ArrowRight size={8} className="transition-transform group-hover:translate-x-0.5 sm:size-[7px] md:size-3" />
+            <ArrowRight size={8} className="transition-transform group-hover:translate-x-0.5" />
           </button>
           <button
             onClick={() => onNavigate(9)}
-            className="inline-flex items-center gap-0.5 rounded-full border border-border/60 px-2 py-0.5 text-[9px] font-medium transition-colors hover:border-accent/50 hover:bg-accent/10 hover:text-accent sm:px-2.5 sm:py-0.5 sm:text-[9px] md:px-4 md:py-1.5 md:text-sm"
+            className="inline-flex items-center gap-0.5 rounded-full border border-border/60 px-2 py-0.5 text-[9px] font-medium transition-colors hover:border-accent/50 hover:bg-accent/10 hover:text-accent"
           >
             Quote
-            <Mail size={8} className="sm:size-[7px] md:size-3" />
+            <Mail size={8} />
           </button>
         </motion.div>
 
         {/* Skills row — smaller */}
         <motion.div
-          className="w-full border-t border-white/5 pt-0.5 mt-0.5 sm:mt-0.5 sm:pt-0.5 md:mt-2 md:pt-2"
+          className="w-full border-t border-white/5 pt-0.5 mt-0.5"
           initial={{ opacity: 0, y: 4 }}
           animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
           transition={{ duration: 0.4, delay: 0.6 }}
         >
-          <p className="mb-0.5 text-center text-[7px] font-medium uppercase tracking-[0.15em] text-muted-foreground/60 sm:mb-0.5 sm:text-[7px] md:mb-1 md:text-[10px]">
+          <p className="mb-0.5 text-center text-[7px] font-medium uppercase tracking-[0.15em] text-muted-foreground/60">
             Tools I work with
           </p>
-          <div className="flex flex-wrap justify-center gap-0.5 sm:gap-0.5 md:gap-1">
+          <div className="flex flex-wrap justify-center gap-0.5">
             {skills.map((skill, i) => (
               <motion.span
                 key={skill.name}
-                className={`rounded-full bg-white/[0.03] px-1 py-[2px] text-[6.5px] font-medium ring-1 ring-white/5 ${skill.color} sm:px-1 sm:py-[2px] sm:text-[7px] md:px-1.5 md:py-0.5 md:text-[11px]`}
+                className={`rounded-full bg-white/[0.03] px-1 py-[2px] text-[6.5px] font-medium ring-1 ring-white/5 ${skill.color}`}
                 initial={{ opacity: 0, y: 3 }}
                 animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 3 }}
                 transition={{ duration: 0.3, delay: 0.6 + i * 0.03 }}
