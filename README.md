@@ -127,3 +127,4 @@ vercel
 - Static generation — all pages prerendered
 - Next.js Image optimization for mockups
 - Smooth 60fps target on mid-range devices
+ 
