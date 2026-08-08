@@ -12,7 +12,7 @@ interface MobileHologramProps {
 // Scale factor to make content fill the hologram
 // On mobile viewport, slides use tiny base sizes (text-[5px] etc.)
 // Scaling them up makes the content fill the hologram at readable sizes
-const SCALE = 2.2;
+const SCALE = 1.9;
 
 export default function MobileHologram({
   isOpen,

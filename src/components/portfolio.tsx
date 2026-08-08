@@ -207,7 +207,7 @@ export default function Portfolio() {
           </LaptopStage>
 
           {/* Hologram modal — renders outside the laptop screen, floating above */}
-          <div className="pointer-events-none absolute inset-0 z-50 flex items-center justify-center">
+          <div className="pointer-events-none absolute inset-0 z-[80] flex items-center justify-center">
             <HologramModal
               project={hologramProject}
               isOpen={isHologramOpen}
