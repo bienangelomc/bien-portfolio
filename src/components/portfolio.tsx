@@ -20,13 +20,13 @@ import MobileHologram from "./mobile-hologram";
 const TOTAL_SLIDES = 9;
 
 // Timeline:
-// 0.00 → 0.08   Laptop closed
-// 0.08 → 0.45   Lid opens
-// 0.45 → 0.55   Boot animation
-// 0.55 → 0.95   Portfolio slides (9 slides, ~4.4% each = plenty of scroll room)
-// 0.95 → 1.00   Hold / slight shrink
-const PRESENT_START = 0.55;
-const PRESENT_END = 0.95;
+// 0.00 → 0.06   Laptop closed
+// 0.06 → 0.42   Lid opens
+// 0.42 → 0.48   Boot animation (short)
+// 0.48 → 0.97   Portfolio slides (9 slides, ~5.4% each = ~540px scroll per slide)
+// 0.97 → 1.00   Hold
+const PRESENT_START = 0.48;
+const PRESENT_END = 0.97;
 const PRESENT_RANGE = PRESENT_END - PRESENT_START;
 
 export default function Portfolio() {
@@ -122,8 +122,8 @@ export default function Portfolio() {
       const slideFloat = ((p - PRESENT_START) / PRESENT_RANGE) * TOTAL_SLIDES;
       const slide = Math.min(TOTAL_SLIDES - 1, Math.max(0, Math.floor(slideFloat)));
       setActiveSlide(slide);
-      // Open mobile hologram during presentation
-      setMobileHologramOpen(isMobile && p >= 0.56 && p < 0.97);
+      // Open mobile hologram right at presentation start
+      setMobileHologramOpen(isMobile && p >= PRESENT_START && p < 0.98);
     });
     return () => unsubscribe();
   }, [scrollProgress, isMobile]);
@@ -166,7 +166,7 @@ export default function Portfolio() {
       <div
         ref={containerRef}
         className="relative"
-        style={{ height: "1000vh" }}
+        style={{ height: "1500vh" }}
       >
         <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
           {/* Ambient glow */}
@@ -187,6 +187,7 @@ export default function Portfolio() {
             activeSlide={activeSlide}
             containerRef={containerRef}
             scrollProgress={scrollProgress}
+            isMobile={isMobile}
           >
             {/* Only render slides inside laptop on desktop */}
             {!isMobile && (

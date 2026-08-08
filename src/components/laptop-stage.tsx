@@ -10,6 +10,7 @@ interface LaptopStageProps {
   className?: string;
   containerRef: React.RefObject<HTMLDivElement | null>;
   scrollProgress: MotionValue<number>;
+  isMobile?: boolean;
 }
 
 /**
@@ -54,6 +55,7 @@ export default function LaptopStage({
   activeSlide,
   className,
   scrollProgress,
+  isMobile = false,
 }: LaptopStageProps) {
   const p = useSpring(scrollProgress, {
     stiffness: 120,
@@ -61,10 +63,10 @@ export default function LaptopStage({
     restDelta: 0.001,
   });
 
-  // LID rotation: closed → open
+  // LID rotation: closed → open (shorter on mobile)
   const lidRotation = useTransform(
     p,
-    [0.08, 0.45],
+    isMobile ? [0.06, 0.35] : [0.06, 0.42],
     [LID_CLOSED, LID_OPEN],
     { clamp: true }
   );
@@ -80,29 +82,29 @@ export default function LaptopStage({
   // Screen wake
   const screenOpacity = useTransform(
     p,
-    [0.22, 0.38, 0.45],
+    isMobile ? [0.18, 0.30, 0.35] : [0.22, 0.38, 0.42],
     [0.15, 0.6, 1],
     { clamp: true }
   );
   const screenBrightness = useTransform(
     p,
-    [0.22, 0.45],
+    isMobile ? [0.18, 0.35] : [0.22, 0.42],
     [0.4, 1],
     { clamp: true }
   );
 
-  // Boot overlay
+  // Boot overlay — disabled on mobile (content shows in hologram, not laptop screen)
   const bootOpacity = useTransform(
     p,
-    [0.42, 0.46, 0.52, 0.56],
-    [0, 1, 1, 0],
+    isMobile ? [1, 1.01] : [0.38, 0.42, 0.46, 0.50],
+    isMobile ? [0, 0] : [0, 1, 1, 0],
     { clamp: true }
   );
 
   // Slides after boot
   const slidesOpacity = useTransform(
     p,
-    [0.52, 0.58],
+    isMobile ? [0.40, 0.42] : [0.44, 0.48],
     [0, 1],
     { clamp: true }
   );

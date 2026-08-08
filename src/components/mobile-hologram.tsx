@@ -66,8 +66,8 @@ export default function MobileHologram({
             <div
               className="relative overflow-hidden rounded-xl border border-accent/40 bg-zinc-950/97"
               style={{
-                width: "94vw",
-                height: "72vh",
+                width: "95vw",
+                height: "78vh",
                 boxShadow:
                   "0 0 40px rgba(74, 222, 128, 0.1), inset 0 1px 0 rgba(74, 222, 128, 0.1)",
               }}
