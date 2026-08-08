@@ -15,6 +15,7 @@ import SlideProcess from "./slides/slide-process";
 import SlideTestimonials from "./slides/slide-testimonials";
 import HologramModal, { type ProjectData } from "./hologram-modal";
 import TestimonialVideoHologram from "./testimonial-video-hologram";
+import MobileHologram from "./mobile-hologram";
 
 const TOTAL_SLIDES = 9;
 
@@ -34,6 +35,16 @@ export default function Portfolio() {
   const [hologramProject, setHologramProject] = useState<ProjectData | null>(null);
   const [isHologramOpen, setIsHologramOpen] = useState(false);
   const [selectedTestimonial, setSelectedTestimonial] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileHologramOpen, setMobileHologramOpen] = useState(false);
+
+  // Mobile detection
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const openHologram = useCallback((project: ProjectData) => {
     setHologramProject(project);
@@ -93,23 +104,27 @@ export default function Portfolio() {
     };
   }, [scrollProgress]);
 
-  // Calculate active slide
+  // Calculate active slide + mobile hologram visibility
   useEffect(() => {
     const unsubscribe = scrollProgress.on("change", (p) => {
       if (p < PRESENT_START) {
         setActiveSlide(0);
+        setMobileHologramOpen(false);
         return;
       }
       if (p >= PRESENT_END) {
         setActiveSlide(TOTAL_SLIDES - 1);
+        setMobileHologramOpen(false);
         return;
       }
       const slideFloat = ((p - PRESENT_START) / PRESENT_RANGE) * (TOTAL_SLIDES - 1);
       const slide = Math.min(TOTAL_SLIDES - 1, Math.max(0, Math.round(slideFloat)));
       setActiveSlide(slide);
+      // Open mobile hologram during presentation
+      setMobileHologramOpen(isMobile && p >= 0.56 && p < 0.97);
     });
     return () => unsubscribe();
-  }, [scrollProgress]);
+  }, [scrollProgress, isMobile]);
 
   const navigateToSlide = useCallback((slide: number) => {
     const el = containerRef.current;
@@ -171,18 +186,21 @@ export default function Portfolio() {
             containerRef={containerRef}
             scrollProgress={scrollProgress}
           >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeKey}
-                className="absolute inset-0"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              >
-                <ActiveSlide isActive={true} {...(activeProps as any)} />
-              </motion.div>
-            </AnimatePresence>
+            {/* Only render slides inside laptop on desktop */}
+            {!isMobile && (
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeKey}
+                  className="absolute inset-0"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                >
+                  <ActiveSlide isActive={true} {...(activeProps as any)} />
+                </motion.div>
+              </AnimatePresence>
+            )}
           </LaptopStage>
 
           {/* Hologram modal — renders outside the laptop screen, floating above */}
@@ -199,6 +217,28 @@ export default function Portfolio() {
             selectedIndex={selectedTestimonial}
             onClose={closeTestimonialVideo}
           />
+
+          {/* Mobile hologram — slides display as hologram on mobile for better UX */}
+          {isMobile && (
+            <MobileHologram
+              isOpen={mobileHologramOpen}
+              slideNumber={activeSlide}
+              totalSlides={TOTAL_SLIDES}
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeKey}
+                  className="absolute inset-0"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  <ActiveSlide isActive={true} {...(activeProps as any)} />
+                </motion.div>
+              </AnimatePresence>
+            </MobileHologram>
+          )}
 
           {/* Bottom scroll cue */}
           <BottomCue scrollProgress={scrollProgress} />
