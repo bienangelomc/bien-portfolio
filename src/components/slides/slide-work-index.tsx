@@ -82,26 +82,26 @@ const projects: ProjectData[] = [
 
 export default function SlideWorkIndex({ isActive, onOpenHologram }: SlideProps) {
   return (
-    <div className="relative flex h-full w-full items-start justify-start overflow-y-auto bg-zinc-950 p-3 sm:p-4 md:p-6 sm:items-center sm:justify-center">
+    <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-zinc-950 p-1.5 sm:p-3 md:p-6">
       <motion.div
         className="w-full max-w-lg"
         initial={{ opacity: 0, y: 6 }}
         animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className="text-[7px] font-medium uppercase tracking-[0.18em] text-accent sm:text-[10px] md:text-xs">
+        <p className="text-[6px] font-medium uppercase tracking-[0.18em] text-accent sm:text-[10px] md:text-xs">
           Selected Work
         </p>
-        <h2 className="mt-px font-display text-sm font-medium leading-tight tracking-tight sm:text-base md:text-2xl lg:text-3xl">
+        <h2 className="mt-0.5 font-display text-[11px] font-medium leading-tight tracking-tight sm:text-base md:text-2xl lg:text-3xl">
           Three recent projects.
         </h2>
 
-        <div className="mt-1.5 space-y-1 sm:mt-3 sm:space-y-2 md:mt-4 md:space-y-2.5">
+        <div className="mt-1 space-y-0.5 sm:mt-3 sm:space-y-2 md:mt-4 md:space-y-2.5">
           {projects.map((p, i) => (
             <motion.button
               key={p.title}
               onClick={() => onOpenHologram(p)}
-              className="group relative flex w-full items-center gap-1.5 rounded-md border border-border/50 bg-card/30 p-1 text-left transition-all hover:border-accent/30 hover:bg-card/60 sm:gap-2.5 sm:rounded-lg sm:p-2 md:gap-4 md:p-3"
+              className="group relative flex w-full items-center gap-1 rounded-md border border-border/50 bg-card/30 p-0.5 text-left transition-all hover:border-accent/30 hover:bg-card/60 sm:gap-2.5 sm:rounded-lg sm:p-2 md:gap-4 md:p-3"
               initial={{ opacity: 0, x: -4 }}
               animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -4 }}
               transition={{
@@ -112,7 +112,7 @@ export default function SlideWorkIndex({ isActive, onOpenHologram }: SlideProps)
             >
               <div className="relative">
                 <div
-                  className="relative h-5 w-7 shrink-0 overflow-hidden rounded-[2px] sm:h-7 sm:w-11 md:h-10 md:w-16"
+                  className="relative h-4 w-6 shrink-0 overflow-hidden rounded-[2px] sm:h-7 sm:w-11 md:h-10 md:w-16"
                   style={{ background: `${p.color}15` }}
                 >
                   <Image
@@ -124,22 +124,22 @@ export default function SlideWorkIndex({ isActive, onOpenHologram }: SlideProps)
                 </div>
                 {/* Hologram sparkle indicator */}
                 <div
-                  className="absolute -right-0.5 -top-0.5 flex h-2.5 w-2.5 items-center justify-center rounded-full"
+                  className="absolute -right-0.5 -top-0.5 flex h-2 w-2 items-center justify-center rounded-full"
                   style={{ background: p.accent, boxShadow: `0 0 4px ${p.accent}` }}
                 >
-                  <Sparkles size={6} className="text-white" />
+                  <Sparkles size={5} className="text-white" />
                 </div>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[8px] font-medium leading-tight sm:text-[10px] md:text-sm">
+                <p className="text-[7px] font-medium leading-tight sm:text-[10px] md:text-sm">
                   {p.title}
                 </p>
-                <p className="mt-px text-[6px] text-muted-foreground sm:text-[9px] md:text-xs">
+                <p className="mt-px text-[5px] text-muted-foreground sm:text-[9px] md:text-xs">
                   {p.tag}
                 </p>
               </div>
               <ArrowUpRight
-                size={8}
+                size={7}
                 className="shrink-0 text-muted-foreground transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-accent sm:size-3 md:size-4"
               />
             </motion.button>

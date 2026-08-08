@@ -19,13 +19,13 @@ import TestimonialVideoHologram from "./testimonial-video-hologram";
 const TOTAL_SLIDES = 9;
 
 // Timeline:
-// 0.00 → 0.10   Laptop closed
-// 0.10 → 0.45   Lid opens
+// 0.00 → 0.08   Laptop closed
+// 0.08 → 0.45   Lid opens
 // 0.45 → 0.55   Boot animation
-// 0.55 → 0.92   Portfolio slides (8 slides)
-// 0.92 → 1.00   Hold / slight shrink
+// 0.55 → 0.95   Portfolio slides (9 slides, ~4.4% each = plenty of scroll room)
+// 0.95 → 1.00   Hold / slight shrink
 const PRESENT_START = 0.55;
-const PRESENT_END = 0.92;
+const PRESENT_END = 0.95;
 const PRESENT_RANGE = PRESENT_END - PRESENT_START;
 
 export default function Portfolio() {
@@ -74,21 +74,7 @@ export default function Portfolio() {
       });
     };
 
-    // When pointer is inside the laptop screen, wheel = scroll the screen content,
-    // NOT the page. This lets users interact with forms and scroll within slides.
-    const handleWheel = (e: WheelEvent) => {
-      const target = e.target as HTMLElement;
-      if (!target?.closest?.(".laptop-screen")) return;
-      // Don't hijack wheel inside modals/holograms — let them scroll naturally
-      if (target?.closest?.("[data-modal-open]")) return;
-      e.preventDefault();
-      const screenEl = target.closest(".laptop-screen") as HTMLElement;
-      if (screenEl) {
-        screenEl.scrollTop += e.deltaY;
-      }
-    };
-
-    // Also prevent touch events from hijacking form inputs
+    // Prevent touch events from hijacking form inputs
     const handleTouch = (e: TouchEvent) => {
       const target = e.target as HTMLElement;
       if (target?.tagName === "INPUT" || target?.tagName === "TEXTAREA" || target?.tagName === "SELECT") {
@@ -99,12 +85,10 @@ export default function Portfolio() {
     handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll);
-    window.addEventListener("wheel", handleWheel, { passive: false, capture: true });
     window.addEventListener("touchmove", handleTouch, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
-      window.removeEventListener("wheel", handleWheel, { capture: true });
       window.removeEventListener("touchmove", handleTouch);
     };
   }, [scrollProgress]);
@@ -165,7 +149,7 @@ export default function Portfolio() {
       <div
         ref={containerRef}
         className="relative"
-        style={{ height: "800vh" }}
+        style={{ height: "1000vh" }}
       >
         <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
           {/* Ambient glow */}

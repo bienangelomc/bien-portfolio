@@ -42,13 +42,13 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
       {/* Glowing orbs */}
       <motion.div
-        className="absolute -left-6 top-1/4 h-16 w-16 rounded-full bg-accent/15 blur-2xl sm:h-28 sm:w-28 md:h-40 md:w-40"
+        className="absolute -left-4 top-1/4 h-10 w-10 rounded-full bg-accent/15 blur-xl sm:h-28 sm:w-28 md:h-40 md:w-40"
         animate={{ x: [0, 8, 0], y: [0, -6, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         aria-hidden="true"
       />
       <motion.div
-        className="absolute -right-4 bottom-1/5 h-14 w-14 rounded-full bg-sky-500/10 blur-2xl sm:h-20 sm:w-20 md:h-32 md:w-32"
+        className="absolute -right-2 bottom-1/5 h-8 w-8 rounded-full bg-sky-500/10 blur-xl sm:h-20 sm:w-20 md:h-32 md:w-32"
         animate={{ x: [0, -10, 0], y: [0, 8, 0] }}
         transition={{
           duration: 10,
@@ -60,7 +60,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
       />
 
       <motion.div
-        className="relative z-10 flex w-full h-full flex-col justify-center gap-1 text-left sm:gap-2 md:gap-3"
+        className="relative z-10 flex w-full h-full flex-col justify-center gap-0.5 text-left sm:gap-1.5 md:gap-3"
         initial={{ opacity: 0, y: 6 }}
         animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -76,13 +76,13 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
               animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 }}
               transition={{ duration: 0.4, delay: 0.05 }}
             >
-              <Zap size={6} className="sm:w-[8px] sm:h-[8px] md:w-3 md:h-3" />
-              Funnel Builder & Web Dev
+              <Zap size={5} className="sm:w-[8px] sm:h-[8px] md:w-3 md:h-3" />
+              Funnel Builder
             </motion.div>
 
             {/* Headline */}
             <motion.h1
-              className="font-display text-[11px] font-medium leading-tight tracking-tight sm:text-sm md:text-2xl lg:text-3xl"
+              className="font-display text-[10px] font-medium leading-tight tracking-tight sm:text-sm md:text-2xl lg:text-3xl"
               initial={{ opacity: 0, x: -8 }}
               animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -8 }}
               transition={{ duration: 0.5, delay: 0.15 }}
@@ -94,79 +94,79 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
             {/* Description */}
             <motion.p
-              className="mt-0.5 max-w-none text-[6px] leading-relaxed text-muted-foreground/80 sm:max-w-xs sm:text-[8px] md:mt-1.5 md:text-xs lg:text-sm"
+              className="mt-0.5 max-w-none text-[5px] leading-relaxed text-muted-foreground/80 sm:max-w-xs sm:text-[8px] md:mt-1.5 md:text-xs lg:text-sm"
               initial={{ opacity: 0, x: -4 }}
               animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -4 }}
               transition={{ duration: 0.4, delay: 0.3 }}
             >
-              Done-for-you Systeme.io sales funnels and custom websites.
+              Done-for-you Systeme.io funnels &amp; custom websites.
             </motion.p>
 
             {/* Stats row */}
             <motion.div
-              className="mt-1 grid grid-cols-3 gap-1 sm:mt-2 sm:gap-2 md:mt-3 md:gap-3"
+              className="mt-0.5 grid grid-cols-3 gap-0.5 sm:mt-2 sm:gap-2 md:mt-3 md:gap-3"
               initial={{ opacity: 0, y: 4 }}
               animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
               transition={{ duration: 0.4, delay: 0.4 }}
             >
               <div>
-                <p className="font-display text-[8px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
+                <p className="font-display text-[7px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
                   2+
                 </p>
-                <p className="text-[5px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
+                <p className="text-[4.5px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
                   Years exp.
                 </p>
               </div>
               <div>
-                <p className="font-display text-[8px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
+                <p className="font-display text-[7px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
                   20+
                 </p>
-                <p className="text-[5px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
+                <p className="text-[4.5px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
                   Funnels
                 </p>
               </div>
               <div>
-                <p className="font-display text-[8px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
+                <p className="font-display text-[7px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
                   100%
                 </p>
-                <p className="text-[5px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
-                  Satisfaction
+                <p className="text-[4.5px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
+                  Satisfied
                 </p>
               </div>
             </motion.div>
 
             {/* CTAs */}
             <motion.div
-              className="mt-1 flex flex-wrap gap-1 sm:mt-2 sm:gap-2 md:mt-3 md:gap-2"
+              className="mt-0.5 flex flex-wrap gap-0.5 sm:mt-2 sm:gap-2 md:mt-3 md:gap-2"
               initial={{ opacity: 0, y: 4 }}
               animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
               transition={{ duration: 0.4, delay: 0.5 }}
             >
               <button
-                onClick={() => onNavigate(2)}
-                className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-1.5 py-0.5 text-[6px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(74,222,128,0.4)] sm:px-2 sm:py-0.5 sm:text-[8px] md:px-4 md:py-1.5 md:text-sm"
+                onClick={() => onNavigate(3)}
+                className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-1.5 py-0.5 text-[5px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(74,222,128,0.4)] sm:px-2 sm:py-0.5 sm:text-[8px] md:px-4 md:py-1.5 md:text-sm"
               >
                 See work
                 <ArrowRight
-                  size={5}
+                  size={4}
                   className="transition-transform group-hover:translate-x-0.5 sm:size-[7px] md:size-3"
                 />
               </button>
               <button
-                onClick={() => onNavigate(8)}
-                className="inline-flex items-center gap-0.5 rounded-full border border-border/60 px-1.5 py-0.5 text-[6px] font-medium transition-colors hover:border-accent/50 hover:bg-accent/10 hover:text-accent sm:px-2 sm:py-0.5 sm:text-[8px] md:px-4 md:py-1.5 md:text-sm"
+                onClick={() => onNavigate(9)}
+                className="inline-flex items-center gap-0.5 rounded-full border border-border/60 px-1.5 py-0.5 text-[5px] font-medium transition-colors hover:border-accent/50 hover:bg-accent/10 hover:text-accent sm:px-2 sm:py-0.5 sm:text-[8px] md:px-4 md:py-1.5 md:text-sm"
               >
                 Quote
-                <Mail size={5} className="sm:size-[7px] md:size-3" />
+                <Mail size={4} className="sm:size-[7px] md:size-3" />
               </button>
             </motion.div>
           </div>
 
-          {/* Portrait — right side, contained */}
-          <div className="relative shrink-0 flex-[0 0 38%] sm:flex-[0 0 40%] md:flex-[0 0 42%] lg:flex-[0 0 44%] flex items-center justify-center">
+          {/* Portrait — right side, smaller on mobile */}
+          <div className="relative shrink-0 flex-[0_0 34%] sm:flex-[0_0 40%] md:flex-[0_0 42%] lg:flex-[0_0 44%] flex items-center justify-center">
             {/* Glow pulse */}
             <motion.div
-              className="absolute h-[90%] w-[90%] rounded-full bg-accent/20 blur-md sm:blur-lg md:blur-xl"
+              className="absolute h-[85%] w-[85%] rounded-full bg-accent/20 blur-sm sm:blur-lg md:blur-xl"
               animate={{
                 scale: [1, 1.05, 1],
                 opacity: [0.3, 0.5, 0.3],
@@ -179,7 +179,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
             />
             {/* Rotating ring 1 */}
             <motion.div
-              className="absolute h-[82%] w-[82%] rounded-full border border-accent/25"
+              className="absolute h-[78%] w-[78%] rounded-full border border-accent/25"
               animate={{ rotate: 360 }}
               transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
             >
@@ -187,7 +187,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
             </motion.div>
             {/* Rotating ring 2 */}
             <motion.div
-              className="absolute h-[70%] w-[70%] rounded-full border border-accent/15"
+              className="absolute h-[66%] w-[66%] rounded-full border border-accent/15"
               animate={{ rotate: -360 }}
               transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
             >
@@ -196,8 +196,8 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
             {/* Portrait image */}
             <motion.div
-              className="relative z-10 w-[78%] overflow-hidden rounded-full ring-1.5 ring-accent/30 ring-offset-1 ring-offset-zinc-950 sm:w-[75%] md:w-[72%]"
-              animate={{ y: [0, -3, 0] }}
+              className="relative z-10 w-[72%] overflow-hidden rounded-full ring-1 ring-accent/30 ring-offset-1 ring-offset-zinc-950 sm:w-[75%] md:w-[72%]"
+              animate={{ y: [0, -2, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             >
               <img
@@ -211,21 +211,21 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
           </div>
         </div>
 
-        {/* Skills row at bottom */}
+        {/* Skills row at bottom — more compact on mobile */}
         <motion.div
-          className="mt-1 border-t border-white/5 pt-1 sm:mt-2 sm:pt-2 md:mt-3 md:pt-3"
+          className="mt-0.5 border-t border-white/5 pt-0.5 sm:mt-2 sm:pt-2 md:mt-3 md:pt-3"
           initial={{ opacity: 0, y: 6 }}
           animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
           transition={{ duration: 0.4, delay: 0.6 }}
         >
-          <p className="mb-0.5 text-[5px] font-medium uppercase tracking-[0.15em] text-muted-foreground/60 sm:mb-1 sm:text-[7px] md:mb-1.5 md:text-[10px]">
+          <p className="mb-0.5 text-[4.5px] font-medium uppercase tracking-[0.15em] text-muted-foreground/60 sm:mb-1 sm:text-[7px] md:mb-1.5 md:text-[10px]">
             Tools I work with
           </p>
           <div className="flex flex-wrap gap-0.5 sm:gap-1 md:gap-1.5">
             {skills.map((skill, i) => (
               <motion.span
                 key={skill.name}
-                className={`rounded-full bg-white/[0.03] px-1 py-0.5 text-[5px] font-medium ring-1 ring-white/5 ${skill.color} sm:px-1.5 sm:py-0.5 sm:text-[7px] md:px-2 md:py-1 md:text-xs`}
+                className={`rounded-full bg-white/[0.03] px-1 py-0.5 text-[4.5px] font-medium ring-1 ring-white/5 ${skill.color} sm:px-1.5 sm:py-0.5 sm:text-[7px] md:px-2 md:py-1 md:text-xs`}
                 initial={{ opacity: 0, y: 4 }}
                 animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
                 transition={{ duration: 0.3, delay: 0.6 + i * 0.03 }}

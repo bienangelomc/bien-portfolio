@@ -64,7 +64,7 @@ export default function LaptopStage({
   // LID rotation: closed → open
   const lidRotation = useTransform(
     p,
-    [0.10, 0.45],
+    [0.08, 0.45],
     [LID_CLOSED, LID_OPEN],
     { clamp: true }
   );
@@ -158,13 +158,11 @@ export default function LaptopStage({
 
             {/* Screen panel — scrollable, hidden scrollbar */}
             <motion.div
-              className="laptop-screen relative mt-1 h-[calc(100%-1rem)] overflow-y-auto overflow-x-hidden rounded-md bg-zinc-950 sm:mt-1.5 sm:h-[calc(100%-1.25rem)] md:mt-2 md:h-[calc(100%-1.75rem)]"
+              className="laptop-screen relative mt-1 h-[calc(100%-1rem)] overflow-hidden rounded-md bg-zinc-950 sm:mt-1.5 sm:h-[calc(100%-1.25rem)] md:mt-2 md:h-[calc(100%-1.75rem)]"
               style={{
                 opacity: screenOpacity,
                 filter: useTransform(screenBrightness, (v) => `brightness(${v})`),
                 willChange: "opacity, filter",
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
               }}
             >
               {/* Boot overlay */}
