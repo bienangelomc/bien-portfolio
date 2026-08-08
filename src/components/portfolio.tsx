@@ -117,8 +117,10 @@ export default function Portfolio() {
         setMobileHologramOpen(false);
         return;
       }
-      const slideFloat = ((p - PRESENT_START) / PRESENT_RANGE) * (TOTAL_SLIDES - 1);
-      const slide = Math.min(TOTAL_SLIDES - 1, Math.max(0, Math.round(slideFloat)));
+      // Use floor with per-slide bands so each slide gets equal scroll room
+      // This prevents fast scroll from skipping slides
+      const slideFloat = ((p - PRESENT_START) / PRESENT_RANGE) * TOTAL_SLIDES;
+      const slide = Math.min(TOTAL_SLIDES - 1, Math.max(0, Math.floor(slideFloat)));
       setActiveSlide(slide);
       // Open mobile hologram during presentation
       setMobileHologramOpen(isMobile && p >= 0.56 && p < 0.97);
@@ -129,7 +131,6 @@ export default function Portfolio() {
   const navigateToSlide = useCallback((slide: number) => {
     const el = containerRef.current;
     if (!el) return;
-    // "Contact" (slide 8) = scroll to the release/contact section below the laptop
     if (slide >= TOTAL_SLIDES) {
       const releaseEl = document.getElementById("get-in-touch");
       if (releaseEl) {
@@ -137,7 +138,8 @@ export default function Portfolio() {
       }
       return;
     }
-    const targetP = PRESENT_START + (slide / (TOTAL_SLIDES - 1)) * PRESENT_RANGE;
+    // Match the floor-based slide calculation: center of each slide's band
+    const targetP = PRESENT_START + ((slide + 0.5) / TOTAL_SLIDES) * PRESENT_RANGE;
     const scrollDistance = el.offsetHeight - window.innerHeight;
     const targetScroll = el.offsetTop + targetP * scrollDistance;
     window.scrollTo({ top: targetScroll, behavior: "smooth" });
@@ -212,7 +214,7 @@ export default function Portfolio() {
             />
           </div>
 
-          {/* Testimonial video hologram — renders outside the laptop screen */}
+          {/* Testimonial video hologram — renders above everything */}
           <TestimonialVideoHologram
             selectedIndex={selectedTestimonial}
             onClose={closeTestimonialVideo}

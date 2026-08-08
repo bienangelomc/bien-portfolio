@@ -46,12 +46,12 @@ export default function TestimonialVideoHologram({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="absolute inset-0 z-40 bg-black/70 backdrop-blur-sm cursor-pointer"
+            className="absolute inset-0 z-[60] bg-black/80 backdrop-blur-md cursor-pointer"
             onClick={onClose}
           />
 
           {/* Hologram container — matches work hologram sizing */}
-          <div className="absolute inset-0 z-50 flex items-center justify-center p-2 sm:p-3 md:p-5 pointer-events-none">
+          <div className="absolute inset-0 z-[70] flex items-center justify-center p-2 sm:p-3 md:p-5 pointer-events-none">
             <motion.div
               initial={{ opacity: 0, y: 80, scale: 0.8, rotateX: 20 }}
               animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
