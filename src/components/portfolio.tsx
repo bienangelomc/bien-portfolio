@@ -12,9 +12,10 @@ import SlideProjectAQ from "./slides/slide-project-aq";
 import SlideProjectVoiceCare from "./slides/slide-project-voicecare";
 import SlideProjectAngelo from "./slides/slide-project-angelo";
 import SlideProcess from "./slides/slide-process";
+import SlideTestimonials from "./slides/slide-testimonials";
 import HologramModal, { type ProjectData } from "./hologram-modal";
 
-const TOTAL_SLIDES = 8;
+const TOTAL_SLIDES = 9;
 
 // Timeline:
 // 0.00 → 0.10   Laptop closed
@@ -142,6 +143,7 @@ export default function Portfolio() {
     { key: "voicecare", component: SlideProjectVoiceCare, props: {} },
     { key: "angelo", component: SlideProjectAngelo, props: {} },
     { key: "process", component: SlideProcess, props: {} },
+    { key: "testimonials", component: SlideTestimonials, props: {} },
   ];
 
   const ActiveSlide = slides[activeSlide].component;
