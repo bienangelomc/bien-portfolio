@@ -54,158 +54,160 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
         aria-hidden="true"
       />
 
-      {/* Main content — flex column, centered */}
-      <div className="relative z-10 flex w-full flex-col items-center justify-center gap-1 text-center sm:text-left sm:items-start sm:gap-1.5 md:gap-3">
-        {/* Top: badge + portrait */}
-        <div className="flex w-full flex-col items-center gap-1.5 sm:flex-row sm:gap-2 md:gap-4">
-          {/* Portrait — top on mobile, right on desktop */}
-          <div className="relative shrink-0 flex h-10 w-10 items-center justify-center sm:h-auto sm:w-auto sm:flex-[0_0_28%] md:flex-[0_0_42%] lg:flex-[0_0_44%]">
-            {/* Glow pulse */}
-            <motion.div
-              className="absolute h-[75%] w-[75%] rounded-full bg-accent/20 blur-md sm:blur-lg md:blur-xl"
-              animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.5, 0.3] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      {/* Main content */}
+      <div className="relative z-10 flex w-full flex-col items-center justify-center gap-1 text-center sm:gap-1.5 md:gap-3">
+        {/* Portrait — big, centered at top */}
+        <div className="relative flex h-24 w-24 flex-col items-center justify-center sm:h-auto sm:w-auto sm:flex-[0_0_40%] md:flex-[0_0_44%]">
+          {/* Glow pulse */}
+          <motion.div
+            className="absolute h-[85%] w-[85%] rounded-full bg-accent/20 blur-md sm:blur-lg md:blur-xl"
+            animate={{ scale: [1, 1.05, 1], opacity: [0.3, 0.5, 0.3] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
+          {/* Rotating ring 1 */}
+          <motion.div
+            className="absolute h-[80%] w-[80%] rounded-full border border-accent/25"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+          >
+            <div className="absolute -top-0.5 left-1/2 h-0.5 w-0.5 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_6px_2px_rgba(74,222,128,0.6)]" />
+          </motion.div>
+          {/* Rotating ring 2 */}
+          <motion.div
+            className="absolute h-[65%] w-[65%] rounded-full border border-accent/15"
+            animate={{ rotate: -360 }}
+            transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
+          >
+            <div className="absolute bottom-1 left-0 h-0.5 w-0.5 rounded-full bg-sky-400/60" />
+          </motion.div>
+
+          {/* Portrait image — big */}
+          <motion.div
+            className="relative z-10 h-20 w-20 overflow-hidden rounded-full ring-1.5 ring-accent/30 ring-offset-1.5 ring-offset-zinc-950 sm:h-auto sm:w-[72%] md:w-[72%]"
+            animate={{ y: [0, -2, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <img
+              src="/bien-portrait.png"
+              alt="Bien Casimiro"
+              className="h-full w-full rounded-full object-cover aspect-square"
             />
-            {/* Rotating ring 1 */}
-            <motion.div
-              className="absolute h-[72%] w-[72%] rounded-full border border-accent/25"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-            >
-              <div className="absolute -top-0.5 left-1/2 h-0.5 w-0.5 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_6px_2px_rgba(74,222,128,0.6)]" />
-            </motion.div>
-            {/* Rotating ring 2 */}
-            <motion.div
-              className="absolute h-[58%] w-[58%] rounded-full border border-accent/15"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
-            >
-              <div className="absolute bottom-1 left-0 h-0.5 w-0.5 rounded-full bg-sky-400/60" />
-            </motion.div>
-
-            {/* Portrait image */}
-            <motion.div
-              className="relative z-10 h-7.5 w-7.5 overflow-hidden rounded-full ring-1 ring-accent/30 ring-offset-1 ring-offset-zinc-950 sm:h-auto sm:w-[72%] md:w-[72%]"
-              animate={{ y: [0, -1.5, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <img
-                src="/bien-portrait.png"
-                alt="Bien Casimiro"
-                className="h-full w-full rounded-full object-cover aspect-square"
-              />
-              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-accent/20 to-transparent" />
-            </motion.div>
-          </div>
-
-          {/* Text section */}
-          <div className="flex-1 min-w-0 flex flex-col items-center sm:items-start justify-center">
-            {/* Badge */}
-            <motion.div
-              className="mb-1 inline-flex w-fit items-center gap-1 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent ring-1 ring-inset ring-accent/20 sm:mb-1 sm:gap-1 sm:px-1.5 sm:py-0.5 sm:text-[7px] md:mb-2 md:px-2 md:py-1 md:text-xs"
-              initial={{ opacity: 0, y: -4 }}
-              animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 }}
-              transition={{ duration: 0.4, delay: 0.05 }}
-            >
-              <Zap size={9} className="sm:w-[8px] sm:h-[8px] md:w-3 md:h-3" />
-              Funnel Builder
-            </motion.div>
-
-            {/* Headline */}
-            <motion.h1
-              className="font-display text-sm font-medium leading-tight tracking-tight sm:text-sm md:text-2xl lg:text-3xl"
-              initial={{ opacity: 0, x: -8 }}
-              animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -8 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-            >
-              I build funnels
-              <br />
-              <span className="text-accent">that convert.</span>
-            </motion.h1>
-
-            {/* Description */}
-            <motion.p
-              className="mt-1 max-w-none text-[10px] leading-relaxed text-muted-foreground/80 sm:max-w-xs sm:text-[8px] md:mt-1.5 md:text-xs lg:text-sm"
-              initial={{ opacity: 0, x: -4 }}
-              animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -4 }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-            >
-              Done-for-you Systeme.io funnels &amp; custom websites.
-            </motion.p>
-
-            {/* Stats row */}
-            <motion.div
-              className="mt-1.5 grid grid-cols-3 gap-1.5 sm:mt-2 sm:gap-2 md:mt-3 md:gap-3"
-              initial={{ opacity: 0, y: 4 }}
-              animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
-              transition={{ duration: 0.4, delay: 0.4 }}
-            >
-              <div className="text-center sm:text-left">
-                <p className="font-display text-[15px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
-                  2+
-                </p>
-                <p className="text-[10px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
-                  Years exp.
-                </p>
-              </div>
-              <div className="text-center sm:text-left">
-                <p className="font-display text-[15px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
-                  20+
-                </p>
-                <p className="text-[10px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
-                  Funnels
-                </p>
-              </div>
-              <div className="text-center sm:text-left">
-                <p className="font-display text-[15px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
-                  100%
-                </p>
-                <p className="text-[10px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
-                  Satisfied
-                </p>
-              </div>
-            </motion.div>
-
-            {/* CTAs */}
-            <motion.div
-              className="mt-1.5 flex flex-wrap justify-center gap-1.5 sm:justify-start sm:mt-2 sm:gap-2 md:mt-3 md:gap-2"
-              initial={{ opacity: 0, y: 4 }}
-              animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
-              transition={{ duration: 0.4, delay: 0.5 }}
-            >
-              <button
-                onClick={() => onNavigate(3)}
-                className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-2 py-1 text-[10px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(74,222,128,0.4)] sm:px-2 sm:py-0.5 sm:text-[8px] md:px-4 md:py-1.5 md:text-sm"
-              >
-                See work
-                <ArrowRight size={9} className="transition-transform group-hover:translate-x-0.5 sm:size-[7px] md:size-3" />
-              </button>
-              <button
-                onClick={() => onNavigate(9)}
-                className="inline-flex items-center gap-0.5 rounded-full border border-border/60 px-2 py-1 text-[10px] font-medium transition-colors hover:border-accent/50 hover:bg-accent/10 hover:text-accent sm:px-2 sm:py-0.5 sm:text-[8px] md:px-4 md:py-1.5 md:text-sm"
-              >
-                Quote
-                <Mail size={9} className="sm:size-[7px] md:size-3" />
-              </button>
-            </motion.div>
-          </div>
+            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-accent/20 to-transparent" />
+          </motion.div>
         </div>
 
-        {/* Skills row at bottom */}
+        {/* Name below picture */}
+        <motion.h2
+          className="font-display text-xl font-bold tracking-tight text-foreground sm:text-lg md:text-3xl"
+          initial={{ opacity: 0, y: 6 }}
+          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+        >
+          BIEN CASIMIRO
+        </motion.h2>
+
+        {/* Badge */}
         <motion.div
-          className="mt-1 w-full border-t border-white/5 pt-1.5 sm:mt-0.5 sm:pt-0.5 md:mt-3 md:pt-3"
+          className="inline-flex w-fit items-center gap-1 rounded-full bg-accent/10 px-2 py-0.5 text-[10px] font-medium text-accent ring-1 ring-inset ring-accent/20 sm:text-[9px] md:px-2.5 md:py-1 md:text-xs"
+          initial={{ opacity: 0, y: -4 }}
+          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+        >
+          <Zap size={9} className="sm:w-[8px] sm:h-[8px] md:w-3 md:h-3" />
+          Funnel Builder
+        </motion.div>
+
+        {/* Headline */}
+        <motion.h1
+          className="font-display text-sm font-medium leading-tight tracking-tight sm:text-sm md:text-2xl lg:text-3xl"
+          initial={{ opacity: 0, x: -8 }}
+          animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -8 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+        >
+          I build funnels that convert.
+        </motion.h1>
+
+        {/* Description */}
+        <motion.p
+          className="max-w-none text-[10px] leading-relaxed text-muted-foreground/80 sm:max-w-xs sm:text-[9px] md:mt-1 md:text-xs lg:text-sm"
+          initial={{ opacity: 0, x: -4 }}
+          animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -4 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+        >
+          Done-for-you Systeme.io funnels &amp; custom websites.
+        </motion.p>
+
+        {/* Stats row */}
+        <motion.div
+          className="grid grid-cols-3 gap-2 sm:gap-2 md:mt-1 md:gap-3"
+          initial={{ opacity: 0, y: 4 }}
+          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
+          transition={{ duration: 0.4, delay: 0.4 }}
+        >
+          <div className="text-center">
+            <p className="font-display text-[15px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
+              2+
+            </p>
+            <p className="text-[9px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
+              Years exp.
+            </p>
+          </div>
+          <div className="text-center">
+            <p className="font-display text-[15px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
+              20+
+            </p>
+            <p className="text-[9px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
+              Funnels
+            </p>
+          </div>
+          <div className="text-center">
+            <p className="font-display text-[15px] font-bold text-foreground sm:text-[12px] md:text-base lg:text-lg">
+              100%
+            </p>
+            <p className="text-[9px] text-muted-foreground sm:text-[8px] md:text-[10px] lg:text-xs">
+              Satisfied
+            </p>
+          </div>
+        </motion.div>
+
+        {/* CTAs */}
+        <motion.div
+          className="flex flex-wrap justify-center gap-1.5 sm:gap-2 md:mt-1 md:gap-2"
+          initial={{ opacity: 0, y: 4 }}
+          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
+          transition={{ duration: 0.4, delay: 0.5 }}
+        >
+          <button
+            onClick={() => onNavigate(3)}
+            className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-2 py-1 text-[10px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(74,222,128,0.4)] sm:px-2.5 sm:py-0.5 sm:text-[9px] md:px-4 md:py-1.5 md:text-sm"
+          >
+            See work
+            <ArrowRight size={9} className="transition-transform group-hover:translate-x-0.5 sm:size-[7px] md:size-3" />
+          </button>
+          <button
+            onClick={() => onNavigate(9)}
+            className="inline-flex items-center gap-0.5 rounded-full border border-border/60 px-2 py-1 text-[10px] font-medium transition-colors hover:border-accent/50 hover:bg-accent/10 hover:text-accent sm:px-2.5 sm:py-0.5 sm:text-[9px] md:px-4 md:py-1.5 md:text-sm"
+          >
+            Quote
+            <Mail size={9} className="sm:size-[7px] md:size-3" />
+          </button>
+        </motion.div>
+
+        {/* Skills row — smaller */}
+        <motion.div
+          className="w-full border-t border-white/5 pt-1 mt-1 sm:mt-0.5 sm:pt-0.5 md:mt-2 md:pt-2"
           initial={{ opacity: 0, y: 6 }}
           animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
           transition={{ duration: 0.4, delay: 0.6 }}
         >
-          <p className="mb-1 text-center text-[9px] font-medium uppercase tracking-[0.15em] text-muted-foreground/60 sm:mb-0.5 sm:text-left sm:text-[7px] md:mb-1.5 md:text-[10px]">
+          <p className="mb-0.5 text-center text-[8px] font-medium uppercase tracking-[0.15em] text-muted-foreground/60 sm:mb-0.5 sm:text-[7px] md:mb-1 md:text-[10px]">
             Tools I work with
           </p>
-          <div className="flex flex-wrap justify-center gap-0.5 sm:justify-start sm:gap-0.5 md:gap-1.5">
+          <div className="flex flex-wrap justify-center gap-0.5 sm:gap-0.5 md:gap-1">
             {skills.map((skill, i) => (
               <motion.span
                 key={skill.name}
-                className={`rounded-full bg-white/[0.03] px-1.5 py-0.5 text-[8px] font-medium ring-1 ring-white/5 ${skill.color} sm:px-1 sm:py-0.5 sm:text-[7px] md:px-2 md:py-1 md:text-xs`}
+                className={`rounded-full bg-white/[0.03] px-1 py-0.5 text-[7px] font-medium ring-1 ring-white/5 ${skill.color} sm:px-1 sm:py-0.5 sm:text-[7px] md:px-1.5 md:py-0.5 md:text-[11px]`}
                 initial={{ opacity: 0, y: 4 }}
                 animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
                 transition={{ duration: 0.3, delay: 0.6 + i * 0.03 }}

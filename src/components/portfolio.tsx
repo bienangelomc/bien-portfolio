@@ -20,12 +20,12 @@ import MobileHologram from "./mobile-hologram";
 const TOTAL_SLIDES = 9;
 
 // Timeline:
-// 0.00 → 0.06   Laptop closed
-// 0.06 → 0.42   Lid opens
-// 0.42 → 0.48   Boot animation (short)
-// 0.48 → 0.97   Portfolio slides (9 slides, ~5.4% each = ~540px scroll per slide)
+// 0.00 → 0.03   Laptop closed
+// 0.03 → 0.15   Lid opens (fast — 1-2 scrolls)
+// 0.15 → 0.22   Boot animation (short)
+// 0.22 → 0.97   Portfolio slides (9 slides, ~8.3% each = lots of scroll room)
 // 0.97 → 1.00   Hold
-const PRESENT_START = 0.48;
+const PRESENT_START = 0.22;
 const PRESENT_END = 0.97;
 const PRESENT_RANGE = PRESENT_END - PRESENT_START;
 

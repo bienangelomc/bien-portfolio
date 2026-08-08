@@ -63,10 +63,10 @@ export default function LaptopStage({
     restDelta: 0.001,
   });
 
-  // LID rotation: closed → open (shorter on mobile)
+  // LID rotation: closed → open (fast — 1-2 scrolls)
   const lidRotation = useTransform(
     p,
-    isMobile ? [0.06, 0.35] : [0.06, 0.42],
+    isMobile ? [0.03, 0.12] : [0.03, 0.15],
     [LID_CLOSED, LID_OPEN],
     { clamp: true }
   );
@@ -82,13 +82,13 @@ export default function LaptopStage({
   // Screen wake
   const screenOpacity = useTransform(
     p,
-    isMobile ? [0.18, 0.30, 0.35] : [0.22, 0.38, 0.42],
+    isMobile ? [0.08, 0.13, 0.16] : [0.08, 0.13, 0.16],
     [0.15, 0.6, 1],
     { clamp: true }
   );
   const screenBrightness = useTransform(
     p,
-    isMobile ? [0.18, 0.35] : [0.22, 0.42],
+    isMobile ? [0.08, 0.16] : [0.08, 0.16],
     [0.4, 1],
     { clamp: true }
   );
@@ -96,7 +96,7 @@ export default function LaptopStage({
   // Boot overlay — disabled on mobile (content shows in hologram, not laptop screen)
   const bootOpacity = useTransform(
     p,
-    isMobile ? [1, 1.01] : [0.38, 0.42, 0.46, 0.50],
+    isMobile ? [1, 1.01] : [0.13, 0.16, 0.19, 0.22],
     isMobile ? [0, 0] : [0, 1, 1, 0],
     { clamp: true }
   );
@@ -104,7 +104,7 @@ export default function LaptopStage({
   // Slides after boot
   const slidesOpacity = useTransform(
     p,
-    isMobile ? [0.40, 0.42] : [0.44, 0.48],
+    isMobile ? [0.16, 0.18] : [0.18, 0.22],
     [0, 1],
     { clamp: true }
   );
