@@ -163,10 +163,10 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
           </div>
 
           {/* Portrait — right side, smaller on mobile */}
-          <div className="relative shrink-0 flex-[0_0 34%] sm:flex-[0_0 40%] md:flex-[0_0 42%] lg:flex-[0_0 44%] flex items-center justify-center">
+          <div className="relative shrink-0 flex-[0_0 28%] sm:flex-[0_0 38%] md:flex-[0_0 42%] lg:flex-[0_0 44%] flex items-center justify-center">
             {/* Glow pulse */}
             <motion.div
-              className="absolute h-[85%] w-[85%] rounded-full bg-accent/20 blur-sm sm:blur-lg md:blur-xl"
+              className="absolute h-[80%] w-[80%] rounded-full bg-accent/20 blur-sm sm:blur-lg md:blur-xl"
               animate={{
                 scale: [1, 1.05, 1],
                 opacity: [0.3, 0.5, 0.3],
@@ -179,15 +179,15 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
             />
             {/* Rotating ring 1 */}
             <motion.div
-              className="absolute h-[78%] w-[78%] rounded-full border border-accent/25"
+              className="absolute h-[75%] w-[75%] rounded-full border border-accent/25"
               animate={{ rotate: 360 }}
               transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
             >
-              <div className="absolute -top-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_8px_2px_rgba(74,222,128,0.6)]" />
+              <div className="absolute -top-0.5 left-1/2 h-0.5 w-0.5 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_6px_2px_rgba(74,222,128,0.6)]" />
             </motion.div>
             {/* Rotating ring 2 */}
             <motion.div
-              className="absolute h-[66%] w-[66%] rounded-full border border-accent/15"
+              className="absolute h-[63%] w-[63%] rounded-full border border-accent/15"
               animate={{ rotate: -360 }}
               transition={{ duration: 16, repeat: Infinity, ease: "linear" }}
             >
@@ -196,7 +196,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
             {/* Portrait image */}
             <motion.div
-              className="relative z-10 w-[72%] overflow-hidden rounded-full ring-1 ring-accent/30 ring-offset-1 ring-offset-zinc-950 sm:w-[75%] md:w-[72%]"
+              className="relative z-10 w-[68%] overflow-hidden rounded-full ring-1 ring-accent/30 ring-offset-1 ring-offset-zinc-950 sm:w-[72%] md:w-[72%]"
               animate={{ y: [0, -2, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             >
