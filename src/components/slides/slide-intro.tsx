@@ -183,14 +183,14 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
             transition={{ duration: 0.4, delay: 0.5 }}
           >
             <button
-              onClick={() => onNavigate(3)}
+              onClick={() => onNavigate(4)}
               className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-2 py-0.5 text-[9px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(255,107,53,0.4)] md:px-5 md:py-2 md:text-base md:gap-1.5"
             >
               See work
               <ArrowRight size={8} className="transition-transform group-hover:translate-x-0.5 md:size-4" />
             </button>
             <button
-              onClick={() => onNavigate(9)}
+              onClick={() => onNavigate(10)}
               className="inline-flex items-center gap-0.5 rounded-full border border-border/60 px-2 py-0.5 text-[9px] font-medium transition-colors hover:border-accent/50 hover:bg-accent/10 hover:text-accent md:px-5 md:py-2 md:text-base md:gap-1.5"
             >
               Quote

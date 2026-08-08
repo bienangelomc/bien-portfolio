@@ -7,6 +7,7 @@ import LaptopStage from "./laptop-stage";
 import SlideIntro from "./slides/slide-intro";
 import SlideAbout from "./slides/slide-about";
 import SlideServices from "./slides/slide-services";
+import SlideExcel from "./slides/slide-excel";
 import SlideWorkIndex from "./slides/slide-work-index";
 import SlideProjectAQ from "./slides/slide-project-aq";
 import SlideProjectVoiceCare from "./slides/slide-project-voicecare";
@@ -17,7 +18,7 @@ import HologramModal, { type ProjectData } from "./hologram-modal";
 import TestimonialVideoHologram from "./testimonial-video-hologram";
 import MobileHologram from "./mobile-hologram";
 
-const TOTAL_SLIDES = 9;
+const TOTAL_SLIDES = 10;
 
 // Timeline:
 // 0.00 → 0.03   Laptop closed
@@ -174,6 +175,7 @@ export default function Portfolio() {
     { key: "intro", component: SlideIntro, props: { onNavigate: navigateToSlide } },
     { key: "about", component: SlideAbout, props: {} },
     { key: "services", component: SlideServices, props: {} },
+    { key: "excel", component: SlideExcel, props: {} },
     { key: "work", component: SlideWorkIndex, props: { onNavigate: navigateToSlide, onOpenHologram: openHologram } },
     { key: "aq", component: SlideProjectAQ, props: {} },
     { key: "voicecare", component: SlideProjectVoiceCare, props: {} },
