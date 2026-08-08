@@ -9,6 +9,11 @@ interface MobileHologramProps {
   children: React.ReactNode;
 }
 
+// Scale factor to make content fill the hologram
+// On mobile viewport, slides use tiny base sizes (text-[5px] etc.)
+// Scaling them up makes the content fill the hologram at readable sizes
+const SCALE = 2.2;
+
 export default function MobileHologram({
   isOpen,
   slideNumber,
@@ -25,16 +30,16 @@ export default function MobileHologram({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.35 }}
-            className="absolute inset-0 z-40 bg-black/70 backdrop-blur-sm pointer-events-none"
+            className="absolute inset-0 z-40 bg-black/75 backdrop-blur-sm pointer-events-none"
           />
 
           {/* Projection beam from laptop */}
           <motion.div
             initial={{ opacity: 0, scaleY: 0 }}
-            animate={{ opacity: 0.3, scaleY: 1 }}
+            animate={{ opacity: 0.25, scaleY: 1 }}
             exit={{ opacity: 0, scaleY: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="pointer-events-none absolute left-1/2 top-[55%] z-40 h-12 w-24 -translate-x-1/2"
+            className="pointer-events-none absolute left-1/2 top-[55%] z-40 h-10 w-20 -translate-x-1/2"
             style={{
               background:
                 "linear-gradient(to top, rgba(74, 222, 128, 0.15), transparent)",
@@ -45,7 +50,7 @@ export default function MobileHologram({
 
           {/* Hologram panel */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 60, rotateX: 20 }}
+            initial={{ opacity: 0, scale: 0.75, y: 60, rotateX: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
             exit={{ opacity: 0, scale: 0.85, y: 40, rotateX: 15 }}
             transition={{
@@ -66,10 +71,10 @@ export default function MobileHologram({
             <div
               className="relative overflow-hidden rounded-xl border border-accent/40 bg-zinc-950/97"
               style={{
-                width: "95vw",
-                height: "78vh",
+                width: "96vw",
+                height: "82vh",
                 boxShadow:
-                  "0 0 40px rgba(74, 222, 128, 0.1), inset 0 1px 0 rgba(74, 222, 128, 0.1)",
+                  "0 0 50px rgba(74, 222, 128, 0.12), inset 0 1px 0 rgba(74, 222, 128, 0.1)",
               }}
             >
               {/* Scan lines */}
@@ -83,40 +88,51 @@ export default function MobileHologram({
 
               {/* Corner brackets */}
               <div className="pointer-events-none absolute inset-0 z-30">
-                <div className="absolute left-1.5 top-1.5 h-3 w-3 border-l-2 border-t-2 border-accent/60" />
-                <div className="absolute right-1.5 top-1.5 h-3 w-3 border-r-2 border-t-2 border-accent/60" />
-                <div className="absolute bottom-1.5 left-1.5 h-3 w-3 border-b-2 border-l-2 border-accent/60" />
-                <div className="absolute bottom-1.5 right-1.5 h-3 w-3 border-b-2 border-r-2 border-accent/60" />
+                <div className="absolute left-2 top-2 h-4 w-4 border-l-2 border-t-2 border-accent/60" />
+                <div className="absolute right-2 top-2 h-4 w-4 border-r-2 border-t-2 border-accent/60" />
+                <div className="absolute bottom-2 left-2 h-4 w-4 border-b-2 border-l-2 border-accent/60" />
+                <div className="absolute bottom-2 right-2 h-4 w-4 border-b-2 border-r-2 border-accent/60" />
               </div>
 
               {/* Top HUD bar */}
-              <div className="absolute left-0 right-0 top-0 z-30 flex items-center justify-between border-b border-accent/15 bg-zinc-950/80 px-3 py-1.5 backdrop-blur-sm">
-                <div className="flex items-center gap-1.5">
+              <div className="absolute left-0 right-0 top-0 z-30 flex items-center justify-between border-b border-accent/15 bg-zinc-950/80 px-4 py-2 backdrop-blur-sm">
+                <div className="flex items-center gap-2">
                   <div
-                    className="h-1.5 w-1.5 rounded-full bg-accent"
-                    style={{ boxShadow: "0 0 6px rgba(74, 222, 128, 0.8)" }}
+                    className="h-2 w-2 rounded-full bg-accent"
+                    style={{ boxShadow: "0 0 8px rgba(74, 222, 128, 0.9)" }}
                   />
-                  <span className="text-[10px] font-mono tracking-wider text-accent/80">
+                  <span className="text-[11px] font-mono tracking-wider text-accent/90">
                     {String(slideNumber + 1).padStart(2, "0")} /{" "}
                     {String(totalSlides).padStart(2, "0")}
                   </span>
                 </div>
                 {/* Progress dots */}
-                <div className="flex gap-1">
+                <div className="flex gap-1.5">
                   {Array.from({ length: totalSlides }).map((_, i) => (
                     <div
                       key={i}
-                      className={`h-1 rounded-full transition-all duration-300 ${
-                        i === slideNumber ? "w-4 bg-accent" : "w-1 bg-white/15"
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        i === slideNumber ? "w-5 bg-accent" : "w-1.5 bg-white/15"
                       }`}
                     />
                   ))}
                 </div>
               </div>
 
-              {/* Content area — below HUD bar, fills rest of panel */}
-              <div className="absolute left-0 right-0 top-[32px] bottom-0 overflow-hidden">
-                {children}
+              {/* Content area — scaled up to fill the hologram */}
+              <div
+                className="absolute left-0 right-0 top-[40px] bottom-0 flex items-center justify-center overflow-hidden"
+              >
+                <div
+                  style={{
+                    transform: `scale(${SCALE})`,
+                    transformOrigin: "center center",
+                    width: `calc(96vw / ${SCALE})`,
+                    height: `calc((82vh - 40px) / ${SCALE})`,
+                  }}
+                >
+                  {children}
+                </div>
               </div>
 
               {/* Moving scan line */}
