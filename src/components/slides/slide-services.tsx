@@ -67,46 +67,46 @@ const services = [
 
 export default function SlideServices({ isActive }: SlideProps) {
   return (
-    <div className="flex h-full w-full items-center justify-center overflow-hidden bg-zinc-950 p-1.5 sm:p-3 md:p-5">
+    <div className="flex h-full w-full items-center justify-center overflow-hidden bg-zinc-950 p-1.5 sm:p-3 md:p-4">
       <motion.div
         className="w-full max-w-lg"
         initial={{ opacity: 0, y: 6 }}
         animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className="text-[6px] font-medium uppercase tracking-[0.2em] text-accent sm:text-[9px] md:text-xs">
+        <p className="text-[6px] font-medium uppercase tracking-[0.2em] text-accent sm:text-[8px] md:text-xs">
           What I do
         </p>
-        <h2 className="mt-0.5 font-display text-[10px] font-medium leading-tight tracking-tight sm:text-base md:text-2xl">
+        <h2 className="mt-0.5 font-display text-[10px] font-medium leading-tight tracking-tight sm:text-sm md:text-xl">
           Funnels that make you money
         </h2>
-        <p className="mt-0.5 text-[5.5px] text-muted-foreground sm:mt-2 sm:text-[9px] md:text-sm">
+        <p className="mt-0.5 text-[5.5px] text-muted-foreground sm:text-[8px] md:text-sm">
           From simple landing pages to full sales systems.
         </p>
 
-        <div className="mt-1 grid grid-cols-2 gap-1 sm:mt-3 sm:gap-2 md:mt-5 md:grid-cols-3 md:gap-4">
+        <div className="mt-1 grid grid-cols-2 gap-1 sm:mt-2 sm:gap-1.5 md:mt-3 md:grid-cols-3 md:gap-2">
           {services.map((service, i) => {
             const Icon = service.icon;
             return (
               <motion.div
                 key={i}
-                className="group relative overflow-hidden rounded-lg border border-white/5 bg-white/[0.02] p-1 transition-all hover:border-accent/30 hover:bg-white/[0.04] sm:rounded-xl sm:p-2.5 md:p-4"
+                className="group relative overflow-hidden rounded-lg border border-white/5 bg-white/[0.02] p-1 transition-all hover:border-accent/30 hover:bg-white/[0.04] sm:p-1.5 md:p-3"
                 initial={{ opacity: 0, y: 10 }}
                 animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
                 transition={{ duration: 0.4, delay: 0.05 + i * 0.06 }}
               >
                 <div
-                  className={`mb-0.5 inline-flex items-center justify-center rounded-md ${service.bgColor} p-0.5 sm:mb-2 sm:p-2 md:mb-3 md:p-2.5`}
+                  className={`mb-0.5 inline-flex items-center justify-center rounded-md ${service.bgColor} p-0.5 sm:mb-1 sm:p-1 md:mb-1.5 md:p-2`}
                 >
                   <Icon
-                    size={8}
-                    className={`${service.color} sm:w-4 sm:h-4 md:w-5 md:h-5`}
+                    size={7}
+                    className={`${service.color} sm:w-3 sm:h-3 md:w-4 md:h-4`}
                   />
                 </div>
-                <h3 className="text-[6px] font-medium text-foreground sm:text-[9px] md:text-sm">
+                <h3 className="text-[6px] font-medium text-foreground sm:text-[8px] md:text-sm">
                   {service.title}
                 </h3>
-                <p className="mt-0.5 text-[5px] leading-relaxed text-muted-foreground sm:mt-1 sm:text-[8px] md:mt-2 md:text-xs line-clamp-2">
+                <p className="mt-0.5 text-[5px] leading-relaxed text-muted-foreground line-clamp-2 sm:text-[7px] md:mt-1 md:text-xs">
                   {service.description}
                 </p>
               </motion.div>
