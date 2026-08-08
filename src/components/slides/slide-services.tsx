@@ -8,6 +8,7 @@ import {
   ShoppingCart,
   GraduationCap,
   Code2,
+  BarChart3,
 } from "lucide-react";
 
 interface SlideProps {
@@ -62,6 +63,14 @@ const services = [
       "Fully custom web apps with Next.js when you need more than a page builder.",
     color: "text-emerald-400",
     bgColor: "bg-emerald-400/10",
+  },
+  {
+    icon: BarChart3,
+    title: "Data & Reporting",
+    description:
+      "Advanced Excel, Google Sheets & big data reporting — ex-data team, reports assistant background.",
+    color: "text-indigo-400",
+    bgColor: "bg-indigo-400/10",
   },
 ];
 

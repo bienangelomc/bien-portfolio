@@ -55,11 +55,13 @@ export default function SlideAbout({ isActive }: SlideProps) {
               specialize in building sales funnels on Systeme.io and custom
               websites that convert visitors into customers.
             </p>
-            <p>
-              I started out building simple landing pages, and over time that
-              grew into full sales funnels, email automations, e-commerce
-              stores, and custom web apps for clients.
-            </p>
+          <p>
+            I started out building simple landing pages, and over time that
+            grew into full sales funnels, email automations, e-commerce
+            stores, and custom web apps for clients. Before that I worked as
+            a reports assistant on a data team, so I'm very strong with Excel,
+            Google Sheets, and working with big data.
+          </p>
             <p>
               What I care about: funnels that make money. I don't build pretty
               pages that don't work — I build systems that get you leads and

@@ -15,11 +15,11 @@ const skills = [
   { name: "HTML/CSS", color: "text-orange-400" },
   { name: "JavaScript", color: "text-yellow-400" },
   { name: "TypeScript", color: "text-blue-400" },
+  { name: "Excel / Data", color: "text-emerald-400" },
+  { name: "Google Sheets", color: "text-green-400" },
   { name: "Canva", color: "text-cyan-300" },
   { name: "Photoshop", color: "text-blue-300" },
   { name: "AI Tools", color: "text-violet-400" },
-  { name: "Google Sheets", color: "text-green-400" },
-  { name: "Excel", color: "text-emerald-400" },
   { name: "Microsoft", color: "text-sky-500" },
 ];
 
