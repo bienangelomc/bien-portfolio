@@ -42,7 +42,7 @@ export default function MobileHologram({
             className="pointer-events-none absolute left-1/2 top-[55%] z-40 h-10 w-20 -translate-x-1/2"
             style={{
               background:
-                "linear-gradient(to top, rgba(74, 222, 128, 0.15), transparent)",
+                "linear-gradient(to top, rgba(255, 107, 53, 0.15), transparent)",
               clipPath: "polygon(35% 100%, 65% 100%, 58% 0%, 42% 0%)",
               transformOrigin: "bottom center",
             }}
@@ -74,7 +74,7 @@ export default function MobileHologram({
                 width: "96vw",
                 height: "82vh",
                 boxShadow:
-                  "0 0 50px rgba(74, 222, 128, 0.12), inset 0 1px 0 rgba(74, 222, 128, 0.1)",
+                  "0 0 50px rgba(255, 107, 53, 0.12), inset 0 1px 0 rgba(255, 107, 53, 0.1)",
               }}
             >
               {/* Scan lines */}
@@ -99,7 +99,7 @@ export default function MobileHologram({
                 <div className="flex items-center gap-2">
                   <div
                     className="h-2 w-2 rounded-full bg-accent"
-                    style={{ boxShadow: "0 0 8px rgba(74, 222, 128, 0.9)" }}
+                    style={{ boxShadow: "0 0 8px rgba(255, 107, 53, 0.9)" }}
                   />
                   <span className="text-[11px] font-mono tracking-wider text-accent/90">
                     {String(slideNumber + 1).padStart(2, "0")} /{" "}
@@ -140,7 +140,7 @@ export default function MobileHologram({
                 className="pointer-events-none absolute inset-x-0 h-[2px] z-20"
                 style={{
                   background:
-                    "linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.4), transparent)",
+                    "linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.4), transparent)",
                 }}
                 animate={{ top: ["0%", "100%"] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "linear" }}

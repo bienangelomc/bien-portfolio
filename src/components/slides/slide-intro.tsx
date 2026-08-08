@@ -31,7 +31,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
         className="absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(74, 222, 128, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(74, 222, 128, 0.5) 1px, transparent 1px)",
+            "linear-gradient(rgba(255, 107, 53, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 53, 0.5) 1px, transparent 1px)",
           backgroundSize: "32px 32px",
           maskImage: "radial-gradient(ellipse at center, black 30%, transparent 75%)",
           WebkitMaskImage:
@@ -72,7 +72,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
               animate={{ rotate: 360 }}
               transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
             >
-              <div className="absolute -top-0.5 left-1/2 h-0.5 w-0.5 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_6px_2px_rgba(74,222,128,0.6)] md:h-1 md:w-1 md:shadow-[0_0_10px_3px_rgba(74,222,128,0.7)]" />
+              <div className="absolute -top-0.5 left-1/2 h-0.5 w-0.5 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_6px_2px_rgba(255,107,53,0.6)] md:h-1 md:w-1 md:shadow-[0_0_10px_3px_rgba(255,107,53,0.7)]" />
             </motion.div>
             {/* Rotating ring 2 */}
             <motion.div
@@ -184,7 +184,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
           >
             <button
               onClick={() => onNavigate(3)}
-              className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-2 py-0.5 text-[9px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(74,222,128,0.4)] md:px-5 md:py-2 md:text-base md:gap-1.5"
+              className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-2 py-0.5 text-[9px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(255,107,53,0.4)] md:px-5 md:py-2 md:text-base md:gap-1.5"
             >
               See work
               <ArrowRight size={8} className="transition-transform group-hover:translate-x-0.5 md:size-4" />

@@ -16,7 +16,7 @@ const testimonials = [
       "You saved me a lot of time and started my online business quickly. I cannot thank you enough.",
     video:
       "https://d2ol7oe51mr4n9.cloudfront.net/user_3HWb5DRLDrXcSCum0mDA7fFLQjg/42299dd6-aead-442b-950c-f1fe7a91bfb9.mp4",
-    accent: "rgb(74, 222, 128)",
+    accent: "rgb(255, 107, 53)",
   },
   {
     name: "Meg",

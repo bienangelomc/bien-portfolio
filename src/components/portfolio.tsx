@@ -37,6 +37,7 @@ export default function Portfolio() {
   const [selectedTestimonial, setSelectedTestimonial] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileHologramOpen, setMobileHologramOpen] = useState(false);
+  const [slideDirection, setSlideDirection] = useState(1); // 1 = forward, -1 = backward
 
   // Mobile detection
   useEffect(() => {
@@ -106,27 +107,51 @@ export default function Portfolio() {
 
   // Calculate active slide + mobile hologram visibility
   useEffect(() => {
+    let lastSlide = 0;
     const unsubscribe = scrollProgress.on("change", (p) => {
       if (p < PRESENT_START) {
+        setSlideDirection(lastSlide > 0 ? -1 : 1);
+        lastSlide = 0;
         setActiveSlide(0);
         setMobileHologramOpen(false);
         return;
       }
       if (p >= PRESENT_END) {
+        setSlideDirection(lastSlide < TOTAL_SLIDES - 1 ? 1 : -1);
+        lastSlide = TOTAL_SLIDES - 1;
         setActiveSlide(TOTAL_SLIDES - 1);
         setMobileHologramOpen(false);
         return;
       }
       // Use floor with per-slide bands so each slide gets equal scroll room
-      // This prevents fast scroll from skipping slides
       const slideFloat = ((p - PRESENT_START) / PRESENT_RANGE) * TOTAL_SLIDES;
       const slide = Math.min(TOTAL_SLIDES - 1, Math.max(0, Math.floor(slideFloat)));
+      if (slide !== lastSlide) {
+        setSlideDirection(slide > lastSlide ? 1 : -1);
+        lastSlide = slide;
+      }
       setActiveSlide(slide);
-      // Open mobile hologram right at presentation start
       setMobileHologramOpen(isMobile && p >= PRESENT_START && p < 0.98);
     });
     return () => unsubscribe();
   }, [scrollProgress, isMobile]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      if (target?.tagName === "INPUT" || target?.tagName === "TEXTAREA" || target?.tagName === "SELECT") return;
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+        e.preventDefault();
+        navigateToSlide(Math.min(activeSlide + 1, TOTAL_SLIDES));
+      } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+        e.preventDefault();
+        navigateToSlide(Math.max(activeSlide - 1, 0));
+      }
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [activeSlide]);
 
   const navigateToSlide = useCallback((slide: number) => {
     const el = containerRef.current;
@@ -191,14 +216,32 @@ export default function Portfolio() {
           >
             {/* Only render slides inside laptop on desktop */}
             {!isMobile && (
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="wait" custom={slideDirection}>
                 <motion.div
                   key={activeKey}
                   className="absolute inset-0"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.4, ease: "easeInOut" }}
+                  custom={slideDirection}
+                  variants={{
+                    enter: (dir: number) => ({
+                      opacity: 1,
+                      x: 0,
+                      scale: 1,
+                      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                    }),
+                    exit: (dir: number) => ({
+                      opacity: 0,
+                      x: dir > 0 ? -40 : 40,
+                      scale: 0.96,
+                      transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+                    }),
+                  }}
+                  initial={{
+                    opacity: 0,
+                    x: slideDirection > 0 ? 40 : -40,
+                    scale: 0.96,
+                  }}
+                  animate="enter"
+                  exit="exit"
                 >
                   <ActiveSlide isActive={true} {...(activeProps as any)} />
                 </motion.div>
@@ -228,14 +271,29 @@ export default function Portfolio() {
               slideNumber={activeSlide}
               totalSlides={TOTAL_SLIDES}
             >
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="wait" custom={slideDirection}>
                 <motion.div
                   key={activeKey}
                   className="absolute inset-0"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  custom={slideDirection}
+                  variants={{
+                    enter: (dir: number) => ({
+                      opacity: 1,
+                      x: 0,
+                      transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+                    }),
+                    exit: (dir: number) => ({
+                      opacity: 0,
+                      x: dir > 0 ? -30 : 30,
+                      transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
+                    }),
+                  }}
+                  initial={{
+                    opacity: 0,
+                    x: slideDirection > 0 ? 30 : -30,
+                  }}
+                  animate="enter"
+                  exit="exit"
                 >
                   <ActiveSlide isActive={true} {...(activeProps as any)} />
                 </motion.div>
@@ -353,6 +411,15 @@ function ReleaseSection() {
 
   return (
     <section id="get-in-touch" className="relative border-t border-zinc-800/50 bg-[#0a0a0c] py-24">
+      {/* Ambient glow */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 0%, rgba(255, 107, 53, 0.08) 0%, transparent 50%)",
+        }}
+        aria-hidden="true"
+      />
       <div className="mx-auto max-w-2xl px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -367,12 +434,55 @@ function ReleaseSection() {
           <h2 className="mt-4 font-display text-3xl font-medium leading-tight md:text-5xl">
             Have a project?
             <br />
-            Let's build it.
+            <span className="text-accent">Let's build it.</span>
           </h2>
           <p className="mx-auto mt-5 max-w-md text-sm text-zinc-400 md:text-base">
-            Whether it's a website, a web app, or something you haven't quite
+            Whether it's a funnel, a website, or something you haven't quite
             figured out yet — send me a note and I'll get back within 1-2 days.
           </p>
+
+          {/* Trust signals */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="mx-auto mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-zinc-500"
+          >
+            <span className="inline-flex items-center gap-1.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+              20+ funnels built
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" /><polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+              100% satisfaction
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
+                <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+              </svg>
+              1-2 day response
+            </span>
+          </motion.div>
+
+          {/* Direct email link */}
+          <motion.a
+            href="mailto:bienangelomc@gmail.com"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-accent transition-colors hover:text-accent/80"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+            </svg>
+            bienangelomc@gmail.com
+          </motion.a>
         </motion.div>
 
         {state === "success" ? (
@@ -434,9 +544,10 @@ function ReleaseSection() {
                 className="w-full rounded-lg border border-zinc-700/50 bg-zinc-900/40 px-3 py-2.5 text-sm outline-none transition-all focus:border-accent/60 focus:ring-2 focus:ring-accent/20"
               >
                 <option value="" disabled>Select...</option>
-                <option value="website">Website</option>
-                <option value="web-app">Web app</option>
-                <option value="mobile-app">Mobile app</option>
+                <option value="funnel">Sales funnel (Systeme.io)</option>
+                <option value="website">Business website</option>
+                <option value="web-app">Custom web app</option>
+                <option value="landing-page">Landing page</option>
                 <option value="other">Other</option>
               </select>
             </div>
@@ -471,7 +582,7 @@ function ReleaseSection() {
               <button
                 type="submit"
                 disabled={state === "loading"}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition-colors hover:bg-accent disabled:opacity-60"
+                className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white shadow-lg shadow-accent/20 transition-all hover:bg-accent/90 hover:shadow-accent/30 disabled:opacity-60"
               >
                 {state === "loading" ? (
                   <><Loader2 size={14} className="animate-spin" /> Sending...</>
@@ -486,6 +597,30 @@ function ReleaseSection() {
         <p className="mt-12 text-center text-xs text-zinc-600">
           © {new Date().getFullYear()} Bien Casimiro. All rights reserved.
         </p>
+
+        {/* Social links */}
+        <div className="mt-4 flex items-center justify-center gap-4">
+          <a
+            href="https://github.com/bienangelomc"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-500 transition-colors hover:text-accent"
+            aria-label="GitHub"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+            </svg>
+          </a>
+          <a
+            href="mailto:bienangelomc@gmail.com"
+            className="text-zinc-500 transition-colors hover:text-accent"
+            aria-label="Email"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
   );

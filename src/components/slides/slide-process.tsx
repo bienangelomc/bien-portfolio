@@ -50,13 +50,15 @@ export default function SlideProcess({ isActive }: SlideProps) {
           Four real steps.
         </h2>
 
-        <div className="mt-1 space-y-0.5 sm:mt-3 sm:space-y-1.5 md:mt-4 md:space-y-2">
+        <div className="relative mt-1 space-y-0.5 sm:mt-3 sm:space-y-1.5 md:mt-4 md:space-y-2">
+          {/* Connecting line */}
+          <div className="pointer-events-none absolute left-[6px] top-2 bottom-2 w-px bg-gradient-to-b from-accent/30 via-accent/10 to-transparent sm:left-[11px] md:left-[15px]" aria-hidden="true" />
           {steps.map((step, i) => {
             const Icon = step.icon;
             return (
               <motion.div
                 key={step.num}
-                className="flex gap-1 rounded-md border border-border/40 bg-card/20 p-0.5 sm:gap-2 sm:rounded-lg sm:p-2 md:gap-2.5 md:p-2.5"
+                className="flex gap-1 rounded-md border border-border/40 bg-card/20 p-0.5 transition-all duration-300 hover:border-accent/30 hover:bg-card/40 sm:gap-2 sm:rounded-lg sm:p-2 md:gap-2.5 md:p-2.5"
                 initial={{ opacity: 0, x: -4 }}
                 animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -4 }}
                 transition={{
@@ -64,6 +66,7 @@ export default function SlideProcess({ isActive }: SlideProps) {
                   delay: 0.04 + i * 0.03,
                   ease: [0.22, 1, 0.36, 1],
                 }}
+                whileHover={{ x: 2 }}
               >
                 <div className="flex h-3 w-3 shrink-0 items-center justify-center rounded bg-accent/10 text-accent sm:h-5 sm:w-5 sm:rounded-md md:h-7 md:w-7">
                   <Icon size={6} className="sm:size-[9px] md:size-[13px]" />

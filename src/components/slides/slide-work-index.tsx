@@ -101,7 +101,7 @@ export default function SlideWorkIndex({ isActive, onOpenHologram }: SlideProps)
             <motion.button
               key={p.title}
               onClick={() => onOpenHologram(p)}
-              className="group relative flex w-full items-center gap-1 rounded-md border border-border/50 bg-card/30 p-0.5 text-left transition-all hover:border-accent/30 hover:bg-card/60 sm:gap-2.5 sm:rounded-lg sm:p-2 md:gap-4 md:p-3"
+              className="group relative flex w-full items-center gap-1 rounded-md border border-border/50 bg-card/30 p-0.5 text-left transition-all duration-300 hover:border-accent/30 hover:bg-card/60 hover:shadow-[0_0_16px_rgba(255,107,53,0.08)] sm:gap-2.5 sm:rounded-lg sm:p-2 md:gap-4 md:p-3"
               initial={{ opacity: 0, x: -4 }}
               animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -4 }}
               transition={{
@@ -109,6 +109,7 @@ export default function SlideWorkIndex({ isActive, onOpenHologram }: SlideProps)
                 delay: 0.04 + i * 0.04,
                 ease: [0.22, 1, 0.36, 1],
               }}
+              whileHover={{ x: 2 }}
             >
               <div className="relative">
                 <div

@@ -2,15 +2,14 @@
 
 export const siteConfig = {
   name: "Bien Casimiro",
-  role: "Web & Mobile App Developer",
-  tagline: "I build websites that turn visitors into customers.",
+  role: "Funnel Builder & Web Developer",
+  tagline: "I build funnels that convert.",
   subline:
-    "I build websites and applications for real businesses and real users — from local service businesses to health and accessibility tools.",
+    "Done-for-you Systeme.io funnels and custom websites that turn visitors into customers.",
   email: "bienangelomc@gmail.com",
   location: "Philippines",
   socials: [
-    { name: "GitHub", url: "https://github.com/" },
-    { name: "LinkedIn", url: "https://linkedin.com/" },
+    { name: "GitHub", url: "https://github.com/bienangelomc" },
   ],
 };
 

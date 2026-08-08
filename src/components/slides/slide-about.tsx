@@ -9,6 +9,14 @@ interface SlideProps {
 export default function SlideAbout({ isActive }: SlideProps) {
   return (
     <div className="flex h-full w-full items-center justify-center overflow-hidden bg-zinc-950 p-1.5 sm:p-3 md:p-6">
+      {/* Subtle ambient gradient */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-30"
+        style={{
+          background: "radial-gradient(ellipse at 30% 50%, rgba(255, 107, 53, 0.06) 0%, transparent 60%)",
+        }}
+        aria-hidden="true"
+      />
       <motion.div
         className="w-full max-w-full flex flex-col items-center gap-2 md:flex-row md:max-w-none md:gap-5"
         initial={{ opacity: 0, y: 6 }}
@@ -19,7 +27,7 @@ export default function SlideAbout({ isActive }: SlideProps) {
         <div className="relative flex-shrink-0 md:w-[42%] md:max-w-[220px]">
           <div className="relative overflow-hidden rounded-lg ring-1 ring-white/10">
             <img
-              src="/bien-about.jpg"
+              src="/bien-about.png"
               alt="Bien Casimiro"
               className="h-16 w-full object-cover object-top md:h-auto md:min-h-[260px] md:w-full"
             />
