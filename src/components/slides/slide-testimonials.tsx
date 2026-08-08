@@ -107,7 +107,8 @@ export default function SlideTestimonials({ isActive }: SlideProps) {
           {testimonials.map((t, i) => (
             <motion.div
               key={i}
-              className="relative group"
+              className="relative group cursor-pointer"
+              onClick={() => setSelectedVideo(i)}
               initial={{ opacity: 0, x: i === 0 ? -30 : 30, scale: 0.9 }}
               animate={
                 isActive
@@ -160,31 +161,32 @@ export default function SlideTestimonials({ isActive }: SlideProps) {
 
                 <div className="flex flex-row items-stretch gap-1.5 p-1.5 sm:gap-2 sm:p-2.5 md:gap-3 md:p-3">
                   {/* Video thumbnail with hologram frame */}
-                  <div className="relative shrink-0 w-[32%] cursor-pointer group/video">
+                  <div className="relative shrink-0 w-[32%] cursor-pointer group/video" onClick={() => setSelectedVideo(i)}>
                     <div className="relative overflow-hidden rounded-md border border-white/10 sm:rounded-lg">
                       <video
-                        className="testimonial-video w-full aspect-video object-cover"
+                        className="testimonial-video w-full aspect-video object-cover pointer-events-none"
                         src={t.video}
                         muted
                         loop
                         playsInline
-                        onClick={() => setSelectedVideo(i)}
                       />
 
                       {/* Hologram overlay on video */}
                       <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 via-transparent to-transparent" />
 
-                      {/* Play indicator */}
-                      <div
-                        className="absolute bottom-1 right-1 flex h-4 w-4 items-center justify-center rounded-full sm:h-5 sm:w-5 md:h-6 md:w-6"
-                        style={{ backgroundColor: `${t.accent}30`, border: `1px solid ${t.accent}60` }}
-                      >
-                        <Play size={8} fill={t.accent} style={{ color: t.accent }} className="ml-0.5 sm:w-3 sm:h-3 md:w-3.5 md:h-3.5" />
+                      {/* Clickable overlay with play indicator */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div
+                          className="flex h-7 w-7 items-center justify-center rounded-full transition-transform group-hover/video:scale-110 sm:h-9 sm:w-9 md:h-10 md:w-10"
+                          style={{ backgroundColor: `${t.accent}30`, border: `1.5px solid ${t.accent}80`, boxShadow: `0 0 12px ${t.accent}40` }}
+                        >
+                          <Play size={10} fill={t.accent} style={{ color: t.accent }} className="ml-0.5 sm:w-4 sm:h-4 md:w-5 md:h-5" />
+                        </div>
                       </div>
 
                       {/* Scan line on video */}
                       <motion.div
-                        className="absolute inset-x-0 h-[1px]"
+                        className="absolute inset-x-0 h-[1px] pointer-events-none"
                         style={{ background: `${t.accent}60` }}
                         animate={{ top: ["0%", "100%"] }}
                         transition={{
