@@ -1,16 +1,17 @@
 "use client";
 
-import { motion, useScroll, useTransform, useInView, AnimatePresence } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
-import { Quote, Star, Play, X } from "lucide-react";
+import { motion } from "framer-motion";
+import { useRef, useEffect } from "react";
+import { Quote, Star, Play } from "lucide-react";
 
 interface SlideProps {
   isActive: boolean;
+  onOpenVideo?: (index: number) => void;
 }
 
 const testimonials = [
   {
-    name: "BG Creatives DGT",
+    name: "Tracey",
     role: "Digital Product Marketer",
     quote:
       "You saved me a lot of time and started my online business quickly. I cannot thank you enough.",
@@ -19,7 +20,7 @@ const testimonials = [
     accent: "rgb(74, 222, 128)",
   },
   {
-    name: "Vian",
+    name: "Meg",
     role: "Digital Product Marketer",
     quote:
       "I would still be lost and in the weeds if it wasn't for you. Everything went very seamlessly.",
@@ -29,11 +30,10 @@ const testimonials = [
   },
 ];
 
-export default function SlideTestimonials({ isActive }: SlideProps) {
-  const [selectedVideo, setSelectedVideo] = useState<number | null>(null);
+export default function SlideTestimonials({ isActive, onOpenVideo }: SlideProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // When slide is active, videos auto-play
+  // Auto-play videos when slide is active
   useEffect(() => {
     if (isActive) {
       const videos = document.querySelectorAll(".testimonial-video");
@@ -45,8 +45,6 @@ export default function SlideTestimonials({ isActive }: SlideProps) {
           el.play().catch(() => {});
         }, i * 300);
       });
-    } else {
-      setSelectedVideo(null);
     }
   }, [isActive]);
 
@@ -108,7 +106,7 @@ export default function SlideTestimonials({ isActive }: SlideProps) {
             <motion.div
               key={i}
               className="relative group cursor-pointer"
-              onClick={() => setSelectedVideo(i)}
+              onClick={() => onOpenVideo?.(i)}
               initial={{ opacity: 0, x: i === 0 ? -30 : 30, scale: 0.9 }}
               animate={
                 isActive
@@ -161,7 +159,7 @@ export default function SlideTestimonials({ isActive }: SlideProps) {
 
                 <div className="flex flex-row items-stretch gap-1.5 p-1.5 sm:gap-2 sm:p-2.5 md:gap-3 md:p-3">
                   {/* Video thumbnail with hologram frame */}
-                  <div className="relative shrink-0 w-[32%] cursor-pointer group/video" onClick={() => setSelectedVideo(i)}>
+                  <div className="relative shrink-0 w-[32%]">
                     <div className="relative overflow-hidden rounded-md border border-white/10 sm:rounded-lg">
                       <video
                         className="testimonial-video w-full aspect-video object-cover pointer-events-none"
@@ -177,7 +175,7 @@ export default function SlideTestimonials({ isActive }: SlideProps) {
                       {/* Clickable overlay with play indicator */}
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div
-                          className="flex h-7 w-7 items-center justify-center rounded-full transition-transform group-hover/video:scale-110 sm:h-9 sm:w-9 md:h-10 md:w-10"
+                          className="flex h-7 w-7 items-center justify-center rounded-full transition-transform group-hover:scale-110 sm:h-9 sm:w-9 md:h-10 md:w-10"
                           style={{ backgroundColor: `${t.accent}30`, border: `1.5px solid ${t.accent}80`, boxShadow: `0 0 12px ${t.accent}40` }}
                         >
                           <Play size={10} fill={t.accent} style={{ color: t.accent }} className="ml-0.5 sm:w-4 sm:h-4 md:w-5 md:h-5" />
@@ -241,97 +239,10 @@ export default function SlideTestimonials({ isActive }: SlideProps) {
           transition={{ duration: 0.5, delay: 0.8 }}
         >
           <p className="text-[5px] font-mono text-muted-foreground/50 sm:text-[7px] md:text-[10px]">
-            // click video to enlarge
+            // click to watch full video
           </p>
         </motion.div>
       </div>
-
-      {/* Fullscreen video hologram modal */}
-      <AnimatePresence>
-        {selectedVideo !== null && (
-          <motion.div
-            className="absolute inset-0 z-40 flex items-center justify-center bg-black/80 backdrop-blur-sm p-2 sm:p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSelectedVideo(null)}
-          >
-            <motion.div
-              className="relative w-full max-w-md"
-              initial={{ scale: 0.8, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.8, y: 20 }}
-              transition={{ type: "spring", damping: 22 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              {/* Hologram glow frame */}
-              <div
-                className="absolute -inset-1 rounded-xl blur-xl opacity-50"
-                style={{
-                  background: testimonials[selectedVideo].accent,
-                }}
-              />
-
-              {/* Corner brackets */}
-              <div
-                className="absolute -left-1 -top-1 h-3 w-3 border-l-2 border-t-2 z-10 sm:h-5 sm:w-5"
-                style={{ borderColor: testimonials[selectedVideo].accent }}
-              />
-              <div
-                className="absolute -right-1 -top-1 h-3 w-3 border-r-2 border-t-2 z-10 sm:h-5 sm:w-5"
-                style={{ borderColor: testimonials[selectedVideo].accent }}
-              />
-              <div
-                className="absolute -bottom-1 -left-1 h-3 w-3 border-b-2 border-l-2 z-10 sm:h-5 sm:w-5"
-                style={{ borderColor: testimonials[selectedVideo].accent }}
-              />
-              <div
-                className="absolute -bottom-1 -right-1 h-3 w-3 border-b-2 border-r-2 z-10 sm:h-5 sm:w-5"
-                style={{ borderColor: testimonials[selectedVideo].accent }}
-              />
-
-              {/* Video */}
-              <div className="relative overflow-hidden rounded-lg border border-white/20 bg-black">
-                <video
-                  className="w-full"
-                  src={testimonials[selectedVideo].video}
-                  controls
-                  autoPlay
-                  playsInline
-                />
-                {/* Scan line */}
-                <motion.div
-                  className="absolute inset-x-0 h-[1px] pointer-events-none"
-                  style={{ background: `${testimonials[selectedVideo].accent}60` }}
-                  animate={{ top: ["0%", "100%"] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                />
-              </div>
-
-              {/* Info */}
-              <div className="mt-2 text-center sm:mt-3">
-                <p
-                  className="text-[8px] font-semibold sm:text-sm md:text-base"
-                  style={{ color: testimonials[selectedVideo].accent }}
-                >
-                  {testimonials[selectedVideo].name}
-                </p>
-                <p className="text-[6px] text-muted-foreground sm:text-xs">
-                  {testimonials[selectedVideo].role}
-                </p>
-              </div>
-
-              {/* Close button */}
-              <button
-                onClick={() => setSelectedVideo(null)}
-                className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-zinc-800 text-white ring-1 ring-white/20 transition hover:bg-zinc-700 sm:h-6 sm:w-6"
-              >
-                <X size={10} className="sm:w-3 sm:h-3" />
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

@@ -14,6 +14,7 @@ import SlideProjectAngelo from "./slides/slide-project-angelo";
 import SlideProcess from "./slides/slide-process";
 import SlideTestimonials from "./slides/slide-testimonials";
 import HologramModal, { type ProjectData } from "./hologram-modal";
+import TestimonialVideoHologram from "./testimonial-video-hologram";
 
 const TOTAL_SLIDES = 9;
 
@@ -32,6 +33,7 @@ export default function Portfolio() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [hologramProject, setHologramProject] = useState<ProjectData | null>(null);
   const [isHologramOpen, setIsHologramOpen] = useState(false);
+  const [selectedTestimonial, setSelectedTestimonial] = useState<number | null>(null);
 
   const openHologram = useCallback((project: ProjectData) => {
     setHologramProject(project);
@@ -41,6 +43,14 @@ export default function Portfolio() {
   const closeHologram = useCallback(() => {
     setIsHologramOpen(false);
     setTimeout(() => setHologramProject(null), 300);
+  }, []);
+
+  const openTestimonialVideo = useCallback((index: number) => {
+    setSelectedTestimonial(index);
+  }, []);
+
+  const closeTestimonialVideo = useCallback(() => {
+    setSelectedTestimonial(null);
   }, []);
   const scrollProgress = useMotionValue(0);
 
@@ -143,7 +153,7 @@ export default function Portfolio() {
     { key: "voicecare", component: SlideProjectVoiceCare, props: {} },
     { key: "angelo", component: SlideProjectAngelo, props: {} },
     { key: "process", component: SlideProcess, props: {} },
-    { key: "testimonials", component: SlideTestimonials, props: {} },
+    { key: "testimonials", component: SlideTestimonials, props: { onOpenVideo: openTestimonialVideo } },
   ];
 
   const ActiveSlide = slides[activeSlide].component;
@@ -199,6 +209,12 @@ export default function Portfolio() {
               onClose={closeHologram}
             />
           </div>
+
+          {/* Testimonial video hologram — renders outside the laptop screen */}
+          <TestimonialVideoHologram
+            selectedIndex={selectedTestimonial}
+            onClose={closeTestimonialVideo}
+          />
 
           {/* Bottom scroll cue */}
           <BottomCue scrollProgress={scrollProgress} />
