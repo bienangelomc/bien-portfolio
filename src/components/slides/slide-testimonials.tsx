@@ -11,7 +11,7 @@ interface SlideProps {
 const testimonials = [
   {
     name: "BG Creatives DGT",
-    role: "Online Business Owner",
+    role: "Digital Product Marketer",
     quote:
       "You saved me a lot of time and started my online business quickly. I cannot thank you enough.",
     video:
@@ -19,8 +19,8 @@ const testimonials = [
     accent: "rgb(74, 222, 128)",
   },
   {
-    name: "Systeme.io Store Client",
-    role: "E-commerce Owner",
+    name: "Vian",
+    role: "Digital Product Marketer",
     quote:
       "I would still be lost and in the weeds if it wasn't for you. Everything went very seamlessly.",
     video:
