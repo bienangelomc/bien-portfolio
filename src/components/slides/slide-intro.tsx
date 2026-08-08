@@ -59,7 +59,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
         {/* Top: badge + portrait */}
         <div className="flex w-full flex-col items-center gap-1.5 sm:flex-row sm:gap-2 md:gap-4">
           {/* Portrait — top on mobile, right on desktop */}
-          <div className="relative shrink-0 flex h-12 w-12 items-center justify-center sm:h-auto sm:w-auto sm:flex-[0_0_28%] md:flex-[0_0_42%] lg:flex-[0_0_44%]">
+          <div className="relative shrink-0 flex h-10 w-10 items-center justify-center sm:h-auto sm:w-auto sm:flex-[0_0_28%] md:flex-[0_0_42%] lg:flex-[0_0_44%]">
             {/* Glow pulse */}
             <motion.div
               className="absolute h-[75%] w-[75%] rounded-full bg-accent/20 blur-md sm:blur-lg md:blur-xl"
@@ -85,7 +85,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
             {/* Portrait image */}
             <motion.div
-              className="relative z-10 h-9 w-9 overflow-hidden rounded-full ring-1 ring-accent/30 ring-offset-1 ring-offset-zinc-950 sm:h-auto sm:w-[72%] md:w-[72%]"
+              className="relative z-10 h-7.5 w-7.5 overflow-hidden rounded-full ring-1 ring-accent/30 ring-offset-1 ring-offset-zinc-950 sm:h-auto sm:w-[72%] md:w-[72%]"
               animate={{ y: [0, -1.5, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -113,7 +113,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
             {/* Headline */}
             <motion.h1
-              className="font-display text-base font-medium leading-tight tracking-tight sm:text-sm md:text-2xl lg:text-3xl"
+              className="font-display text-sm font-medium leading-tight tracking-tight sm:text-sm md:text-2xl lg:text-3xl"
               initial={{ opacity: 0, x: -8 }}
               animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -8 }}
               transition={{ duration: 0.5, delay: 0.15 }}
@@ -135,32 +135,32 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
             {/* Stats row */}
             <motion.div
-              className="mt-1.5 grid grid-cols-3 gap-2 sm:mt-2 sm:gap-2 md:mt-3 md:gap-3"
+              className="mt-1.5 grid grid-cols-3 gap-1.5 sm:mt-2 sm:gap-2 md:mt-3 md:gap-3"
               initial={{ opacity: 0, y: 4 }}
               animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
               transition={{ duration: 0.4, delay: 0.4 }}
             >
               <div className="text-center sm:text-left">
-                <p className="font-display text-sm font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
+                <p className="font-display text-[15px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
                   2+
                 </p>
-                <p className="text-[9px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
+                <p className="text-[10px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
                   Years exp.
                 </p>
               </div>
               <div className="text-center sm:text-left">
-                <p className="font-display text-sm font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
+                <p className="font-display text-[15px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
                   20+
                 </p>
-                <p className="text-[9px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
+                <p className="text-[10px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
                   Funnels
                 </p>
               </div>
               <div className="text-center sm:text-left">
-                <p className="font-display text-sm font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
+                <p className="font-display text-[15px] font-bold text-foreground sm:text-[10px] md:text-base lg:text-lg">
                   100%
                 </p>
-                <p className="text-[9px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
+                <p className="text-[10px] text-muted-foreground sm:text-[7px] md:text-[10px] lg:text-xs">
                   Satisfied
                 </p>
               </div>
@@ -168,24 +168,24 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
             {/* CTAs */}
             <motion.div
-              className="mt-2 flex flex-wrap justify-center gap-1.5 sm:justify-start sm:mt-2 sm:gap-2 md:mt-3 md:gap-2"
+              className="mt-1.5 flex flex-wrap justify-center gap-1.5 sm:justify-start sm:mt-2 sm:gap-2 md:mt-3 md:gap-2"
               initial={{ opacity: 0, y: 4 }}
               animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
               transition={{ duration: 0.4, delay: 0.5 }}
             >
               <button
                 onClick={() => onNavigate(3)}
-                className="group inline-flex items-center gap-1 rounded-full bg-accent px-2.5 py-1 text-[10px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(74,222,128,0.4)] sm:px-2 sm:py-0.5 sm:text-[8px] md:px-4 md:py-1.5 md:text-sm"
+                className="group inline-flex items-center gap-0.5 rounded-full bg-accent px-2 py-1 text-[10px] font-medium text-zinc-950 transition-all hover:bg-accent/90 hover:shadow-[0_0_12px_rgba(74,222,128,0.4)] sm:px-2 sm:py-0.5 sm:text-[8px] md:px-4 md:py-1.5 md:text-sm"
               >
                 See work
-                <ArrowRight size={10} className="transition-transform group-hover:translate-x-0.5 sm:size-[7px] md:size-3" />
+                <ArrowRight size={9} className="transition-transform group-hover:translate-x-0.5 sm:size-[7px] md:size-3" />
               </button>
               <button
                 onClick={() => onNavigate(9)}
-                className="inline-flex items-center gap-1 rounded-full border border-border/60 px-2.5 py-1 text-[10px] font-medium transition-colors hover:border-accent/50 hover:bg-accent/10 hover:text-accent sm:px-2 sm:py-0.5 sm:text-[8px] md:px-4 md:py-1.5 md:text-sm"
+                className="inline-flex items-center gap-0.5 rounded-full border border-border/60 px-2 py-1 text-[10px] font-medium transition-colors hover:border-accent/50 hover:bg-accent/10 hover:text-accent sm:px-2 sm:py-0.5 sm:text-[8px] md:px-4 md:py-1.5 md:text-sm"
               >
                 Quote
-                <Mail size={10} className="sm:size-[7px] md:size-3" />
+                <Mail size={9} className="sm:size-[7px] md:size-3" />
               </button>
             </motion.div>
           </div>
