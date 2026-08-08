@@ -8,6 +8,8 @@ import {
   Filter,
   Table2,
   TrendingUp,
+  Code2,
+  Bot,
 } from "lucide-react";
 
 interface SlideProps {
@@ -20,9 +22,9 @@ const excelSkills = [
   { name: "Pivot Tables", icon: Table2 },
   { name: "Conditional Formatting", icon: TrendingUp },
   { name: "Data Cleanup", icon: Database },
-  { name: "Advanced Formulas", icon: FileSpreadsheet },
+  { name: "Macros / VBA", icon: Code2 },
+  { name: "Apps Script", icon: Bot },
   { name: "Google Sheets", icon: BarChart3 },
-  { name: "Big Data Reporting", icon: BarChart3 },
 ];
 
 const highlights = [
@@ -41,9 +43,9 @@ const highlights = [
     bg: "bg-sky-400/10",
   },
   {
-    icon: Table2,
-    title: "Pivot & Dashboards",
-    desc: "Pivot tables, slicers, dynamic dashboards, and summary reports that update instantly.",
+    icon: Code2,
+    title: "Automation & Scripts",
+    desc: "Macros, VBA, and Google Apps Script to automate repetitive tasks and workflows.",
     color: "text-violet-400",
     bg: "bg-violet-400/10",
   },
@@ -51,13 +53,13 @@ const highlights = [
 
 export default function SlideExcel({ isActive }: SlideProps) {
   return (
-    <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-zinc-950 p-1.5 sm:p-3 md:p-5">
+    <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-zinc-950 p-1.5 sm:p-3 md:p-4">
       {/* Subtle grid background */}
       <div
         className="absolute inset-0 opacity-[0.04]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(255, 107, 53, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 107, 53, 0.5) 1px, transparent 1px)",
+            "linear-gradient(rgba(52, 211, 153, 0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(52, 211, 153, 0.5) 1px, transparent 1px)",
           backgroundSize: "28px 28px",
         }}
         aria-hidden="true"
@@ -79,10 +81,10 @@ export default function SlideExcel({ isActive }: SlideProps) {
         animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className="text-[6px] font-medium uppercase tracking-[0.2em] text-emerald-400 sm:text-[9px] md:text-xs">
+        <p className="text-[6px] font-medium uppercase tracking-[0.2em] text-emerald-400 sm:text-[8px] md:text-xs">
           Bonus skill
         </p>
-        <h2 className="mt-0.5 font-display text-[10px] font-medium leading-tight tracking-tight sm:text-base md:text-xl lg:text-2xl">
+        <h2 className="mt-0.5 font-display text-[10px] font-medium leading-tight tracking-tight sm:text-sm md:text-xl">
           Excel &amp; data specialist
         </h2>
         <p className="mt-0.5 text-[5.5px] text-muted-foreground sm:text-[8px] md:text-sm">
@@ -90,7 +92,7 @@ export default function SlideExcel({ isActive }: SlideProps) {
         </p>
 
         {/* Three highlights */}
-        <div className="mt-1 space-y-0.5 sm:mt-3 sm:space-y-1.5 md:mt-4 md:space-y-2">
+        <div className="mt-1 space-y-0.5 sm:mt-2 sm:space-y-1.5 md:mt-3 md:space-y-2">
           {highlights.map((h, i) => {
             const Icon = h.icon;
             return (
@@ -106,10 +108,10 @@ export default function SlideExcel({ isActive }: SlideProps) {
                   <Icon size={6} className={`${h.color} sm:size-[9px] md:size-[13px]`} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className={`text-[6px] font-medium sm:text-[9px] md:text-sm ${h.color}`}>
+                  <h3 className={`text-[6px] font-medium sm:text-[8px] md:text-sm ${h.color}`}>
                     {h.title}
                   </h3>
-                  <p className="mt-px text-[5px] leading-relaxed text-muted-foreground sm:text-[7px] md:text-xs">
+                  <p className="mt-px text-[5px] leading-relaxed text-muted-foreground line-clamp-2 sm:text-[7px] md:text-xs">
                     {h.desc}
                   </p>
                 </div>
@@ -119,9 +121,9 @@ export default function SlideExcel({ isActive }: SlideProps) {
         </div>
 
         {/* Skill tags */}
-        <div className="mt-1.5 sm:mt-3 md:mt-4">
-          <p className="mb-0.5 text-[5.5px] font-medium uppercase tracking-[0.15em] text-muted-foreground/60 sm:mb-1 sm:text-[8px] md:text-[10px]">
-            Tools &amp; formulas I use daily
+        <div className="mt-1 sm:mt-2 md:mt-3">
+          <p className="mb-0.5 text-[5px] font-medium uppercase tracking-[0.15em] text-muted-foreground/60 sm:mb-1 sm:text-[8px] md:text-[10px]">
+            Tools &amp; formulas
           </p>
           <div className="flex flex-wrap gap-0.5 sm:gap-1.5 md:gap-2">
             {excelSkills.map((skill, i) => {
@@ -129,12 +131,12 @@ export default function SlideExcel({ isActive }: SlideProps) {
               return (
                 <motion.span
                   key={skill.name}
-                  className="inline-flex items-center gap-0.5 rounded-full border border-white/10 bg-emerald-400/[0.06] px-1 py-0.5 text-[5.5px] font-medium text-emerald-300 sm:gap-1 sm:px-2 sm:py-1 sm:text-[10px] md:px-2.5 md:text-xs"
+                  className="inline-flex items-center gap-0.5 rounded-full border border-emerald-400/20 bg-emerald-400/[0.06] px-1 py-0.5 text-[5px] font-medium text-emerald-300 sm:gap-1 sm:px-2 sm:py-1 sm:text-[9px] md:px-2.5 md:text-xs"
                   initial={{ opacity: 0, y: 4 }}
                   animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
                   transition={{ duration: 0.25, delay: 0.3 + i * 0.04 }}
                 >
-                  <Icon size={5} className="sm:size-[9px] md:size-3" />
+                  <Icon size={4} className="sm:size-[9px] md:size-3" />
                   {skill.name}
                 </motion.span>
               );
@@ -144,7 +146,7 @@ export default function SlideExcel({ isActive }: SlideProps) {
 
         {/* Bottom tagline */}
         <motion.p
-          className="mt-1 text-center text-[5px] text-muted-foreground/50 sm:mt-3 sm:text-[9px] md:text-xs"
+          className="mt-1 text-center text-[5px] text-muted-foreground/50 sm:mt-2 sm:text-[8px] md:text-xs"
           initial={{ opacity: 0 }}
           animate={isActive ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.4, delay: 0.6 }}

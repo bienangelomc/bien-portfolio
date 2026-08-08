@@ -19,21 +19,26 @@ const display = Fraunces({
 export const metadata: Metadata = {
   metadataBase: new URL("https://bienmc-portfolio-kappa.vercel.app"),
   title: {
-    default: "Bien Casimiro — Funnel Builder & Web Developer (Philippines)",
+    default: "Bien Casimiro — Funnel Builder & Data Specialist (Philippines)",
     template: `%s | Bien Casimiro`,
   },
   description:
-    "Bien Casimiro is a funnel builder and web developer based in the Philippines. He builds done-for-you Systeme.io sales funnels, email automations, and custom websites that convert visitors into customers.",
+    "Bien Casimiro is a funnel builder, web developer, and data specialist based in the Philippines. Done-for-you Systeme.io sales funnels, custom websites, and Excel/data reporting for businesses.",
   keywords: [
     "Bien Casimiro",
     "funnel builder Philippines",
     "Systeme.io expert",
     "sales funnel builder",
+    "Excel specialist",
+    "Google Sheets expert",
+    "data analyst Philippines",
     "web developer Philippines",
     "freelance funnel builder",
     "email automation",
     "landing page builder",
     "conversion funnel",
+    "pivot tables",
+    "Excel macros",
     "Next.js developer",
     "React developer",
     "TypeScript",
@@ -41,7 +46,6 @@ export const metadata: Metadata = {
     "Philippines developer",
     "Filipino developer",
     "portfolio",
-    "web developer",
   ],
   authors: [{ name: "Bien Casimiro", url: "https://bienmc-portfolio-kappa.vercel.app" }],
   creator: "Bien Casimiro",
@@ -58,9 +62,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://bienmc-portfolio-kappa.vercel.app",
     siteName: "Bien Casimiro Portfolio",
-    title: "Bien Casimiro — Funnel Builder & Web Developer",
+    title: "Bien Casimiro — Funnel Builder & Data Specialist",
     description:
-      "Done-for-you Systeme.io funnels and custom websites that convert visitors into customers. Based in the Philippines.",
+      "Done-for-you Systeme.io funnels, custom websites, and Excel/data reporting. Based in the Philippines.",
     images: [
       {
         url: "/og.png",
@@ -72,9 +76,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bien Casimiro — Funnel Builder & Web Developer",
+    title: "Bien Casimiro — Funnel Builder & Data Specialist",
     description:
-      "Done-for-you Systeme.io funnels and custom websites that convert. Based in the Philippines.",
+      "Done-for-you Systeme.io funnels, custom websites, and Excel/data reporting. Based in the Philippines.",
     images: ["/og.png"],
     creator: "@bienangelomc",
   },
@@ -106,9 +110,9 @@ const jsonLd = {
   alternateName: "Bien Angelo Casimiro",
   url: "https://bienmc-portfolio-kappa.vercel.app",
   image: "https://bienmc-portfolio-kappa.vercel.app/bien-portrait.png",
-  jobTitle: "Funnel Builder & Web Developer",
+  jobTitle: "Funnel Builder & Data Specialist",
   description:
-    "Funnel builder and web developer creating done-for-you Systeme.io sales funnels, email automations, and custom websites that convert visitors into customers. Specializes in Systeme.io, Next.js, React, and TypeScript.",
+    "Funnel builder, web developer, and data specialist creating done-for-you Systeme.io sales funnels, custom websites, and Excel/data reporting that drives results. Specializes in Systeme.io, Next.js, Excel, and Google Sheets.",
   address: {
     "@type": "PostalAddress",
     addressCountry: "PH",
@@ -123,6 +127,11 @@ const jsonLd = {
     "Systeme.io",
     "Sales Funnels",
     "Email Automation",
+    "Excel",
+    "Google Sheets",
+    "Data Analysis",
+    "Pivot Tables",
+    "Excel Macros",
     "Web Development",
     "Next.js",
     "React",

@@ -134,12 +134,13 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
           {/* Description */}
           <motion.p
-            className="max-w-none text-[9px] leading-relaxed text-muted-foreground/80 md:mt-0.5 md:max-w-md md:text-base"
+            className="max-w-none text-[9px] leading-relaxed text-muted-foreground/80 md:mt-0.5 md:max-w-sm md:text-sm"
             initial={{ opacity: 0, x: -4 }}
             animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -4 }}
             transition={{ duration: 0.4, delay: 0.3 }}
           >
-            Done-for-you Systeme.io funnels &amp; custom websites.
+            Done-for-you Systeme.io funnels, custom websites, and data-driven
+            reporting — backed by advanced Excel &amp; Google Sheets expertise.
           </motion.p>
 
           {/* Stats row */}

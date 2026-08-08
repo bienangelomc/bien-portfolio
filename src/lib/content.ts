@@ -2,10 +2,10 @@
 
 export const siteConfig = {
   name: "Bien Casimiro",
-  role: "Funnel Builder & Web Developer",
+  role: "Funnel Builder & Data Specialist",
   tagline: "I build funnels that convert.",
   subline:
-    "Done-for-you Systeme.io funnels and custom websites that turn visitors into customers.",
+    "Done-for-you Systeme.io funnels, custom websites, and data-driven reporting — backed by advanced Excel & Google Sheets expertise.",
   email: "bienangelomc@gmail.com",
   location: "Philippines",
   socials: [
