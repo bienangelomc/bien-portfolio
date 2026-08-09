@@ -29,7 +29,7 @@ export default function SlideAbout({ isActive }: SlideProps) {
             <img
               src="/bien-about.png"
               alt="Bien Casimiro"
-              className="h-16 w-full object-cover object-top md:h-auto md:min-h-[260px] md:w-full"
+              className="h-32 w-28 object-cover object-top md:h-auto md:min-h-[260px] md:w-full"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/60 via-transparent to-transparent" />
           </div>
@@ -50,22 +50,27 @@ export default function SlideAbout({ isActive }: SlideProps) {
         </h2>
           <div className="mt-1 space-y-1 text-[6px] leading-relaxed text-muted-foreground sm:mt-2 sm:space-y-1.5 sm:text-[9px] md:mt-4 md:space-y-3 md:text-sm">
             <p>
-              I'm <strong className="text-foreground">Bien Casimiro</strong>, a
-              funnel builder and web developer based in the Philippines. I
-              specialize in building sales funnels on Systeme.io and custom
-              websites that convert visitors into customers.
+              I'm <strong className="text-foreground">Bien Casimiro</strong>, a{" "}
+              <strong className="text-foreground">funnel builder</strong> and{" "}
+              <strong className="text-foreground">data specialist</strong> based
+              in the Philippines. I build sales funnels on Systeme.io that turn
+              visitors into customers — and I turn messy spreadsheets into
+              reporting a team can actually run on.
             </p>
-          <p>
-            I started out building simple landing pages, and over time that
-            grew into full sales funnels, email automations, e-commerce
-            stores, and custom web apps for clients. Before that I worked as
-            a reports assistant on a data team, so I'm very strong with Excel,
-            Google Sheets, and working with big data.
-          </p>
             <p>
-              What I care about: funnels that make money. I don't build pretty
-              pages that don't work — I build systems that get you leads and
-              sales. Fast delivery, clean design, real results.
+              The funnel side started with simple landing pages and grew into
+              full funnels, email automations, e-commerce stores and custom web
+              apps. The data side came from working as a{" "}
+              <strong className="text-foreground">reports assistant</strong> on
+              a data team — XLOOKUP and INDEX/MATCH, pivot tables, macros and
+              Apps Script, and cleaning large, messy datasets into something
+              you can trust.
+            </p>
+            <p>
+              They're two halves of the same job. Funnels bring the leads in;
+              clean data tells you which ones are actually worth having. I
+              build both, and I'd rather ship something that works than
+              something that just looks good.
             </p>
           </div>
         </div>
