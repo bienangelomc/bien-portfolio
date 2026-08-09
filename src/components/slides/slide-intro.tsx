@@ -59,7 +59,11 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
         {/* Left column — portrait with name below (desktop), stacked (mobile) */}
         <div className="relative flex flex-col items-center justify-center gap-1 md:flex md:flex-[0_0_44%] md:flex-col md:items-center md:justify-center md:gap-2">
           {/* Portrait with rings */}
-          <div className="relative flex h-16 w-16 items-center justify-center md:h-auto md:w-full md:max-w-[220px]">
+          {/* Mobile size is tuned against MobileScreen's content box.
+              Worst case is 360x640, where the intro column has ~18px of
+              headroom at this size. h-32 overflows it by 3px — do not
+              grow past h-28 without re-measuring at 360x640. */}
+          <div className="relative flex h-28 w-28 items-center justify-center md:h-auto md:w-full md:max-w-[220px]">
             {/* Glow pulse */}
             <motion.div
               className="absolute h-[85%] w-[85%] rounded-full bg-accent/20 blur-md md:h-[85%] md:w-[85%] md:blur-xl"
@@ -72,7 +76,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
               animate={{ rotate: 360 }}
               transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
             >
-              <div className="absolute -top-0.5 left-1/2 h-0.5 w-0.5 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_6px_2px_rgba(255,107,53,0.6)] md:h-1 md:w-1 md:shadow-[0_0_10px_3px_rgba(255,107,53,0.7)]" />
+              <div className="absolute -top-[3px] left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-accent shadow-[0_0_8px_3px_rgba(255,107,53,0.6)] md:h-1 md:w-1 md:shadow-[0_0_10px_3px_rgba(255,107,53,0.7)]" />
             </motion.div>
             {/* Rotating ring 2 */}
             <motion.div
@@ -85,7 +89,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
 
             {/* Portrait image */}
             <motion.div
-              className="relative z-10 h-14 w-14 overflow-hidden rounded-full ring-1.5 ring-accent/30 ring-offset-1 ring-offset-zinc-950 md:h-auto md:w-[75%]"
+              className="relative z-10 h-24 w-24 overflow-hidden rounded-full ring-2 ring-accent/30 ring-offset-2 ring-offset-zinc-950 md:h-auto md:w-[75%] md:ring-1"
               animate={{ y: [0, -1.5, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -199,9 +203,14 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
             </button>
           </motion.div>
 
-          {/* Skills row */}
+          {/* Skills row.
+              Hidden on phones: it costs 60px of the intro's vertical
+              budget and renders at ~9px, below legible. That 60px is
+              what pays for the portrait being twice the size. The same
+              tools appear on the Services and Excel slides, so nothing
+              is actually lost. */}
           <motion.div
-            className="w-full border-t border-white/5 pt-0.5 mt-0.5 md:mt-2 md:pt-2"
+            className="hidden w-full border-t border-white/5 pt-0.5 mt-0.5 md:block md:mt-2 md:pt-2"
             initial={{ opacity: 0, y: 4 }}
             animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
             transition={{ duration: 0.4, delay: 0.6 }}
