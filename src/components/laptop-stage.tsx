@@ -11,6 +11,9 @@ interface LaptopStageProps {
   className?: string;
   containerRef: React.RefObject<HTMLDivElement | null>;
   scrollProgress: MotionValue<number>;
+  /** Below lg the screen flies forward into MobileScreen; the laptop
+   *  plays the opening beat, then fades and hands off. */
+  isMobile?: boolean;
 }
 
 /**
@@ -55,6 +58,7 @@ export default function LaptopStage({
   activeSlide,
   className,
   scrollProgress,
+  isMobile = false,
 }: LaptopStageProps) {
   const p = useSpring(scrollProgress, {
     stiffness: 120,
@@ -62,10 +66,18 @@ export default function LaptopStage({
     restDelta: 0.001,
   });
 
-  // Every phase below is now viewport-independent. Mobile used to branch
-  // here because slides rendered in a separate full-screen hologram
-  // overlay instead of the laptop screen; that overlay is gone, so mobile
-  // and desktop run the identical timeline.
+  // The opening beat is identical on every viewport. Only the handoff
+  // differs: on mobile the screen detaches at 0.22 and the machine fades
+  // out behind it, because a 16:10 lid cannot be read on a portrait
+  // phone (see mobile-screen.tsx for the numbers).
+
+  // Hand the stage over to MobileScreen once the slides begin.
+  const stageOpacity = useTransform(
+    p,
+    isMobile ? [0.18, 0.24] : [0, 1],
+    isMobile ? [1, 0] : [1, 1],
+    { clamp: true }
+  );
 
   // LID rotation: closed → open (fast — 1-2 scrolls)
   const lidRotation = useTransform(
@@ -97,11 +109,12 @@ export default function LaptopStage({
     { clamp: true }
   );
 
-  // Boot overlay
+  // Boot overlay — skipped on mobile, where the screen flies forward
+  // before the boot sequence would have finished.
   const bootOpacity = useTransform(
     p,
-    [0.13, 0.16, 0.19, 0.22],
-    [0, 1, 1, 0],
+    isMobile ? [0, 1] : [0.13, 0.16, 0.19, 0.22],
+    isMobile ? [0, 0] : [0, 1, 1, 0],
     { clamp: true }
   );
 
@@ -130,6 +143,7 @@ export default function LaptopStage({
         className="relative mx-auto"
         style={{
           scale: stageScale,
+          opacity: stageOpacity,
           rotateX: 14,
           y: useTransform(p, [0, 1], ["0%", "10%"]),
           transformStyle: "preserve-3d",

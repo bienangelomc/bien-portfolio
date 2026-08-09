@@ -17,6 +17,7 @@ import SlideTestimonials from "./slides/slide-testimonials";
 import HologramModal, { type ProjectData } from "./hologram-modal";
 import TestimonialVideoHologram from "./testimonial-video-hologram";
 import HoloAtmosphere from "./holo-atmosphere";
+import MobileScreen from "./mobile-screen";
 
 const TOTAL_SLIDES = 10;
 
@@ -37,6 +38,18 @@ export default function Portfolio() {
   const [isHologramOpen, setIsHologramOpen] = useState(false);
   const [selectedTestimonial, setSelectedTestimonial] = useState<number | null>(null);
   const [slideDirection, setSlideDirection] = useState(1); // 1 = forward, -1 = backward
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileScreenOpen, setMobileScreenOpen] = useState(false);
+
+  // The lid is 16:10, which caps the screen at ~205px tall on a 375px
+  // phone and forces slide text to 7–9px. Below this width the screen
+  // flies forward and fills the viewport instead. See mobile-screen.tsx.
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const openHologram = useCallback((project: ProjectData) => {
     setHologramProject(project);
@@ -104,12 +117,14 @@ export default function Portfolio() {
         setSlideDirection(lastSlide > 0 ? -1 : 1);
         lastSlide = 0;
         setActiveSlide(0);
+        setMobileScreenOpen(false);
         return;
       }
       if (p >= PRESENT_END) {
         setSlideDirection(lastSlide < TOTAL_SLIDES - 1 ? 1 : -1);
         lastSlide = TOTAL_SLIDES - 1;
         setActiveSlide(TOTAL_SLIDES - 1);
+        setMobileScreenOpen(false);
         return;
       }
       // Use floor with per-slide bands so each slide gets equal scroll room
@@ -120,9 +135,10 @@ export default function Portfolio() {
         lastSlide = slide;
       }
       setActiveSlide(slide);
+      setMobileScreenOpen(isMobile && p >= PRESENT_START && p < 0.98);
     });
     return () => unsubscribe();
-  }, [scrollProgress]);
+  }, [scrollProgress, isMobile]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -175,6 +191,42 @@ export default function Portfolio() {
   const activeKey = slides[activeSlide].key;
   const activeProps = slides[activeSlide].props;
 
+  // One slide renderer, mounted into whichever screen is in play — the
+  // laptop's on desktop, the flown-forward panel on mobile. Identical
+  // markup and transitions either way.
+  const slideNode = (
+    <AnimatePresence mode="wait" custom={slideDirection}>
+      <motion.div
+        key={activeKey}
+        className="absolute inset-0"
+        custom={slideDirection}
+        variants={{
+          enter: () => ({
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+          }),
+          exit: (dir: number) => ({
+            opacity: 0,
+            x: dir > 0 ? -40 : 40,
+            scale: 0.96,
+            transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+          }),
+        }}
+        initial={{
+          opacity: 0,
+          x: slideDirection > 0 ? 40 : -40,
+          scale: 0.96,
+        }}
+        animate="enter"
+        exit="exit"
+      >
+        <ActiveSlide isActive={true} {...(activeProps as any)} />
+      </motion.div>
+    </AnimatePresence>
+  );
+
   return (
     <div className="relative min-h-screen bg-[#0a0a0c] text-foreground">
       <div
@@ -205,38 +257,23 @@ export default function Portfolio() {
             activeSlide={activeSlide}
             containerRef={containerRef}
             scrollProgress={scrollProgress}
+            isMobile={isMobile}
           >
-            <AnimatePresence mode="wait" custom={slideDirection}>
-              <motion.div
-                key={activeKey}
-                className="absolute inset-0"
-                custom={slideDirection}
-                variants={{
-                  enter: () => ({
-                    opacity: 1,
-                    x: 0,
-                    scale: 1,
-                    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-                  }),
-                  exit: (dir: number) => ({
-                    opacity: 0,
-                    x: dir > 0 ? -40 : 40,
-                    scale: 0.96,
-                    transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
-                  }),
-                }}
-                initial={{
-                  opacity: 0,
-                  x: slideDirection > 0 ? 40 : -40,
-                  scale: 0.96,
-                }}
-                animate="enter"
-                exit="exit"
-              >
-                <ActiveSlide isActive={true} {...(activeProps as any)} />
-              </motion.div>
-            </AnimatePresence>
+            {/* On mobile the slides live in MobileScreen instead — the
+                laptop still opens, then hands off. */}
+            {!isMobile && slideNode}
           </LaptopStage>
+
+          {/* Mobile: the screen, flown forward to fill the viewport */}
+          {isMobile && (
+            <MobileScreen
+              isOpen={mobileScreenOpen}
+              slideNumber={activeSlide}
+              totalSlides={TOTAL_SLIDES}
+            >
+              {slideNode}
+            </MobileScreen>
+          )}
 
           {/* Hologram modal — renders outside the laptop screen, floating above */}
           <div className="pointer-events-none absolute inset-0 z-[80] flex items-center justify-center">
