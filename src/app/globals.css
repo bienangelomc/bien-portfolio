@@ -304,6 +304,27 @@
     white-space: nowrap;
   }
 
+  /* Compact variant for phones, where the panels flank the flown-forward
+     screen rather than the laptop. Values are capped and ellipsised so a
+     long string can never widen a row past the viewport. */
+  .holo-panel[data-size="sm"] {
+    padding: 0.3rem 0.55rem;
+    border-radius: 0.45rem;
+    max-width: 46vw;
+  }
+  .holo-panel[data-size="sm"]::before {
+    inset: 2px;
+  }
+  .holo-panel[data-size="sm"] .holo-label {
+    font-size: 0.42rem;
+    letter-spacing: 0.16em;
+  }
+  .holo-panel[data-size="sm"] .holo-value {
+    font-size: 0.63rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   /* Warm variant keys a panel to the brand accent instead of cyan */
   .holo-panel[data-tone="warm"] {
     background: linear-gradient(
