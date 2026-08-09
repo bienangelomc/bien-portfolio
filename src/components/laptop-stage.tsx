@@ -2,6 +2,7 @@
 
 import { motion, MotionValue, useTransform, useSpring } from "framer-motion";
 import { cn } from "@/lib/utils";
+import HologramField from "./hologram-field";
 
 interface LaptopStageProps {
   children: React.ReactNode;
@@ -10,7 +11,6 @@ interface LaptopStageProps {
   className?: string;
   containerRef: React.RefObject<HTMLDivElement | null>;
   scrollProgress: MotionValue<number>;
-  isMobile?: boolean;
 }
 
 /**
@@ -55,7 +55,6 @@ export default function LaptopStage({
   activeSlide,
   className,
   scrollProgress,
-  isMobile = false,
 }: LaptopStageProps) {
   const p = useSpring(scrollProgress, {
     stiffness: 120,
@@ -63,10 +62,15 @@ export default function LaptopStage({
     restDelta: 0.001,
   });
 
+  // Every phase below is now viewport-independent. Mobile used to branch
+  // here because slides rendered in a separate full-screen hologram
+  // overlay instead of the laptop screen; that overlay is gone, so mobile
+  // and desktop run the identical timeline.
+
   // LID rotation: closed → open (fast — 1-2 scrolls)
   const lidRotation = useTransform(
     p,
-    isMobile ? [0.03, 0.12] : [0.03, 0.15],
+    [0.03, 0.15],
     [LID_CLOSED, LID_OPEN],
     { clamp: true }
   );
@@ -82,29 +86,29 @@ export default function LaptopStage({
   // Screen wake
   const screenOpacity = useTransform(
     p,
-    isMobile ? [0.08, 0.13, 0.16] : [0.08, 0.13, 0.16],
+    [0.08, 0.13, 0.16],
     [0.15, 0.6, 1],
     { clamp: true }
   );
   const screenBrightness = useTransform(
     p,
-    isMobile ? [0.08, 0.16] : [0.08, 0.16],
+    [0.08, 0.16],
     [0.4, 1],
     { clamp: true }
   );
 
-  // Boot overlay — disabled on mobile (content shows in hologram, not laptop screen)
+  // Boot overlay
   const bootOpacity = useTransform(
     p,
-    isMobile ? [1, 1.01] : [0.13, 0.16, 0.19, 0.22],
-    isMobile ? [0, 0] : [0, 1, 1, 0],
+    [0.13, 0.16, 0.19, 0.22],
+    [0, 1, 1, 0],
     { clamp: true }
   );
 
   // Slides after boot
   const slidesOpacity = useTransform(
     p,
-    isMobile ? [0.16, 0.18] : [0.18, 0.22],
+    [0.18, 0.22],
     [0, 1],
     { clamp: true }
   );
@@ -200,6 +204,28 @@ export default function LaptopStage({
                 {children}
               </motion.div>
 
+              {/* CRT scanlines — very low contrast; enough to read as
+                  "emitting light" without hurting slide legibility. */}
+              <div
+                className="pointer-events-none absolute inset-0 z-30 opacity-[0.14] mix-blend-overlay"
+                style={{
+                  backgroundImage:
+                    "repeating-linear-gradient(to bottom, rgba(255,255,255,0.5) 0px, rgba(255,255,255,0.5) 1px, transparent 1px, transparent 3px)",
+                }}
+                aria-hidden="true"
+              />
+
+              {/* Cyan bloom at the top edge, where the projection
+                  originates. Sells the haze as coming FROM the panel. */}
+              <div
+                className="pointer-events-none absolute inset-x-0 top-0 z-30 h-1/3 mix-blend-screen"
+                style={{
+                  background:
+                    "linear-gradient(to bottom, hsl(var(--holo) / 0.20), transparent)",
+                }}
+                aria-hidden="true"
+              />
+
               {/* Glare */}
               <div
                 className="pointer-events-none absolute inset-0 z-30 bg-gradient-to-br from-white/[0.06] via-transparent to-transparent"
@@ -284,6 +310,15 @@ export default function LaptopStage({
           className="mx-auto h-4 w-[70%] rounded-full bg-black/60 blur-lg"
           style={{ transform: "translateY(-6px)" }}
           aria-hidden="true"
+        />
+
+        {/* Holographic key-info panels — sibling of the lid, so they
+            inherit the stage tilt but not the 100° hinge rotation. Last
+            in DOM order and pushed forward on Z to render over the
+            machine. */}
+        <HologramField
+          activeSlide={activeSlide}
+          scrollProgress={scrollProgress}
         />
       </motion.div>
     </div>

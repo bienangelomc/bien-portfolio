@@ -16,7 +16,7 @@ import SlideProcess from "./slides/slide-process";
 import SlideTestimonials from "./slides/slide-testimonials";
 import HologramModal, { type ProjectData } from "./hologram-modal";
 import TestimonialVideoHologram from "./testimonial-video-hologram";
-import MobileHologram from "./mobile-hologram";
+import HoloAtmosphere from "./holo-atmosphere";
 
 const TOTAL_SLIDES = 10;
 
@@ -36,17 +36,7 @@ export default function Portfolio() {
   const [hologramProject, setHologramProject] = useState<ProjectData | null>(null);
   const [isHologramOpen, setIsHologramOpen] = useState(false);
   const [selectedTestimonial, setSelectedTestimonial] = useState<number | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [mobileHologramOpen, setMobileHologramOpen] = useState(false);
   const [slideDirection, setSlideDirection] = useState(1); // 1 = forward, -1 = backward
-
-  // Mobile detection
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
 
   const openHologram = useCallback((project: ProjectData) => {
     setHologramProject(project);
@@ -114,14 +104,12 @@ export default function Portfolio() {
         setSlideDirection(lastSlide > 0 ? -1 : 1);
         lastSlide = 0;
         setActiveSlide(0);
-        setMobileHologramOpen(false);
         return;
       }
       if (p >= PRESENT_END) {
         setSlideDirection(lastSlide < TOTAL_SLIDES - 1 ? 1 : -1);
         lastSlide = TOTAL_SLIDES - 1;
         setActiveSlide(TOTAL_SLIDES - 1);
-        setMobileHologramOpen(false);
         return;
       }
       // Use floor with per-slide bands so each slide gets equal scroll room
@@ -132,10 +120,9 @@ export default function Portfolio() {
         lastSlide = slide;
       }
       setActiveSlide(slide);
-      setMobileHologramOpen(isMobile && p >= PRESENT_START && p < 0.98);
     });
     return () => unsubscribe();
-  }, [scrollProgress, isMobile]);
+  }, [scrollProgress]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -206,6 +193,10 @@ export default function Portfolio() {
             aria-hidden="true"
           />
 
+          {/* Projection environment — floor grid, haze, drifting motes.
+              Behind the machine; fades in as the lid opens. */}
+          <HoloAtmosphere scrollProgress={scrollProgress} />
+
           {/* Top name label */}
           <TopLabel scrollProgress={scrollProgress} />
 
@@ -214,41 +205,37 @@ export default function Portfolio() {
             activeSlide={activeSlide}
             containerRef={containerRef}
             scrollProgress={scrollProgress}
-            isMobile={isMobile}
           >
-            {/* Only render slides inside laptop on desktop */}
-            {!isMobile && (
-              <AnimatePresence mode="wait" custom={slideDirection}>
-                <motion.div
-                  key={activeKey}
-                  className="absolute inset-0"
-                  custom={slideDirection}
-                  variants={{
-                    enter: (dir: number) => ({
-                      opacity: 1,
-                      x: 0,
-                      scale: 1,
-                      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-                    }),
-                    exit: (dir: number) => ({
-                      opacity: 0,
-                      x: dir > 0 ? -40 : 40,
-                      scale: 0.96,
-                      transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
-                    }),
-                  }}
-                  initial={{
+            <AnimatePresence mode="wait" custom={slideDirection}>
+              <motion.div
+                key={activeKey}
+                className="absolute inset-0"
+                custom={slideDirection}
+                variants={{
+                  enter: () => ({
+                    opacity: 1,
+                    x: 0,
+                    scale: 1,
+                    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+                  }),
+                  exit: (dir: number) => ({
                     opacity: 0,
-                    x: slideDirection > 0 ? 40 : -40,
+                    x: dir > 0 ? -40 : 40,
                     scale: 0.96,
-                  }}
-                  animate="enter"
-                  exit="exit"
-                >
-                  <ActiveSlide isActive={true} {...(activeProps as any)} />
-                </motion.div>
-              </AnimatePresence>
-            )}
+                    transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
+                  }),
+                }}
+                initial={{
+                  opacity: 0,
+                  x: slideDirection > 0 ? 40 : -40,
+                  scale: 0.96,
+                }}
+                animate="enter"
+                exit="exit"
+              >
+                <ActiveSlide isActive={true} {...(activeProps as any)} />
+              </motion.div>
+            </AnimatePresence>
           </LaptopStage>
 
           {/* Hologram modal — renders outside the laptop screen, floating above */}
@@ -265,43 +252,6 @@ export default function Portfolio() {
             selectedIndex={selectedTestimonial}
             onClose={closeTestimonialVideo}
           />
-
-          {/* Mobile hologram — slides display as hologram on mobile for better UX */}
-          {isMobile && (
-            <MobileHologram
-              isOpen={mobileHologramOpen}
-              slideNumber={activeSlide}
-              totalSlides={TOTAL_SLIDES}
-            >
-              <AnimatePresence mode="wait" custom={slideDirection}>
-                <motion.div
-                  key={activeKey}
-                  className="absolute inset-0"
-                  custom={slideDirection}
-                  variants={{
-                    enter: (dir: number) => ({
-                      opacity: 1,
-                      x: 0,
-                      transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] },
-                    }),
-                    exit: (dir: number) => ({
-                      opacity: 0,
-                      x: dir > 0 ? -30 : 30,
-                      transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
-                    }),
-                  }}
-                  initial={{
-                    opacity: 0,
-                    x: slideDirection > 0 ? 30 : -30,
-                  }}
-                  animate="enter"
-                  exit="exit"
-                >
-                  <ActiveSlide isActive={true} {...(activeProps as any)} />
-                </motion.div>
-              </AnimatePresence>
-            </MobileHologram>
-          )}
 
           {/* Bottom scroll cue */}
           <BottomCue scrollProgress={scrollProgress} />

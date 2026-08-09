@@ -28,8 +28,15 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
 
+  --color-holo: hsl(var(--holo));
+  --color-holo-warm: hsl(var(--holo-warm));
+
   --animate-marquee-left: marquee-left 30s linear infinite;
   --animate-marquee-right: marquee-right 30s linear infinite;
+  --animate-holo-scan: holo-scan 3.4s linear infinite;
+  --animate-holo-sweep: holo-sweep 5s ease-in-out infinite;
+  --animate-holo-flicker: holo-flicker 7s steps(1, end) infinite;
+  --animate-holo-rise: holo-rise 9s linear infinite;
 
   @keyframes marquee-left {
     0% { transform: translateX(0); }
@@ -38,6 +45,35 @@
   @keyframes marquee-right {
     0% { transform: translateX(-50%); }
     100% { transform: translateX(0); }
+  }
+
+  /* Scanline crawling down a holographic surface */
+  @keyframes holo-scan {
+    0%   { transform: translateY(-120%); }
+    100% { transform: translateY(320%); }
+  }
+
+  /* Specular sheen travelling across a holo panel */
+  @keyframes holo-sweep {
+    0%, 100% { transform: translateX(-130%); opacity: 0; }
+    45%      { opacity: 0.55; }
+    70%      { transform: translateX(130%); opacity: 0; }
+  }
+
+  /* Rare, brief brightness dropouts — the "unstable projection" tell */
+  @keyframes holo-flicker {
+    0%, 96%, 100% { opacity: 1; }
+    97%           { opacity: 0.62; }
+    98%           { opacity: 1; }
+    99%           { opacity: 0.78; }
+  }
+
+  /* Motes drifting upward through the projection volume */
+  @keyframes holo-rise {
+    0%   { transform: translate3d(0, 0, 0) scale(1); opacity: 0; }
+    12%  { opacity: 0.9; }
+    88%  { opacity: 0.5; }
+    100% { transform: translate3d(14px, -180px, 0) scale(0.4); opacity: 0; }
   }
 }
 
@@ -62,6 +98,10 @@
   --input: 240 5.9% 90%;
   --ring: 12 92% 55%;
   --radius: 0.75rem;
+
+  /* Holographic projection palette */
+  --holo: 186 94% 58%;
+  --holo-warm: 12 92% 62%;
 }
 
 .dark {
@@ -84,6 +124,9 @@
   --border: 240 3% 18%;
   --input: 240 3% 18%;
   --ring: 12 92% 62%;
+
+  --holo: 186 96% 64%;
+  --holo-warm: 12 92% 66%;
 }
 
 @layer base {
@@ -137,6 +180,196 @@
   }
   .glow-accent {
     box-shadow: 0 0 60px 0 hsl(var(--accent) / 0.25);
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+}
+
+/* ============================================================
+   HOLOGRAM SYSTEM
+   Panels that read as light projected into the air rather than
+   glass sitting on a surface: additive blending, a bright rim,
+   a crawling scanline, and no solid fill.
+   ============================================================ */
+@layer components {
+  .holo-panel {
+    position: relative;
+    isolation: isolate;
+    border-radius: 0.6rem;
+    padding: 0.55rem 0.85rem;
+    background:
+      linear-gradient(
+        155deg,
+        hsl(var(--holo) / 0.20) 0%,
+        hsl(var(--holo) / 0.06) 45%,
+        hsl(var(--holo) / 0.13) 100%
+      );
+    border: 1px solid hsl(var(--holo) / 0.5);
+    box-shadow:
+      0 0 0 1px hsl(var(--holo) / 0.10),
+      0 0 26px -4px hsl(var(--holo) / 0.55),
+      inset 0 0 22px -6px hsl(var(--holo) / 0.5);
+    backdrop-filter: blur(7px) saturate(150%);
+    -webkit-backdrop-filter: blur(7px) saturate(150%);
+    overflow: hidden;
+  }
+
+  /* Corner brackets — the HUD tell, matching the existing hologram
+     modal's language. Drawn with gradients so no extra elements. */
+  .holo-panel::before {
+    content: "";
+    position: absolute;
+    inset: 3px;
+    border-radius: 0.4rem;
+    pointer-events: none;
+    background:
+      linear-gradient(to right, hsl(var(--holo) / 0.9) 0 9px, transparent 9px) 0 0 / 100% 1px no-repeat,
+      linear-gradient(to right, hsl(var(--holo) / 0.9) 0 9px, transparent 9px) 100% 100% / 100% 1px no-repeat,
+      linear-gradient(to bottom, hsl(var(--holo) / 0.9) 0 9px, transparent 9px) 0 0 / 1px 100% no-repeat,
+      linear-gradient(to bottom, hsl(var(--holo) / 0.9) 0 9px, transparent 9px) 100% 100% / 1px 100% no-repeat;
+    opacity: 0.85;
+  }
+
+  /* Horizontal scanlines baked into the panel face */
+  .holo-panel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      hsl(var(--holo) / 0.10) 0px,
+      hsl(var(--holo) / 0.10) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mix-blend-mode: screen;
+    opacity: 0.7;
+  }
+
+  /* The bright line that crawls down. Separate element so it animates
+     independently of the panel's own transforms. */
+  .holo-scanline {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 28%;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      hsl(var(--holo) / 0.28),
+      transparent
+    );
+    mix-blend-mode: screen;
+    animation: var(--animate-holo-scan);
+  }
+
+  /* Specular sheen sliding across the face */
+  .holo-sheen {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      105deg,
+      transparent 35%,
+      hsl(var(--holo) / 0.35) 50%,
+      transparent 65%
+    );
+    mix-blend-mode: screen;
+    animation: var(--animate-holo-sweep);
+  }
+
+  .holo-label {
+    display: block;
+    font-size: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: hsl(var(--holo) / 0.75);
+    text-shadow: 0 0 10px hsl(var(--holo) / 0.7);
+  }
+
+  .holo-value {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: hsl(var(--holo) / 0.98);
+    text-shadow:
+      0 0 12px hsl(var(--holo) / 0.85),
+      0 0 30px hsl(var(--holo) / 0.35);
+    white-space: nowrap;
+  }
+
+  /* Warm variant keys a panel to the brand accent instead of cyan */
+  .holo-panel[data-tone="warm"] {
+    background: linear-gradient(
+      155deg,
+      hsl(var(--holo-warm) / 0.20) 0%,
+      hsl(var(--holo-warm) / 0.06) 45%,
+      hsl(var(--holo-warm) / 0.13) 100%
+    );
+    border-color: hsl(var(--holo-warm) / 0.5);
+    box-shadow:
+      0 0 0 1px hsl(var(--holo-warm) / 0.10),
+      0 0 26px -4px hsl(var(--holo-warm) / 0.55),
+      inset 0 0 22px -6px hsl(var(--holo-warm) / 0.5);
+  }
+  .holo-panel[data-tone="warm"] .holo-label {
+    color: hsl(var(--holo-warm) / 0.78);
+    text-shadow: 0 0 10px hsl(var(--holo-warm) / 0.7);
+  }
+  .holo-panel[data-tone="warm"] .holo-value {
+    color: hsl(var(--holo-warm) / 0.98);
+    text-shadow:
+      0 0 12px hsl(var(--holo-warm) / 0.85),
+      0 0 30px hsl(var(--holo-warm) / 0.35);
+  }
+
+  /* Perspective floor grid under the machine */
+  .holo-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--holo) / 0.30) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--holo) / 0.30) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: radial-gradient(ellipse 62% 78% at 50% 45%, black 5%, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse 62% 78% at 50% 45%, black 5%, transparent 72%);
+  }
+
+  /* Volumetric haze above the panel.
+     Deliberately NOT a hard-edged cone — a clip-path wedge at this size
+     reads as a grey shadow rather than light, even under `screen`. */
+  .holo-beam {
+    background: radial-gradient(
+      ellipse 60% 100% at 50% 100%,
+      hsl(var(--holo) / 0.16) 0%,
+      hsl(var(--holo) / 0.06) 38%,
+      transparent 72%
+    );
+    filter: blur(26px);
+    mix-blend-mode: screen;
+  }
+
+  .holo-mote {
+    position: absolute;
+    border-radius: 9999px;
+    background: hsl(var(--holo) / 0.9);
+    box-shadow: 0 0 8px hsl(var(--holo) / 0.85);
+    animation: var(--animate-holo-rise);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .holo-scanline,
+  .holo-sheen,
+  .holo-mote {
+    animation: none !important;
+  }
+  .holo-sheen {
+    opacity: 0.18;
   }
 }
 
