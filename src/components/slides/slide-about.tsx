@@ -46,31 +46,36 @@ export default function SlideAbout({ isActive }: SlideProps) {
         <h2 className="mt-0.5 font-display text-[10px] font-medium leading-tight tracking-tight sm:text-base md:text-2xl">
           Bien Casimiro
           <br />
-          <span className="text-muted-foreground text-[8px] sm:text-sm md:text-lg">Funnel Builder &amp; Data Specialist</span>
+          <span className="text-muted-foreground text-[8px] sm:text-sm md:text-lg">Automation &amp; Web Systems for Small Business</span>
         </h2>
           <div className="mt-1 space-y-1 text-[6px] leading-relaxed text-muted-foreground sm:mt-2 sm:space-y-1.5 sm:text-[9px] md:mt-4 md:space-y-3 md:text-sm">
             <p>
-              I'm <strong className="text-foreground">Bien Casimiro</strong>, a{" "}
-              <strong className="text-foreground">funnel builder</strong> and{" "}
-              <strong className="text-foreground">data specialist</strong> based
-              in the Philippines. I build sales funnels on Systeme.io that turn
-              visitors into customers — and I turn messy spreadsheets into
-              reporting a team can actually run on.
+              I'm <strong className="text-foreground">Bien Casimiro</strong>. I
+              build the systems small businesses actually run on — the
+              quoting, scheduling and admin that quietly eats an owner&apos;s
+              evenings — from the Philippines, for clients anywhere.
             </p>
             <p>
-              The funnel side started with simple landing pages and grew into
-              full funnels, email automations, e-commerce stores and custom web
-              apps. The data side came from working as a{" "}
-              <strong className="text-foreground">reports assistant</strong> on
-              a data team — XLOOKUP and INDEX/MATCH, pivot tables, macros and
-              Apps Script, and cleaning large, messy datasets into something
-              you can trust.
+              A cleaning business in Western Australia was writing quotes by
+              hand at 9pm and losing jobs to whoever replied first. I built
+              them a site that prices the job from their own rates, checks
+              their real calendar, and sends it to their phone to approve.
+              Accepted jobs land in their books on their own. That&apos;s the
+              kind of work I want more of.
             </p>
             <p>
-              They're two halves of the same job. Funnels bring the leads in;
-              clean data tells you which ones are actually worth having. I
-              build both, and I'd rather ship something that works than
-              something that just looks good.
+              It started with funnels and landing pages, and grew into full
+              systems: web apps, approval bots, dashboards and the reporting
+              behind them. The data side came from a{" "}
+              <strong className="text-foreground">reports assistant</strong>{" "}
+              role — pivot tables, macros, Apps Script, and cleaning messy
+              datasets into something you can trust — which is why the numbers
+              in what I build tend to add up.
+            </p>
+            <p>
+              I&apos;d rather ship something that works than something that
+              just looks good, and I&apos;ll tell you when an idea isn&apos;t
+              worth building.
             </p>
           </div>
         </div>
