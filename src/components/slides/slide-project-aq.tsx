@@ -61,7 +61,10 @@ export default function SlideProjectAQ({ isActive }: SlideProps) {
         {/* The pipeline. Same box the screenshot used, so the mobile vertical
             budget is untouched. */}
         <div className="mt-1 overflow-hidden rounded-lg border border-border/50 bg-[#0c0c10] sm:mt-3">
-          <div className="relative flex aspect-[16/7] items-center justify-center px-1.5 sm:aspect-video sm:px-4">
+          {/* Explicit heights, not an aspect ratio. aspect-video at this width
+              was 288px tall on the laptop — mostly dead space, and enough to
+              push the heading off the top of the screen. */}
+          <div className="relative flex h-[58px] items-center justify-center px-1.5 sm:h-[104px] sm:px-4 md:h-[124px]">
             {/* Rail */}
             <div className="absolute left-3 right-3 top-1/2 h-px -translate-y-1/2 bg-border/40 sm:left-7 sm:right-7" />
 
