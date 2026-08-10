@@ -17,15 +17,50 @@ export interface Shot {
   caption: string;
 }
 
+/**
+ * Frames pulled from the recording of the working system.
+ *
+ * The Telegram card is deliberately absent: the only capture of it shows real
+ * customers' names, emails and phone numbers, and a portfolio is a public
+ * page. It needs a staged test quote before it can go in — see
+ * public/shots/README.txt.
+ */
 export const AQ_SHOTS: Shot[] = [
-  { src: "", label: "Home", caption: "Six services, twelve towns, one owner." },
-  { src: "", label: "Get a quote", caption: "The price builds as they type." },
-  { src: "", label: "Your quote", caption: "$225.50 on screen — before anyone is called." },
-  { src: "", label: "Pricing", caption: "How pricing works, without a public price list." },
-  { src: "", label: "Service page", caption: "One per service, built for local search." },
-  { src: "", label: "Toolkit — Quote", caption: "The same rate card that prices the website." },
-  { src: "", label: "Toolkit — Schedule", caption: "Accepted jobs arrive on their own." },
-  { src: "", label: "Telegram", caption: "Approve or decline. That's the whole job." },
+  {
+    src: "/shots/01-home.png",
+    label: "The website",
+    caption: "Six services, twelve towns, one owner-operator.",
+  },
+  {
+    src: "/shots/02-quote.png",
+    label: "Get a quote",
+    caption: "One page. No wizard, no callback, no waiting.",
+  },
+  {
+    src: "/shots/03-quote-summary.png",
+    label: "The price, live",
+    caption: "It builds line by line as they answer — from her own rate card.",
+  },
+  {
+    src: "/shots/04-calendar.png",
+    label: "Real availability",
+    caption: "Only days she can actually take. Nothing is promised twice.",
+  },
+  {
+    src: "/shots/06-toolkit-dashboard.png",
+    label: "The toolkit",
+    caption: "Her whole business — jobs, clients, money — in one place.",
+  },
+  {
+    src: "/shots/07-toolkit-quote.png",
+    label: "Same engine, her side",
+    caption: "The calculator that prices the website prices her quotes.",
+  },
+  {
+    src: "/shots/08-toolkit-settings.png",
+    label: "One rate card",
+    caption: "Change a price here and the website quotes it instantly.",
+  },
 ];
 
 export const hasShots = AQ_SHOTS.some((s) => s.src.length > 0);
@@ -96,7 +131,9 @@ function ShotPanel({
       }}
     >
       <div className="overflow-hidden rounded-lg border border-cyan-400/35 bg-[#06080c] shadow-[0_0_50px_-10px_rgba(56,189,248,0.55)]">
-        <div className="relative aspect-video">
+        {/* The captures are 1900x910, so the panel matches rather than cropping
+            the top and bottom off a browser window. */}
+        <div className="relative aspect-[190/91]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={shot.src} alt={shot.label} className="h-full w-full object-cover object-top" />
           <div
