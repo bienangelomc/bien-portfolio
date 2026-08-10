@@ -1,12 +1,14 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Maximize2 } from "lucide-react";
+import { ArrowRight, Maximize2, Play } from "lucide-react";
 import type { ProjectData } from "../hologram-modal";
+import { hasWalkthrough } from "../aq-walkthrough-hologram";
 
 interface SlideProps {
   isActive: boolean;
   onOpenHologram?: (project: ProjectData) => void;
+  onOpenWalkthrough?: () => void;
 }
 
 /** The deep detail, shown on demand rather than crammed into the slide. */
@@ -41,7 +43,11 @@ const SHIFTS = [
   { before: "Slots promised twice", after: "Checked before it's offered" },
 ];
 
-export default function SlideAQImpact({ isActive, onOpenHologram }: SlideProps) {
+export default function SlideAQImpact({
+  isActive,
+  onOpenHologram,
+  onOpenWalkthrough,
+}: SlideProps) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -97,16 +103,29 @@ export default function SlideAQImpact({ isActive, onOpenHologram }: SlideProps) 
             Built on Cloudflare&apos;s edge — Workers, D1, signed approval
             links, and a state machine that keeps the order honest.
           </p>
-          {onOpenHologram && (
-            <button
-              type="button"
-              onClick={() => onOpenHologram(AQ_PROJECT)}
-              className="inline-flex shrink-0 items-center gap-0.5 rounded-full border border-accent/40 px-1.5 py-0.5 text-[5px] font-medium text-accent transition-colors hover:bg-accent/10 sm:gap-1 sm:px-3 sm:py-1 sm:text-[10px]"
-            >
-              Full breakdown
-              <Maximize2 className="h-1 w-1 sm:h-2.5 sm:w-2.5" />
-            </button>
-          )}
+          <div className="flex shrink-0 items-center gap-1 sm:gap-1.5">
+            {/* Only offered once real footage exists — see aq-walkthrough-hologram. */}
+            {hasWalkthrough && onOpenWalkthrough && (
+              <button
+                type="button"
+                onClick={onOpenWalkthrough}
+                className="inline-flex items-center gap-0.5 rounded-full bg-accent px-1.5 py-0.5 text-[5px] font-medium text-black transition-opacity hover:opacity-90 sm:gap-1 sm:px-3 sm:py-1 sm:text-[10px]"
+              >
+                <Play className="h-1 w-1 sm:h-2.5 sm:w-2.5" />
+                Watch it work
+              </button>
+            )}
+            {onOpenHologram && (
+              <button
+                type="button"
+                onClick={() => onOpenHologram(AQ_PROJECT)}
+                className="inline-flex items-center gap-0.5 rounded-full border border-accent/40 px-1.5 py-0.5 text-[5px] font-medium text-accent transition-colors hover:bg-accent/10 sm:gap-1 sm:px-3 sm:py-1 sm:text-[10px]"
+              >
+                Full breakdown
+                <Maximize2 className="h-1 w-1 sm:h-2.5 sm:w-2.5" />
+              </button>
+            )}
+          </div>
         </div>
       </motion.div>
     </div>

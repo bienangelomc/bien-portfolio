@@ -16,6 +16,7 @@ import SlideProcess from "./slides/slide-process";
 import SlideTestimonials from "./slides/slide-testimonials";
 import HologramModal, { type ProjectData } from "./hologram-modal";
 import TestimonialVideoHologram from "./testimonial-video-hologram";
+import AQWalkthroughHologram from "./aq-walkthrough-hologram";
 import HoloAtmosphere from "./holo-atmosphere";
 import MobileScreen from "./mobile-screen";
 
@@ -36,6 +37,7 @@ export default function Portfolio() {
   const [activeSlide, setActiveSlide] = useState(0);
   const [hologramProject, setHologramProject] = useState<ProjectData | null>(null);
   const [isHologramOpen, setIsHologramOpen] = useState(false);
+  const [isWalkthroughOpen, setIsWalkthroughOpen] = useState(false);
   const [selectedTestimonial, setSelectedTestimonial] = useState<number | null>(null);
   const [slideDirection, setSlideDirection] = useState(1); // 1 = forward, -1 = backward
   const [isMobile, setIsMobile] = useState(false);
@@ -55,6 +57,9 @@ export default function Portfolio() {
     setHologramProject(project);
     setIsHologramOpen(true);
   }, []);
+
+  const openWalkthrough = useCallback(() => setIsWalkthroughOpen(true), []);
+  const closeWalkthrough = useCallback(() => setIsWalkthroughOpen(false), []);
 
   const closeHologram = useCallback(() => {
     setIsHologramOpen(false);
@@ -184,7 +189,7 @@ export default function Portfolio() {
     { key: "aq-problem", component: SlideAQProblem, props: {} },
     { key: "aq", component: SlideProjectAQ, props: {} },
     { key: "aq-flow", component: SlideAQFlow, props: {} },
-    { key: "aq-impact", component: SlideAQImpact, props: { onOpenHologram: openHologram } },
+    { key: "aq-impact", component: SlideAQImpact, props: { onOpenHologram: openHologram, onOpenWalkthrough: openWalkthrough } },
     { key: "process", component: SlideProcess, props: {} },
     { key: "testimonials", component: SlideTestimonials, props: { onOpenVideo: openTestimonialVideo } },
   ];
@@ -283,6 +288,11 @@ export default function Portfolio() {
               project={hologramProject}
               isOpen={isHologramOpen}
               onClose={closeHologram}
+            />
+
+            <AQWalkthroughHologram
+              isOpen={isWalkthroughOpen}
+              onClose={closeWalkthrough}
             />
           </div>
 
