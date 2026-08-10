@@ -33,6 +33,12 @@ const PRESENT_START = 0.22;
 const PRESENT_END = 0.97;
 const PRESENT_RANGE = PRESENT_END - PRESENT_START;
 
+/** The four AQ case-study slides (indices 4–7) as a scroll band. */
+const AQ_BAND: [number, number] = [
+  PRESENT_START + (4 / TOTAL_SLIDES) * PRESENT_RANGE,
+  PRESENT_START + (8 / TOTAL_SLIDES) * PRESENT_RANGE,
+];
+
 export default function Portfolio() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
@@ -75,6 +81,19 @@ export default function Portfolio() {
     setSelectedTestimonial(null);
   }, []);
   const scrollProgress = useMotionValue(0);
+
+  // Ease the laptop aside as the case study opens and back once it closes, so
+  // it never jumps between slides. The lead-in and lead-out are a tenth of the
+  // band each.
+  const lead = (AQ_BAND[1] - AQ_BAND[0]) / 20;
+  const shiftPoints = [
+    AQ_BAND[0] - lead,
+    AQ_BAND[0] + lead,
+    AQ_BAND[1] - lead,
+    AQ_BAND[1] + lead,
+  ];
+  const laptopShiftX = useTransform(scrollProgress, shiftPoints, [0, -190, -190, 0]);
+  const laptopShiftScale = useTransform(scrollProgress, shiftPoints, [1, 0.78, 0.78, 1]);
 
   // Manual scroll tracking
   useEffect(() => {
@@ -260,17 +279,27 @@ export default function Portfolio() {
           {/* Top name label */}
           <TopLabel scrollProgress={scrollProgress} />
 
-          <LaptopStage
-            slideCount={TOTAL_SLIDES}
-            activeSlide={activeSlide}
-            containerRef={containerRef}
-            scrollProgress={scrollProgress}
-            isMobile={isMobile}
+          {/* The laptop steps aside for the case-study shots. Without this the
+              panels project straight over the machine and you see one or the
+              other; shifted left it reads as the laptop throwing them out to
+              its right, and both stay on screen. Desktop only — on a phone
+              there is no room to stand them side by side. */}
+          <motion.div
+            className="contents lg:block"
+            style={isMobile ? undefined : { x: laptopShiftX, scale: laptopShiftScale }}
           >
-            {/* On mobile the slides live in MobileScreen instead — the
-                laptop still opens, then hands off. */}
-            {!isMobile && slideNode}
-          </LaptopStage>
+            <LaptopStage
+              slideCount={TOTAL_SLIDES}
+              activeSlide={activeSlide}
+              containerRef={containerRef}
+              scrollProgress={scrollProgress}
+              isMobile={isMobile}
+            >
+              {/* On mobile the slides live in MobileScreen instead — the
+                  laptop still opens, then hands off. */}
+              {!isMobile && slideNode}
+            </LaptopStage>
+          </motion.div>
 
           {/* Mobile: the screen, flown forward to fill the viewport */}
           {isMobile && (
@@ -306,13 +335,9 @@ export default function Portfolio() {
           {/* Bottom scroll cue */}
           {/* Screenshots projected over the machine across the four AQ slides
               (indices 4–7), one per scroll beat. Dark until the captures exist. */}
-          <AQShotsHologram
-            scrollProgress={scrollProgress}
-            range={[
-              PRESENT_START + (4 / TOTAL_SLIDES) * PRESENT_RANGE,
-              PRESENT_START + (8 / TOTAL_SLIDES) * PRESENT_RANGE,
-            ]}
-          />
+          {!isMobile && (
+            <AQShotsHologram scrollProgress={scrollProgress} range={AQ_BAND} />
+          )}
 
           <BottomCue scrollProgress={scrollProgress} />
         </div>

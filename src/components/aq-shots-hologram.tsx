@@ -80,7 +80,9 @@ export default function AQShotsHologram({ scrollProgress, range }: Props) {
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center"
+      // Offset right: the laptop slides left over the same band, so the two
+      // sit side by side instead of the panels covering the machine.
+      className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center pl-[26%]"
       // Deeper than the laptop's own 1400px: the panels are large and pushed
       // well forward, and a tighter perspective bends the edges.
       style={{ perspective: "1700px", perspectiveOrigin: "45% 50%" }}
@@ -127,7 +129,7 @@ function ShotPanel({
 
   return (
     <motion.figure
-      className="absolute w-[88%] max-w-2xl"
+      className="absolute w-[62%] max-w-xl"
       style={{
         opacity,
         x,
