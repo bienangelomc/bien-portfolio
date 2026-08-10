@@ -65,11 +65,12 @@ export const holoSlides: HoloPanel[][] = [
     { label: "Scale", value: "Big Data Reporting", ...SLOT.midRight, tone: "warm" },
   ],
 
-  // 4 — Work index
+  // 4 — AQ: the problem
   [
-    { label: "Featured", value: "3 case studies", ...SLOT.topLeft, tone: "warm" },
-    { label: "Sectors", value: "Local · Health · AI", ...SLOT.topRight },
-    { label: "Status", value: "All shipped", ...SLOT.midRight },
+    { label: "Case study", value: "AQ Cleaning", ...SLOT.topLeft, tone: "warm" },
+    { label: "Before", value: "Quoted by hand", ...SLOT.topRight },
+    { label: "Cost", value: "Hours-late replies", ...SLOT.midLeft },
+    { label: "Coverage", value: "12 towns, 1 owner", ...SLOT.midRight },
   ],
 
   // 5 — AQ Cleaning
@@ -80,20 +81,20 @@ export const holoSlides: HoloPanel[][] = [
     { label: "Focus", value: "Quote → Booking", ...SLOT.midRight },
   ],
 
-  // 6 — VoiceCare AI
+  // 6 — AQ: one quote, end to end
   [
-    { label: "Project", value: "VoiceCare AI", ...SLOT.topLeft, tone: "warm" },
-    { label: "Type", value: "Web App / Dashboard", ...SLOT.topRight },
-    { label: "Data", value: "Supabase · Vercel", ...SLOT.midLeft },
-    { label: "Output", value: "PDF reports", ...SLOT.midRight },
+    { label: "Owner effort", value: "One tap", ...SLOT.topLeft, tone: "warm" },
+    { label: "Channel", value: "Telegram approval", ...SLOT.topRight },
+    { label: "Guarantee", value: "Approve before send", ...SLOT.midLeft },
+    { label: "Links", value: "Signed · 7-day expiry", ...SLOT.midRight },
   ],
 
-  // 7 — Angelo
+  // 7 — AQ: what changed
   [
-    { label: "Project", value: "Angelo", ...SLOT.topLeft, tone: "warm" },
-    { label: "Type", value: "Gamified Web App", ...SLOT.topRight },
-    { label: "AI", value: "OpenAI · TTS", ...SLOT.midLeft },
-    { label: "Loop", value: "XP · Quests · Levels", ...SLOT.midRight },
+    { label: "Now", value: "Quotes 24/7", ...SLOT.topLeft, tone: "warm" },
+    { label: "Pricing", value: "One rate card", ...SLOT.topRight },
+    { label: "Booking", value: "Writes itself", ...SLOT.midLeft },
+    { label: "Runs on", value: "Cloudflare edge", ...SLOT.midRight },
   ],
 
   // 8 — Process

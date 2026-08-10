@@ -8,10 +8,10 @@ import SlideIntro from "./slides/slide-intro";
 import SlideAbout from "./slides/slide-about";
 import SlideServices from "./slides/slide-services";
 import SlideExcel from "./slides/slide-excel";
-import SlideWorkIndex from "./slides/slide-work-index";
+import SlideAQProblem from "./slides/slide-aq-problem";
 import SlideProjectAQ from "./slides/slide-project-aq";
-import SlideProjectVoiceCare from "./slides/slide-project-voicecare";
-import SlideProjectAngelo from "./slides/slide-project-angelo";
+import SlideAQFlow from "./slides/slide-aq-flow";
+import SlideAQImpact from "./slides/slide-aq-impact";
 import SlideProcess from "./slides/slide-process";
 import SlideTestimonials from "./slides/slide-testimonials";
 import HologramModal, { type ProjectData } from "./hologram-modal";
@@ -179,10 +179,12 @@ export default function Portfolio() {
     { key: "about", component: SlideAbout, props: {} },
     { key: "services", component: SlideServices, props: {} },
     { key: "excel", component: SlideExcel, props: {} },
-    { key: "work", component: SlideWorkIndex, props: { onNavigate: navigateToSlide, onOpenHologram: openHologram } },
+    // One project, told in four beats: the bottleneck, the system, a single
+    // quote end to end, then what actually changed for the business.
+    { key: "aq-problem", component: SlideAQProblem, props: {} },
     { key: "aq", component: SlideProjectAQ, props: {} },
-    { key: "voicecare", component: SlideProjectVoiceCare, props: {} },
-    { key: "angelo", component: SlideProjectAngelo, props: {} },
+    { key: "aq-flow", component: SlideAQFlow, props: {} },
+    { key: "aq-impact", component: SlideAQImpact, props: { onOpenHologram: openHologram } },
     { key: "process", component: SlideProcess, props: {} },
     { key: "testimonials", component: SlideTestimonials, props: { onOpenVideo: openTestimonialVideo } },
   ];

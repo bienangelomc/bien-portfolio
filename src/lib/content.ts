@@ -61,61 +61,6 @@ export const projects = [
     liveUrl: "https://aq-cleaning-services.higgsfield.app",
     accent: "#ff6b35",
   },
-  {
-    slug: "voicecare-ai",
-    title: "VoiceCare AI",
-    category: "Web App / Dashboard",
-    problem:
-      "An AI speech-monitoring product needed a dashboard where users could see their progress, caregivers could check in, and reports could be exported for clinical review.",
-    solution:
-      "Designed and built a full dashboard experience with daily check-ins, trend charts, a caregiver view, and PDF report generation. Auth, data, and deployment all wired up from day one.",
-    stack: ["Next.js", "TypeScript", "Supabase", "Vercel"],
-    liveUrl: "#",
-    accent: "#6366f1",
-  },
-  {
-    slug: "angelo",
-    title: "Angelo",
-    category: "Gamified Web App",
-    problem:
-      "Speech training apps are boring. The goal was to make daily practice feel like a game, with an AI companion that responds, XP to earn, and quests to complete.",
-    solution:
-      "Built a gamified speech-training app with levels, XP, quests, and an animated companion character that reacts as you practice. Backed by AI conversation and text-to-speech.",
-    stack: ["Next.js", "TypeScript", "Supabase", "OpenAI"],
-    liveUrl: "#",
-    accent: "#10b981",
-  },
-];
-
-export const moreProjects = [
-  {
-    title: "Smart Budget Tracker",
-    category: "Finance App",
-    description:
-      "A personal finance tracker with live PayPal sync, budgets, and mobile packaging via Capacitor.",
-    stack: ["Next.js", "D1", "PayPal", "Capacitor"],
-  },
-  {
-    title: "Voice Quest",
-    category: "Language Learning",
-    description:
-      "A voice-first language learning game with an AI companion and progressive difficulty.",
-    stack: ["Next.js", "OpenAI", "TTS"],
-  },
-  {
-    title: "Cleaning Quote Builder",
-    category: "Internal Tool",
-    description:
-      "A quote and scheduling tool for a cleaning business that cut quote prep time in half.",
-    stack: ["Next.js", "Supabase"],
-  },
-  {
-    title: "Portfolio & Brand Site",
-    category: "Designer Portfolio",
-    description:
-      "A scroll-driven portfolio site for a product designer with case study deep dives.",
-    stack: ["Next.js", "Framer Motion"],
-  },
 ];
 
 export const processSteps = [

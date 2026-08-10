@@ -32,7 +32,9 @@ export default function SlideProjectAQ({ isActive }: SlideProps) {
   return (
     <div className="flex h-full w-full items-center justify-center overflow-hidden bg-zinc-950 p-1.5 sm:p-3 md:p-5">
       <motion.div
-        className="flex h-full w-full max-w-lg flex-col justify-center"
+        // No h-full: the parent already centres it, and a 100%-height child
+        // sat 6px low here and pushed its own base past the bezel.
+        className="flex w-full max-w-lg flex-col justify-center"
         initial={{ opacity: 0, y: 12 }}
         animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
