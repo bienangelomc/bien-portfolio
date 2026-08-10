@@ -17,6 +17,7 @@ import SlideTestimonials from "./slides/slide-testimonials";
 import HologramModal, { type ProjectData } from "./hologram-modal";
 import TestimonialVideoHologram from "./testimonial-video-hologram";
 import AQWalkthroughHologram from "./aq-walkthrough-hologram";
+import AQShotsHologram from "./aq-shots-hologram";
 import HoloAtmosphere from "./holo-atmosphere";
 import MobileScreen from "./mobile-screen";
 
@@ -303,6 +304,16 @@ export default function Portfolio() {
           />
 
           {/* Bottom scroll cue */}
+          {/* Screenshots projected over the machine across the four AQ slides
+              (indices 4–7), one per scroll beat. Dark until the captures exist. */}
+          <AQShotsHologram
+            scrollProgress={scrollProgress}
+            range={[
+              PRESENT_START + (4 / TOTAL_SLIDES) * PRESENT_RANGE,
+              PRESENT_START + (8 / TOTAL_SLIDES) * PRESENT_RANGE,
+            ]}
+          />
+
           <BottomCue scrollProgress={scrollProgress} />
         </div>
       </div>
