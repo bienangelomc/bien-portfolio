@@ -50,32 +50,23 @@ export default function SlideAbout({ isActive }: SlideProps) {
         </h2>
           <div className="mt-1 space-y-1 text-[6px] leading-relaxed text-muted-foreground sm:mt-2 sm:space-y-1.5 sm:text-[9px] md:mt-4 md:space-y-3 md:text-sm">
             <p>
-              I'm <strong className="text-foreground">Bien Casimiro</strong>. I
-              build the systems small businesses actually run on — the
-              quoting, scheduling and admin that quietly eats an owner&apos;s
-              evenings — from the Philippines, for clients anywhere.
+              I&apos;m <strong className="text-foreground">Bien Casimiro</strong>.
+              I build the systems small businesses run on — the quoting,
+              scheduling and admin that eats an owner&apos;s evenings — from
+              the Philippines, for clients anywhere.
             </p>
             <p>
-              A cleaning business in Western Australia was writing quotes by
-              hand at 9pm and losing jobs to whoever replied first. I built
-              them a site that prices the job from their own rates, checks
-              their real calendar, and sends it to their phone to approve.
-              Accepted jobs land in their books on their own. That&apos;s the
-              kind of work I want more of.
+              A cleaning business in WA was quoting by hand at 9pm and losing
+              jobs to whoever replied first. Now their site prices the job from
+              their own rates, checks their real calendar, and sends it to
+              their phone to approve. Accepted jobs land in their books on
+              their own.
             </p>
             <p>
-              It started with funnels and landing pages, and grew into full
-              systems: web apps, approval bots, dashboards and the reporting
-              behind them. The data side came from a{" "}
-              <strong className="text-foreground">reports assistant</strong>{" "}
-              role — pivot tables, macros, Apps Script, and cleaning messy
-              datasets into something you can trust — which is why the numbers
-              in what I build tend to add up.
-            </p>
-            <p>
-              I&apos;d rather ship something that works than something that
-              just looks good, and I&apos;ll tell you when an idea isn&apos;t
-              worth building.
+              It started with funnels, and grew into full systems: web apps,
+              approval bots and the reporting behind them. I&apos;d rather ship
+              something that works than something that just looks good — and
+              I&apos;ll tell you when an idea isn&apos;t worth building.
             </p>
           </div>
         </div>

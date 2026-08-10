@@ -44,7 +44,7 @@ export const holoSlides: HoloPanel[][] = [
 
   // 1 — About
   [
-    { label: "Built", value: "20+ funnels", ...SLOT.topLeft, tone: "warm" },
+    { label: "Built", value: "20+ projects", ...SLOT.topLeft, tone: "warm" },
     { label: "Satisfaction", value: "100%", ...SLOT.topRight },
     { label: "Response", value: "1–2 days", ...SLOT.midLeft },
   ],
