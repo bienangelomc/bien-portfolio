@@ -81,7 +81,9 @@ export default function AQShotsHologram({ scrollProgress, range }: Props) {
   return (
     <div
       className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center"
-      style={{ perspective: "1200px" }}
+      // Deeper than the laptop's own 1400px: the panels are large and pushed
+      // well forward, and a tighter perspective bends the edges.
+      style={{ perspective: "1700px", perspectiveOrigin: "45% 50%" }}
       aria-hidden
     >
       {AQ_SHOTS.map((shot, i) => (
@@ -108,23 +110,30 @@ function ShotPanel({
   from: number;
   span: number;
 }) {
-  // Rise, hold, then fall away — the hold is the middle 60% so the shot is
-  // legible rather than permanently in motion.
+  // Slides out of the screen rather than rising off it: starts small, deep
+  // behind the lid and turned away, travels forward and sideways into a
+  // three-quarter view, holds while it is readable, then carries on past the
+  // viewer. The hold is the middle 60% so it is legible, not permanently moving.
   const points = [from, from + span * 0.2, from + span * 0.8, from + span];
 
   const opacity = useTransform(scrollProgress, points, [0, 1, 1, 0]);
-  const z = useTransform(scrollProgress, points, [-140, 90, 110, 260]);
-  const y = useTransform(scrollProgress, points, [40, 0, -6, -60]);
-  const rotateX = useTransform(scrollProgress, points, [18, 0, 0, -14]);
-  const scale = useTransform(scrollProgress, points, [0.9, 1, 1, 0.94]);
+  const z = useTransform(scrollProgress, points, [-260, 150, 200, 420]);
+  const x = useTransform(scrollProgress, points, [-70, 0, 14, 90]);
+  const y = useTransform(scrollProgress, points, [26, 0, -6, -44]);
+  // Held off-square so it reads as a projected pane with depth, not a flat card.
+  const rotateY = useTransform(scrollProgress, points, [-38, -19, -17, -6]);
+  const rotateX = useTransform(scrollProgress, points, [13, 6, 6, -7]);
+  const scale = useTransform(scrollProgress, points, [0.82, 1, 1.03, 0.95]);
 
   return (
     <motion.figure
-      className="absolute w-[68%] max-w-md"
+      className="absolute w-[88%] max-w-2xl"
       style={{
         opacity,
+        x,
         y,
         rotateX,
+        rotateY,
         scale,
         translateZ: z,
         transformStyle: "preserve-3d",
