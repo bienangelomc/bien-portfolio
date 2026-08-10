@@ -2,10 +2,12 @@
 
 export const siteConfig = {
   name: "Bien Casimiro",
-  role: "Funnel Builder & Data Specialist",
-  tagline: "I build funnels that convert.",
+  // Positioned for the client, not the job board: a business owner searching
+  // for someone to fix their quoting should recognise their own problem here.
+  role: "Automation & Web Systems for Small Business",
+  tagline: "I build the system your business runs on.",
   subline:
-    "Done-for-you Systeme.io funnels, custom websites, and data-driven reporting — backed by advanced Excel & Google Sheets expertise.",
+    "Websites that quote, schedule and book on their own — so the enquiries you get at 9pm are answered before you read them. Funnels, dashboards and reporting too.",
   email: "bienangelomc@gmail.com",
   location: "Philippines",
   socials: [

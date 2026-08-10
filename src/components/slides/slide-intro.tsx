@@ -120,7 +120,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
             transition={{ duration: 0.4, delay: 0.2 }}
           >
             <Zap size={9} className="md:size-3.5" />
-            Funnel Builder &amp; Data Specialist
+            Automation &amp; Web Systems for Small Business
           </motion.div>
         </div>
 
@@ -133,7 +133,7 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
             animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -6 }}
             transition={{ duration: 0.5, delay: 0.25 }}
           >
-            I build funnels that convert.
+            I build the system your business runs on.
           </motion.h1>
 
           {/* Description */}
@@ -143,8 +143,9 @@ export default function SlideIntro({ isActive, onNavigate }: SlideProps) {
             animate={isActive ? { opacity: 1, x: 0 } : { opacity: 0, x: -4 }}
             transition={{ duration: 0.4, delay: 0.3 }}
           >
-            Done-for-you Systeme.io funnels, custom websites, and data-driven
-            reporting — backed by advanced Excel &amp; Google Sheets expertise.
+            Websites that quote, schedule and book on their own — so the
+            enquiries you get at 9pm are answered before you read them.
+            Funnels, dashboards and reporting too.
           </motion.p>
 
           {/* Stats row */}
