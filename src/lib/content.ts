@@ -52,12 +52,12 @@ export const projects = [
   {
     slug: "aq-cleaning",
     title: "AQ Cleaning Services",
-    category: "Marketing Website",
+    category: "Quote-to-Booking System",
     problem:
-      "A growing cleaning business in South West WA needed a site that ranked for local searches, explained their service range clearly, and turned browsing visitors into quote requests.",
+      "An owner-operated cleaning business in South West WA was quoting by hand after a full day of work. Replies landed hours late and lost jobs to whoever answered first, the price advertised online rarely matched the price actually charged, and with no shared calendar a slot could be promised twice.",
     solution:
-      "Built a complete marketing site with service-area SEO, dedicated service and pricing pages, and a guided quote-request flow. Designed around their existing brand, with clear calls to action on every page.",
-    stack: ["Next.js", "Tailwind CSS", "Form handling", "SEO optimized"],
+      "Built the system that quotes for her. A customer sees a real price as they fill the form, calculated from her own rate card so the site and her toolkit can never disagree. It reads their note, checks the live calendar before promising a slot, then pushes the quote to her phone on Telegram with Approve or Decline. Nothing reaches the customer until she taps approve; once they accept, the booking writes itself into her calendar.",
+    stack: ["TanStack Start", "Cloudflare Workers", "D1", "Telegram Bot API", "Claude", "Resend"],
     liveUrl: "https://aq-cleaning-services.higgsfield.app",
     accent: "#ff6b35",
   },

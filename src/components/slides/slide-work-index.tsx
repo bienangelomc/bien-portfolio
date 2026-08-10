@@ -14,24 +14,26 @@ interface SlideProps {
 const projects: ProjectData[] = [
   {
     title: "AQ Cleaning Services",
-    tag: "Marketing site",
+    tag: "Quote-to-booking system",
     color: "#10b981",
     accent: "#10b981",
     image: "/mockup-aq-cleaning.png",
     url: "https://aq-cleaning-services.higgsfield.app/",
     description:
-      "A full marketing website for an owner-operated cleaning business in South West WA. Built for local SEO and lead conversion.",
+      "An owner-operated cleaning business was quoting by hand after work, so replies came hours late and the price on the website rarely matched the price she charged. This is the system that closed that gap: the site quotes, schedules and books on its own, and she approves each one from her phone.",
     features: [
-      "6 service pages optimized for local search",
-      "Instant online quote form with email notifications",
-      "Reviews & testimonials section",
-      "12 service area pages with town-specific content",
+      "Customer sees a real price as they type — from the owner's own rate card, not a guess",
+      "AI reads the free-text note for anything the form didn't ask",
+      "Checks the live calendar before promising a slot, so nothing double-books",
+      "Telegram push with Approve or Decline — two taps, no inbox",
+      "Nothing reaches the customer until she has approved it",
+      "Accepted quotes become bookings and sync to her business toolkit",
     ],
-    stack: ["React", "TanStack Start", "TypeScript", "Tailwind", "Cloudflare", "Resend"],
+    stack: ["TanStack Start", "Cloudflare Workers", "D1", "Telegram Bot API", "Claude", "Resend"],
     stats: [
-      { label: "Services", value: "6" },
-      { label: "Towns", value: "12" },
-      { label: "Conversion", value: "24/7" },
+      { label: "To approve", value: "2 taps" },
+      { label: "Quotes answered", value: "24/7" },
+      { label: "Rate card", value: "1" },
     ],
   },
   {

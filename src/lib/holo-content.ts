@@ -75,9 +75,9 @@ export const holoSlides: HoloPanel[][] = [
   // 5 — AQ Cleaning
   [
     { label: "Project", value: "AQ Cleaning", ...SLOT.topLeft, tone: "warm" },
-    { label: "Type", value: "Marketing Website", ...SLOT.topRight },
-    { label: "Built with", value: "Next.js · Tailwind", ...SLOT.midLeft },
-    { label: "Focus", value: "Local SEO → Quotes", ...SLOT.midRight },
+    { label: "Type", value: "Quote Automation", ...SLOT.topRight },
+    { label: "Built with", value: "Workers · D1 · Claude", ...SLOT.midLeft },
+    { label: "Focus", value: "Quote → Booking", ...SLOT.midRight },
   ],
 
   // 6 — VoiceCare AI
