@@ -13,8 +13,12 @@ import { motion, useTransform, type MotionValue } from "framer-motion";
  */
 export interface Shot {
   src: string;
+  /** The surface being shown. */
   label: string;
+  /** What it proves, in one line. */
   caption: string;
+  /** Why it matters to the business — the part a client is actually buying. */
+  detail: string;
 }
 
 /**
@@ -28,38 +32,53 @@ export interface Shot {
 export const AQ_SHOTS: Shot[] = [
   {
     src: "/shots/01-home.png",
-    label: "The website",
-    caption: "Six services, twelve towns, one owner-operator.",
+    label: "01 — The website",
+    caption: "The shopfront: six services, twelve towns, one owner-operator.",
+    detail:
+      "Built for how people actually find a cleaner — a page per service and per town, so the business shows up for “bond clean Bunbury”, not just its own name.",
   },
   {
     src: "/shots/02-quote.png",
-    label: "Get a quote",
-    caption: "One page. No wizard, no callback, no waiting.",
+    label: "02 — Quote and book",
+    caption: "One page. A live price and the real calendar, no callback.",
+    detail:
+      "Most cleaning sites end at a contact form and a promise. This one prices the job as the customer answers and only offers days the owner can genuinely take, so a booking is never double-sold.",
   },
   {
-    src: "/shots/03-quote-summary.png",
-    label: "The price, live",
-    caption: "It builds line by line as they answer — from her own rate card.",
+    // Waiting on the frequency-discount capture — see public/shots/README.txt.
+    src: "",
+    label: "03 — Pricing that sells",
+    caption: "Frequency discounts, priced automatically: −5%, −10%, −15%.",
+    detail:
+      "Regular work is worth more than one-off work, so the system prices for it. The discount is applied by the engine, not by hand, which quietly moves customers onto recurring bookings.",
   },
   {
-    src: "/shots/04-calendar.png",
-    label: "Real availability",
-    caption: "Only days she can actually take. Nothing is promised twice.",
+    src: "/shots/04-telegram.png",
+    label: "04 — The approval bot",
+    caption: "The full quote on her phone. Approve, or decline. That's the job.",
+    detail:
+      "The owner is on the tools, not at a desk. The bot sends the breakdown, the held slot and the total, and nothing reaches the customer until she taps approve — a person still signs off every price.",
   },
   {
-    src: "/shots/06-toolkit-dashboard.png",
-    label: "The toolkit",
-    caption: "Her whole business — jobs, clients, money — in one place.",
+    src: "/shots/05-toolkit.png",
+    label: "05 — The business toolkit",
+    caption: "Revenue, expenses, profit, unpaid — the whole picture.",
+    detail:
+      "Accepted quotes land here on their own. No spreadsheet, no re-typing, and the numbers a small business usually finds out at tax time are visible today.",
   },
   {
-    src: "/shots/07-toolkit-quote.png",
-    label: "Same engine, her side",
-    caption: "The calculator that prices the website prices her quotes.",
+    src: "/shots/06-schedule.png",
+    label: "06 — The schedule",
+    caption: "Today, this week, this month — with hours and booked value.",
+    detail:
+      "The same calendar the website checks before offering a slot. One source of truth means the site can never sell a time that is already gone.",
   },
   {
-    src: "/shots/08-toolkit-settings.png",
-    label: "One rate card",
-    caption: "Change a price here and the website quotes it instantly.",
+    src: "/shots/07-manual-quote.png",
+    label: "07 — Manual quoting",
+    caption: "Anything the engine won't auto-price, priced by hand — same rates.",
+    detail:
+      "Commercial jobs and odd properties still need a human. She prices them on the same rate card, so a hand-written quote and an automatic one never disagree.",
   },
 ];
 
@@ -73,10 +92,12 @@ interface Props {
 
 export default function AQShotsHologram({ scrollProgress, range }: Props) {
   const [start, end] = range;
-  // Each shot owns an equal slice of the band, so one scroll beat = one shot.
-  const span = (end - start) / AQ_SHOTS.length;
+  // Only shots with a capture take a beat, so a missing image closes the gap
+  // instead of leaving a blank pane floating over the laptop.
+  const shots = AQ_SHOTS.filter((s) => s.src.length > 0);
+  const span = (end - start) / shots.length;
 
-  if (!hasShots) return null;
+  if (!shots.length) return null;
 
   return (
     <div
@@ -88,7 +109,7 @@ export default function AQShotsHologram({ scrollProgress, range }: Props) {
       style={{ perspective: "1700px", perspectiveOrigin: "45% 50%" }}
       aria-hidden
     >
-      {AQ_SHOTS.map((shot, i) => (
+      {shots.map((shot, i) => (
         <ShotPanel
           key={shot.label}
           shot={shot}
@@ -157,11 +178,18 @@ function ShotPanel({
         </div>
       </div>
 
-      <figcaption className="mt-1.5 text-center">
+      <figcaption className="mx-auto mt-2 max-w-[92%] text-center">
         <p className="text-[8px] font-medium uppercase tracking-[0.2em] text-cyan-300 sm:text-[10px]">
           {shot.label}
         </p>
-        <p className="text-[9px] text-white/70 sm:text-[11px]">{shot.caption}</p>
+        <p className="mt-0.5 text-[11px] font-semibold text-white sm:text-[13px]">
+          {shot.caption}
+        </p>
+        {/* The "why it matters" line, kept off the smallest screens where it
+            would compete with the screenshot for the same few pixels. */}
+        <p className="mt-1 hidden text-[10px] leading-relaxed text-white/60 md:block">
+          {shot.detail}
+        </p>
       </figcaption>
 
       <div
