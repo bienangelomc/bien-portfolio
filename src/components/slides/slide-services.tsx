@@ -17,25 +17,25 @@ interface SlideProps {
 const services = [
   {
     icon: Zap,
-    title: "Systeme.io Funnels",
+    title: "Quote & Booking Systems",
     description:
-      "Done-for-you sales funnels — landing pages, email, payments.",
+      "Your site prices the job, checks your calendar, and books it — you just approve.",
     color: "text-accent",
     bgColor: "bg-accent/10",
   },
   {
     icon: ShoppingCart,
-    title: "E-commerce",
+    title: "Business Automation",
     description:
-      "Product pages & checkout that convert visitors to customers.",
+      "The admin that eats your evenings — quoting, scheduling, invoicing — done for you.",
     color: "text-sky-400",
     bgColor: "bg-sky-400/10",
   },
   {
     icon: Mail,
-    title: "Email Automation",
+    title: "Notifications & Bots",
     description:
-      "Automated sequences that nurture leads & make sales on autopilot.",
+      "Telegram, SMS or email alerts so you can run the business from your phone.",
     color: "text-purple-400",
     bgColor: "bg-purple-400/10",
   },
@@ -49,17 +49,17 @@ const services = [
   },
   {
     icon: GraduationCap,
-    title: "Courses & Memberships",
+    title: "Funnels & Landing Pages",
     description:
-      "Course areas with drip content & member management on Systeme.io.",
+      "Systeme.io funnels, email sequences and checkout when you need leads, not systems.",
     color: "text-pink-400",
     bgColor: "bg-pink-400/10",
   },
   {
     icon: Code2,
-    title: "Custom Web Apps",
+    title: "Dashboards & Reporting",
     description:
-      "Fully custom web apps with Next.js when you need more than a page builder.",
+      "See revenue, jobs and what's unpaid today — not at tax time.",
     color: "text-emerald-400",
     bgColor: "bg-emerald-400/10",
   },
