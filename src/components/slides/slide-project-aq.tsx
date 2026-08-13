@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { ExternalLink, FileText, Calculator, CalendarCheck, Send, CheckCircle2, LayoutGrid } from "lucide-react";
+import { AQ_LIVE_URL } from "@/lib/content";
 
 interface SlideProps {
   isActive: boolean;
@@ -50,7 +51,22 @@ export default function SlideProjectAQ({ isActive }: SlideProps) {
         </div>
 
         <h2 className="mt-0.5 font-display text-[11px] font-medium leading-tight tracking-tight sm:text-lg md:text-xl">
-          AQ Cleaning Services
+          {/* The name is the link — a viewer's first instinct is to click the
+              project title, not hunt for "Visit" at the bottom of the slide. */}
+          <a
+            href={AQ_LIVE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-baseline gap-1 decoration-accent/50 underline-offset-4 transition-colors hover:text-accent hover:underline focus-visible:text-accent focus-visible:underline focus-visible:outline-none sm:gap-1.5"
+          >
+            AQ Cleaning Services
+            <ExternalLink
+              size={6}
+              className="shrink-0 self-center text-accent opacity-60 transition-opacity group-hover:opacity-100 sm:size-3.5"
+              aria-hidden="true"
+            />
+            <span className="sr-only">(opens the live site in a new tab)</span>
+          </a>
         </h2>
 
         <p className="mt-0.5 line-clamp-2 text-[6px] text-muted-foreground sm:text-xs md:text-sm">
@@ -169,7 +185,7 @@ export default function SlideProjectAQ({ isActive }: SlideProps) {
             ))}
           </div>
           <a
-            href="https://aq-cleaning-services.higgsfield.app/"
+            href={AQ_LIVE_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="ml-1 inline-flex shrink-0 items-center gap-0.5 text-[6px] font-medium text-accent hover:underline sm:gap-1.5 sm:text-xs"

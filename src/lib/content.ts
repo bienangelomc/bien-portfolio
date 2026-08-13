@@ -50,6 +50,13 @@ export const services = [
   },
 ];
 
+/**
+ * The live AQ site. Imported wherever the project is named or linked, so the
+ * URL exists once — it was previously hardcoded in two slides while the
+ * `liveUrl` below was never imported by anything.
+ */
+export const AQ_LIVE_URL = "https://aq-cleaning-services.higgsfield.app/";
+
 export const projects = [
   {
     slug: "aq-cleaning",
@@ -60,7 +67,7 @@ export const projects = [
     solution:
       "Built the system that quotes for her. A customer sees a real price as they fill the form, calculated from her own rate card so the site and her toolkit can never disagree. It reads their note, checks the live calendar before promising a slot, then pushes the quote to her phone on Telegram with Approve or Decline. Nothing reaches the customer until she taps approve; once they accept, the booking writes itself into her calendar.",
     stack: ["TanStack Start", "Cloudflare Workers", "D1", "Telegram Bot API", "Claude", "Resend"],
-    liveUrl: "https://aq-cleaning-services.higgsfield.app",
+    liveUrl: AQ_LIVE_URL,
     accent: "#ff6b35",
   },
 ];

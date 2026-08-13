@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Maximize2, Play } from "lucide-react";
+import { ArrowRight, ExternalLink, Maximize2, Play } from "lucide-react";
 import type { ProjectData } from "../hologram-modal";
 import { hasWalkthrough } from "../aq-walkthrough-hologram";
+import { AQ_LIVE_URL } from "@/lib/content";
 
 interface SlideProps {
   isActive: boolean;
@@ -18,7 +19,7 @@ export const AQ_PROJECT: ProjectData = {
   color: "#10b981",
   accent: "#10b981",
   image: "/mockup-aq-cleaning.png",
-  url: "https://aq-cleaning-services.higgsfield.app/",
+  url: AQ_LIVE_URL,
   description:
     "An owner-operated cleaning business was quoting by hand after a full day on the tools. Replies landed hours late, the price advertised online rarely matched the price charged, and with no shared calendar a slot could be promised twice. This is the system that quotes, schedules and books for her — she approves each one from her phone.",
   features: [
@@ -68,6 +69,22 @@ export default function SlideAQImpact({
           <span className="text-[6px] text-muted-foreground sm:text-[10px] md:text-xs">
             04 — What changed
           </span>
+          <span className="text-[6px] text-muted-foreground sm:text-[10px] md:text-xs">·</span>
+          {/* This slide named the project but never linked it — the only way
+              out to the live site was buried in the "Full breakdown" modal. */}
+          <a
+            href={AQ_LIVE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-0.5 text-[6px] font-medium text-accent hover:underline sm:gap-1 sm:text-[10px] md:text-xs"
+          >
+            Visit the live site
+            <ExternalLink
+              size={6}
+              className="shrink-0 opacity-60 transition-opacity group-hover:opacity-100 sm:size-2.5"
+              aria-hidden="true"
+            />
+          </a>
         </div>
 
         <h2 className="mt-0.5 font-display text-[11px] font-medium leading-tight tracking-tight sm:text-lg md:text-xl">

@@ -3,6 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { X, Globe, LayoutGrid, Send } from "lucide-react";
+import { AQ_LIVE_URL } from "@/lib/content";
 
 interface Props {
   isOpen: boolean;
@@ -99,9 +100,19 @@ export default function AQWalkthroughHologram({ isOpen, onClose }: Props) {
                     <p className="text-[8px] font-medium uppercase tracking-[0.2em] text-cyan-300 sm:text-[10px]">
                       Walkthrough
                     </p>
-                    <p className="text-xs font-semibold text-white sm:text-sm">
+                    <a
+                      href={AQ_LIVE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1 text-xs font-semibold text-white transition-colors hover:text-cyan-300 focus-visible:text-cyan-300 focus-visible:outline-none sm:text-sm"
+                    >
                       AQ Cleaning Services
-                    </p>
+                      <Globe
+                        className="h-2.5 w-2.5 shrink-0 text-cyan-300 opacity-60 transition-opacity group-hover:opacity-100 sm:h-3 sm:w-3"
+                        aria-hidden="true"
+                      />
+                      <span className="sr-only">(opens the live site in a new tab)</span>
+                    </a>
                   </div>
                   <button
                     type="button"
