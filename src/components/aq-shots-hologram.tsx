@@ -1,6 +1,8 @@
 "use client";
 
 import { motion, useTransform, type MotionValue } from "framer-motion";
+import { Globe } from "lucide-react";
+import { AQ_LIVE_URL } from "@/lib/content";
 
 /**
  * The system's surfaces, projected out of the laptop one at a time as you
@@ -100,25 +102,74 @@ export default function AQShotsHologram({ scrollProgress, range }: Props) {
   if (!shots.length) return null;
 
   return (
-    <div
-      // Offset right: the laptop slides left over the same band, so the two
-      // sit side by side instead of the panels covering the machine.
-      className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center pl-[26%]"
-      // Deeper than the laptop's own 1400px: the panels are large and pushed
-      // well forward, and a tighter perspective bends the edges.
-      style={{ perspective: "1700px", perspectiveOrigin: "45% 50%" }}
-      aria-hidden
+    <>
+      <div
+        // Offset right: the laptop slides left over the same band, so the two
+        // sit side by side instead of the panels covering the machine.
+        className="pointer-events-none absolute inset-0 z-30 flex items-center justify-center pl-[26%]"
+        // Deeper than the laptop's own 1400px: the panels are large and pushed
+        // well forward, and a tighter perspective bends the edges.
+        style={{ perspective: "1700px", perspectiveOrigin: "45% 50%" }}
+        aria-hidden
+      >
+        {shots.map((shot, i) => (
+          <ShotPanel
+            key={shot.label}
+            shot={shot}
+            scrollProgress={scrollProgress}
+            from={start + i * span}
+            span={span}
+          />
+        ))}
+      </div>
+
+      <VisitLive scrollProgress={scrollProgress} range={range} />
+    </>
+  );
+}
+
+/**
+ * A standing "visit the live site" link for the whole hologram sequence.
+ *
+ * Deliberately a sibling of the panels rather than a child of them. The panel
+ * container is `pointer-events-none` and `aria-hidden` — a link inside it would
+ * be unclickable, and a focusable element inside an aria-hidden subtree is
+ * unreachable for anyone using a screen reader. Anchoring it here also keeps it
+ * still: the panels are travelling and fading the whole time, so a link riding
+ * one would be a moving target that vanishes as you reach for it.
+ */
+function VisitLive({
+  scrollProgress,
+  range,
+}: {
+  scrollProgress: MotionValue<number>;
+  range: [number, number];
+}) {
+  const [start, end] = range;
+  const fade = (end - start) * 0.08;
+  // Present for the case study, gone either side of it — a link floating over
+  // an unrelated slide reads as a stray element.
+  const opacity = useTransform(
+    scrollProgress,
+    [start, start + fade, end - fade, end],
+    [0, 1, 1, 0],
+  );
+
+  return (
+    <motion.div
+      className="pointer-events-none absolute inset-x-0 bottom-6 z-40 flex justify-center pl-[26%] sm:bottom-9"
+      style={{ opacity }}
     >
-      {shots.map((shot, i) => (
-        <ShotPanel
-          key={shot.label}
-          shot={shot}
-          scrollProgress={scrollProgress}
-          from={start + i * span}
-          span={span}
-        />
-      ))}
-    </div>
+      <a
+        href={AQ_LIVE_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="pointer-events-auto inline-flex items-center gap-1.5 rounded-full border border-cyan-400/40 bg-[#06080c]/85 px-3 py-1.5 text-[10px] font-medium text-cyan-200 shadow-[0_0_30px_-8px_rgba(56,189,248,0.6)] backdrop-blur-sm transition-colors hover:border-cyan-300 hover:text-white focus-visible:border-cyan-300 focus-visible:text-white focus-visible:outline-none sm:gap-2 sm:px-4 sm:py-2 sm:text-xs"
+      >
+        <Globe className="h-2.5 w-2.5 sm:h-3 sm:w-3" aria-hidden="true" />
+        Visit the live site
+      </a>
+    </motion.div>
   );
 }
 
