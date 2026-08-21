@@ -12,6 +12,7 @@ import SlideAQProblem from "./slides/slide-aq-problem";
 import SlideProjectAQ from "./slides/slide-project-aq";
 import SlideAQFlow from "./slides/slide-aq-flow";
 import SlideAQImpact from "./slides/slide-aq-impact";
+import SlideProjectStealthCoach from "./slides/slide-project-stealthcoach";
 import SlideProcess from "./slides/slide-process";
 import SlideTestimonials from "./slides/slide-testimonials";
 import HologramModal, { type ProjectData } from "./hologram-modal";
@@ -21,13 +22,13 @@ import AQShotsHologram from "./aq-shots-hologram";
 import HoloAtmosphere from "./holo-atmosphere";
 import MobileScreen from "./mobile-screen";
 
-const TOTAL_SLIDES = 10;
+const TOTAL_SLIDES = 11;
 
 // Timeline:
 // 0.00 → 0.03   Laptop closed
 // 0.03 → 0.15   Lid opens (fast — 1-2 scrolls)
 // 0.15 → 0.22   Boot animation (short)
-// 0.22 → 0.97   Portfolio slides (9 slides, ~8.3% each = lots of scroll room)
+// 0.22 → 0.97   Portfolio slides (11 slides, ~6.8% each = lots of scroll room)
 // 0.97 → 1.00   Hold
 const PRESENT_START = 0.22;
 const PRESENT_END = 0.97;
@@ -210,6 +211,10 @@ export default function Portfolio() {
     { key: "aq", component: SlideProjectAQ, props: {} },
     { key: "aq-flow", component: SlideAQFlow, props: {} },
     { key: "aq-impact", component: SlideAQImpact, props: { onOpenHologram: openHologram, onOpenWalkthrough: openWalkthrough } },
+    // Second project. Deliberately one slide rather than four: AQ earns the
+    // long telling because the automation is the story, and repeating that
+    // structure would make the deck feel like the same case study twice.
+    { key: "stealthcoach", component: SlideProjectStealthCoach, props: {} },
     { key: "process", component: SlideProcess, props: {} },
     { key: "testimonials", component: SlideTestimonials, props: { onOpenVideo: openTestimonialVideo } },
   ];

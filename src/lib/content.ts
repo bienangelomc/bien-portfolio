@@ -57,6 +57,9 @@ export const services = [
  */
 export const AQ_LIVE_URL = "https://aq-cleaning-services.higgsfield.app/";
 
+/** The live StealthCoach site. Same reason as above — named once. */
+export const STEALTHCOACH_LIVE_URL = "https://stealth-coach.com";
+
 export const projects = [
   {
     slug: "aq-cleaning",
@@ -69,6 +72,18 @@ export const projects = [
     stack: ["TanStack Start", "Cloudflare Workers", "D1", "Telegram Bot API", "Claude", "Resend"],
     liveUrl: AQ_LIVE_URL,
     accent: "#ff6b35",
+  },
+  {
+    slug: "stealthcoach",
+    title: "StealthCoach",
+    category: "Real-time AI desktop app",
+    problem:
+      "Interview practice is something people do by reading, which is the one thing an interview never asks of you. There was no way to rehearse out loud and get the answer you should have given, in your own words, while the question was still fresh.",
+    solution:
+      "A Windows desktop app that listens, transcribes what it hears through its own server, notices when the speaker has actually finished rather than waiting on a timer, and streams an answer written from the user's resume and the job description. First words land in under two seconds. It ships itself: a release goes out with one command and installed copies offer the update on next launch.",
+    stack: ["Next.js", "Electron", "Deepgram", "Claude", "Postgres", "PayMongo"],
+    liveUrl: STEALTHCOACH_LIVE_URL,
+    accent: "#8b5cf6",
   },
 ];
 
